@@ -1383,7 +1383,7 @@ function initKpop(){
     sb.style.display="none";location.hash="dog-garden";setTimeout(showSticky,45000);
   });
   function showKp(){
-    if(location.hash==="#kpop-generator"||$("#ov").classList.contains("on")){return setTimeout(showKp,20000)}
+    if(/^#(kpop-generator|flatline|birth-time)$/.test(location.hash)||$("#ov").classList.contains("on")){return setTimeout(showKp,20000)}
     kp.style.display="block";
   }
   setTimeout(showKp,rnd(20000,35000));
@@ -1401,7 +1401,7 @@ function initKpop(){
 function flatlineHTML(){
   return `<div class="apage"><div class="box flbox">
     <div class="gtitle" style="color:#7ff;text-shadow:3px 3px #036">FLATLINE&trade;</div>
-    <div class="gsub">MASH <b>ASCEND</b> (or spacebar) to keep the spirit rising. If it sinks back into the body, they get resuscitated and you LOSE. Break through the roof to WIN. Sponsored by D&amp;B Miracle Hospice.</div>
+    <div class="gsub">MASH <b>ASCEND</b> (or tap anywhere on the screen, or spacebar) to keep the spirit rising. If it sinks back into the body, they get resuscitated and you LOSE. Break through the roof to WIN. Sponsored by D&amp;B Miracle Hospice.</div>
     <div class="flstage" id="flstage">
       <div id="fl3d"></div>
       <div class="flav l"><div class="fc2" style="background:#c0392b">MD</div><span>Attending<br>Physician</span></div>
@@ -1600,7 +1600,7 @@ function buildFlatline(){
   let bubT;function say(who,txt){bub.className="flbub "+who;bub.innerHTML=(who==="md"?"<b style='color:#c0392b'>MD:</b> ":"<b style='color:#2471a3'>RN:</b> ")+txt;bub.style.display="block";clearTimeout(bubT);bubT=setTimeout(()=>bub.style.display="none",2200)}
   let bigT;function shout(t,col){big.textContent=t;big.style.color=col||"#fff";big.style.opacity=1;clearTimeout(bigT);bigT=setTimeout(()=>big.style.opacity=0,800)}
   const EVENTS=[
-    {w:4,f:()=>{say("md","Charging 200 joules...");FLS.charge();S.pending={t:1.3,fn:()=>{say("md","CLEAR!!!");shout("CLEAR!","#ff4d4d");FLS.zap();S.v-=3.4+lvl*.3;S.shake=.5;S.jolt=.35}}}},
+    {w:4,f:()=>{say("md","Charging 200 joules...");FLS.charge();S.pending={t:1.3,fn:()=>{say("md","CLEAR!!!");shout("CLEAR!","#ff4d4d");FLS.zap();S.v-=2.4+lvl*.3;S.shake=.5;S.jolt=.35}}}},
     {w:2,f:()=>{say("rn","Pushing 1mg epinephrine!");S.gm=1.6;S.gmT=3.5;FLS.bad()}},
     {w:2,f:()=>{say("md","The family says 'don't go!'");S.gm=1.35;S.gmT=4;FLS.bad()}},
     {w:2,f:()=>{say("rn","The chaplain is here.");S.gm=.55;S.gmT=4;FLS.good()}},
@@ -1639,10 +1639,11 @@ function buildFlatline(){
   function tap(){
     FLS.init();
     if(!S||S.phase!=="play")return;
-    S.v=Math.min(3,S.v+.45);S.taps++;FLS.whoosh();
+    S.v=Math.min(3,S.v+.5);S.taps++;FLS.whoosh();
     const b=$("#flbtn");b.classList.add("hit");setTimeout(()=>b.classList.remove("hit"),60);
   }
-  $("#flbtn").addEventListener("pointerdown",e=>{e.preventDefault();tap()});
+  $("#flbtn").addEventListener("pointerdown",e=>{e.preventDefault();e.stopPropagation();tap()});
+  stage.addEventListener("pointerdown",e=>{if(e.target.closest(".fltabs,.ov,button"))return;e.preventDefault();tap()});
   const onKey=e=>{if(e.code==="Space"&&document.body.contains(host)){e.preventDefault();if(!e.repeat)tap()}};
   document.addEventListener("keydown",onKey);
   $("#flstart").onclick=start;
@@ -1663,7 +1664,7 @@ function buildFlatline(){
       if(S.phase==="play"){
         S.t+=dt;
         if(S.gmT>0){S.gmT-=dt;if(S.gmT<=0)S.gm=1}
-        const g=(2.6+lvl*.3+S.t*.03)*Math.min(1,.35+S.t/3);
+        const g=(1.35+lvl*.25+S.t*.012)*Math.min(1,.35+S.t/3);
         S.v-=(g*S.gm+6*S.v)*dt;S.h+=S.v*dt;
         if(S.pending){S.pending.t-=dt;if(S.pending.t<=0){const f=S.pending.fn;S.pending=null;f()}}
         S.evt-=dt;if(S.evt<=0&&!S.pending){S.evt=rnd(3.2,5.8)-Math.min(1.6,lvl*.25);pickEvt().f()}
@@ -1754,7 +1755,7 @@ document.addEventListener("click",e=>{
 /* ================= VISITOR POPUP ================= */
 let vRuns=0;
 function showVisitor(){
-  if($("#ov").classList.contains("on")){return scheduleVisitor()}
+  if($("#ov").classList.contains("on")||/^#(flatline|birth-time)$/.test(location.hash)){return scheduleVisitor()}
   const v=$("#visitor");vRuns=0;
   $("#vtxt").innerHTML=`You are the <b style="font-size:20px">${(ri(1,9)*1000000).toLocaleString()}th</b> visitor to BirthandDeathNewsNetwork.com!<br>You have won: <u>${pick(["a free casket","3 months for $1","a lamp (off)","one (1) bee","a night at Butt Dilly (eternal)","$0.000001 $DEAD"])}</u>`;
   v.style.left=Math.max(5,(innerWidth-300)/2)+"px";v.style.top=Math.max(40,innerHeight*.25)+"px";v.style.display="block";
