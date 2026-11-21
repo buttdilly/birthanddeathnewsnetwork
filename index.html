@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BirthandDeathNewsNetwork.com</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:#0c0c0c radial-gradient(#2a2a2a 1px,transparent 1.5px) 0 0/9px 9px;font-family:"Times New Roman",Times,serif;color:#000;overflow-x:hidden;cursor:crosshair}
+a{color:#00e;cursor:pointer}
+a:visited{color:#551a8b}
+.blink{animation:blink .8s steps(2,start) infinite}
+@keyframes blink{to{visibility:hidden}}
+@keyframes wob{0%{transform:rotate(-2deg) scale(1.03)}50%{transform:rotate(2deg) scale(.97)}100%{transform:none}}
+@keyframes shake{0%,100%{transform:none}25%{transform:translate(-3px,2px)}75%{transform:translate(3px,-2px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes scrollx{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes scrolly{from{transform:translateY(0)}to{transform:translateY(-50%)}}
+@keyframes rainbow{0%{color:red}20%{color:orange}40%{color:#cc0}60%{color:lime}80%{color:#09f}100%{color:magenta}}
+@keyframes pulse{50%{transform:scale(1.08)}}
+
+/* ===== crypto ticker ===== */
+#ticker{background:#000;color:#0f0;font:bold 13px "Courier New",monospace;white-space:nowrap;overflow:hidden;border-bottom:2px solid #ff0;position:relative;height:24px;line-height:24px}
+#ticker .lbl{position:absolute;left:0;top:0;bottom:0;z-index:2;background:#f00;color:#ff0;padding:0 8px;font-family:Impact,sans-serif;letter-spacing:1px}
+#ticker .track{display:inline-block;animation:scrollx 40s linear infinite;padding-left:110px}
+#ticker .coin{margin-right:26px}
+#ticker .up{color:#0f0}#ticker .dn{color:#f33}
+#ticker .sym{color:#ff0}
+
+/* ===== header ===== */
+#hdr{background:#2b2b2b;color:#ddd;font:10px Arial,sans-serif;display:flex;align-items:center;gap:10px;padding:8px 10px;flex-wrap:wrap}
+#hdr a{color:#ddd;text-decoration:none;font-weight:bold;letter-spacing:1px}
+#hdr .logo{flex:1;text-align:center;font:italic 22px "Brush Script MT","Lucida Handwriting",cursive;color:#eee;letter-spacing:0;min-width:200px}
+#hdr .sub{background:#ff3;color:#000!important;padding:3px 10px;text-align:center;line-height:1.1}
+#hdr .sub small{display:block;font-weight:normal;font-size:8px}
+#hdr .login{background:#fff;color:#000!important;padding:5px 12px}
+#learn{background:#2b2b2b;text-align:center;font:bold 10px Arial;padding:0 0 6px}
+#learn a{color:#ccc}
+
+/* ===== grid ===== */
+#view{max-width:1120px;margin:0 auto}
+.grid{display:grid;grid-template-columns:23% 1fr 1fr;gap:7px;background:#fff;border:3px solid #000;padding:9px;
+grid-template-areas:"top top dilly" "radio schools donate" "side sq latest" "side hosp hosp" "camp camp nm" "war links links"}
+.box{border:3px solid #000;position:relative;background:#fff;overflow:hidden;min-height:60px}
+.box::before,.box::after{content:"";position:absolute;top:-2px;width:22px;height:21px;background:url(img/bowtie.png) center/100% 100%;z-index:4}
+.box::before{left:-3px}.box::after{right:-3px}
+.a-top{grid-area:top;display:flex}.a-dilly{grid-area:dilly}.a-radio{grid-area:radio}.a-schools{grid-area:schools}.a-donate{grid-area:donate}
+.a-side{grid-area:side;background:#eee url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M0 30 Q15 10 30 30 T60 30' stroke='%23d8d8d8' fill='none' stroke-width='3'/%3E%3C/svg%3E")}
+.a-sq{grid-area:sq}.a-latest{grid-area:latest}.a-hosp{grid-area:hosp;display:flex}.a-war{grid-area:war}.a-links{grid-area:links}
+@media (max-width:760px){.grid{grid-template-columns:1fr 1fr;grid-template-areas:"top top" "dilly donate" "radio schools" "sq latest" "side side" "hosp hosp" "camp camp" "nm nm" "war links"}}
+@media (max-width:470px){.grid{grid-template-columns:1fr;grid-template-areas:"top" "dilly" "radio" "schools" "donate" "sq" "latest" "side" "hosp" "camp" "nm" "war" "links"}.a-top,.a-hosp{flex-direction:column}}
+
+/* crest + quote */
+.crest{display:flex;align-items:center;justify-content:center;width:23%;min-width:110px;background:radial-gradient(circle,#2d6b2d,#0d2d0d);text-decoration:none;border-right:3px solid #000}
+.crest div{border:6px double #d4a72c;background:linear-gradient(#7a0f0f,#3b0505);color:#f6d36b;font:italic bold 30px Georgia,serif;padding:12px 10px;text-align:center;box-shadow:0 0 12px #ff0;transform:rotate(-2deg)}
+.quote{flex:1;padding:10px 14px;text-decoration:none;background:linear-gradient(120deg,#fff 60%,#fde 100%)}
+.quote .q{color:#e01b1b;font:bold clamp(17px,2.3vw,26px) Arial,sans-serif;line-height:1.2}
+.quote .by{color:#111;font:bold clamp(15px,2vw,22px) Arial,sans-serif;text-align:right;margin-top:6px}
+
+/* ads */
+.adslot{height:100%;min-height:170px;display:flex;flex-direction:column}.adslot>a{flex:1}
+.adslot.small{min-height:120px;border-top:3px solid #000}
+.ad{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;min-height:inherit;text-decoration:none;text-align:center;padding:8px;color:#000;position:relative}
+.ad .tag{position:absolute;top:3px;right:24px;font:9px Arial;color:#888;background:#fff;border:1px solid #aaa;padding:0 3px}
+.ad.anim{animation:wob .45s}
+.dilly{background:linear-gradient(#fff,#cfe2ff)}
+.dilly .nm{font:italic bold clamp(30px,4.5vw,52px) Georgia,serif;color:#2236a8;text-shadow:2px 2px 0 #b7c4ff;letter-spacing:-2px}
+.dilly .tg{font:9px Georgia;color:#2236a8}
+.pill{display:inline-block;background:linear-gradient(#ffd24d,#f7a600);border:2px solid #b37400;border-radius:30px;padding:6px 24px;font:italic 900 24px Verdana,sans-serif;color:#1a3a8a;text-shadow:1px 1px #fff;box-shadow:inset 0 -3px 0 rgba(0,0,0,.2)}
+.pill small{display:block;font:bold 9px Arial;letter-spacing:3px;color:#333;font-style:normal}
+.cards{display:flex;gap:3px;margin-top:6px}.cards span{font:bold 8px Arial;padding:5px 3px;color:#fff;border-radius:2px}
+.clickhere{display:inline-block;background:radial-gradient(ellipse at 50% 20%,#ff6b6b,#d10000 70%);color:#fff!important;font:bold clamp(13px,1.6vw,18px) Arial,sans-serif;padding:6px 22px;border-radius:30px;border:2px solid #fff;box-shadow:0 0 0 2px #900,2px 3px 6px rgba(0,0,0,.5);text-decoration:none;animation:pulse 1.4s infinite}
+.goodnews{display:inline-block;font:900 clamp(18px,2.6vw,30px) Impact,sans-serif;color:#fff;-webkit-text-stroke:1px #000;text-shadow:2px 2px 0 #c0c0c0,4px 4px 0 #888,5px 5px 0 #444;transform:rotate(-24deg);position:relative}
+
+
+/* radio */
+.radio{display:block;text-decoration:none;background:linear-gradient(#5aa7f0,#cfe8ff);height:100%;padding:8px;text-align:center;color:#000;position:relative}
+.radio .t{font:italic 16px "Book Antiqua",Georgia,serif;text-align:left;line-height:1.1}
+.radio .dish{font-size:56px;position:absolute;right:6px;top:4px;animation:bob 2s infinite}
+.radio .call{background:#000;margin-top:26px;padding:8px 4px;display:flex;justify-content:center;gap:4px}
+.radio .call b{background:#cde;border:2px solid #fff;font:24px Georgia;padding:0 6px}
+
+/* story card */
+.story{display:flex;gap:10px;padding:10px;text-decoration:none;color:#000;align-items:center;height:100%}
+.story .img{flex:0 0 42%;height:150px;background:repeating-linear-gradient(45deg,#666 0 6px,#888 6px 12px),#777;position:relative;display:flex;align-items:flex-end;justify-content:center;border:1px solid #333;overflow:hidden}
+.story .img::after{content:"\1F3D7\FE0F";position:absolute;top:8px;left:10px;font-size:52px;filter:grayscale(.6)}
+.story h3{font:bold clamp(17px,2vw,24px) Georgia,serif;margin:0 0 10px;line-height:1.2}
+.ago{font:11px Arial;color:#666}
+
+/* sidebar */
+.side{padding:8px;text-align:center;font-size:14px}
+.badge{display:inline-block;background:#000;color:#fff;border-radius:6px;padding:4px 10px;font:bold 12px Arial;text-decoration:none;margin:3px;border:1px solid #888}
+.badge small{display:block;font-size:7px;font-weight:normal;text-align:left}
+.side .nav a{display:block;font:italic bold 15px Georgia;margin:6px 0;color:#2233bb}
+.listen{color:red;font:italic bold 16px Georgia;margin:6px 0}
+.player{display:flex;align-items:center;gap:8px;background:#f1f3f4;border-radius:30px;padding:8px 14px;margin:8px auto;max-width:210px;font:13px Arial;border:1px solid #ccc}
+.player button{border:0;background:none;font-size:15px;cursor:pointer;padding:0}
+.player .bar{flex:1;height:4px;background:#ccc;border-radius:3px;overflow:hidden}.player .bar i{display:block;height:100%;width:0;background:#333}
+.soc{display:flex;justify-content:center;gap:10px;margin:10px 0}
+.soc a{text-decoration:none;font:bold 16px Arial;padding:4px 9px;border-radius:5px;color:#fff}
+.reqform label{display:block;font-size:14px;margin-top:6px}
+.reqform input{width:92%;border:2px inset #999;font:13px Arial;padding:2px}
+.reqform button,.btn98{margin-top:8px;font:12px Arial;background:#dcdcdc;border:2px outset #fff;padding:3px 10px;cursor:pointer}
+.minichat{background:#000;color:#0f0;font:10px "Courier New",monospace;height:150px;overflow:hidden;text-align:left;margin-top:12px;border:3px ridge #888;padding:3px;display:block;text-decoration:none}
+.minichat div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.minihead{background:navy;color:#fff;font:bold 11px Arial;padding:2px;margin-top:12px;text-align:left}
+.foot-links a{display:block;text-align:left;color:#777;font:13px Arial;margin:14px 6px}
+
+/* scientific quarterly */
+.sq{display:block;position:relative;text-decoration:none;height:100%;min-height:380px;background:#000}
+.sq svg{width:100%;height:100%;display:block;position:absolute;inset:0}
+.sq .bd{position:absolute;left:10px;top:4px;font:italic 46px "Lucida Calligraphy","Brush Script MT",cursive;color:#111;z-index:2}
+.sq .ch{position:absolute;right:12px;bottom:56px;z-index:2}
+.sq .sqt{position:absolute;bottom:0;left:0;right:0;background:#1c2f6e;color:#ff0;font:italic clamp(16px,2.3vw,26px) "Lucida Calligraphy",Georgia,serif;padding:6px;letter-spacing:1px;z-index:2;text-align:center}
+
+/* latest */
+.latest{padding:8px;text-align:center}
+.latest .lpill{display:inline-block;background:linear-gradient(#ff8a3d,#e85a00);color:#fff;font:bold clamp(20px,2.6vw,30px) Impact,"Arial Black",sans-serif;padding:4px 26px;border-radius:30px;border:2px solid #fff;box-shadow:0 0 0 2px #c44}
+.latest .two{display:flex;gap:10px;margin:10px 0;text-align:left;border-top:1px solid #ccc;padding-top:10px}
+.latest .two a{color:#000;text-decoration:none}
+.latest .two .l{flex:1;font:bold clamp(15px,1.8vw,21px) Georgia}
+.latest .two .r{flex:1;font:12px Arial;padding-left:10px}
+.latest .two .r li{margin-bottom:6px}
+.gov{position:relative;height:190px;background:linear-gradient(#e7ecf5,#9fb3d1);overflow:hidden;display:block;text-decoration:none}
+.gov svg{position:absolute;left:0;bottom:0;height:100%}
+.gov .goodnews{position:absolute;right:20px;top:30px}
+.gov .clickhere{position:absolute;right:10px;bottom:10px}
+.scroller{height:96px;overflow:hidden;border:2px inset #ccc;margin-top:8px;text-align:left;font:12px Arial;background:#ffffe0}
+.scroller .in{animation:scrolly 18s linear infinite}.scroller:hover .in{animation-play-state:paused}
+.scroller a{display:block;padding:3px 6px;border-bottom:1px dotted #aaa;color:#00c}
+
+/* hospice */
+.sign{flex:1.7;background:#14305a;color:#fff;text-decoration:none;padding:10px 12px;font:12px Arial;display:flex;flex-wrap:wrap;gap:10px;min-height:330px}
+.sign h3{font:bold clamp(17px,2.3vw,27px) Arial;margin:0;flex-basis:100%}
+.sign .info{flex:1 1 170px;line-height:1.35}
+.sign .info b{display:block;margin-top:6px}
+.sign .pic{flex:1.3 1 200px;min-height:230px;position:relative;background:linear-gradient(#8fb8e8,#dfe9f5)}
+.sign .pic svg{position:absolute;inset:0;width:100%;height:100%}
+.a-hosp .adslot{flex:1;min-height:330px;border-left:3px solid #000}
+.skull{background:radial-gradient(circle at 50% 40%,#a0b8d8,#2b3448 70%);color:#fff}
+.skull .face{font-size:110px;filter:grayscale(1) contrast(1.5) drop-shadow(0 0 12px red);position:relative}
+.skull .face::after{content:"";position:absolute;left:33%;top:38%;width:14px;height:14px;background:red;border-radius:50%;box-shadow:0 0 20px 8px red;animation:blink 1s infinite}
+.langbar{background:#fff;color:#000;font:15px Arial;border:1px solid #ccc;padding:8px;margin-top:10px;width:90%;display:flex;justify-content:space-between}
+
+/* war + links */
+.war{display:flex;gap:8px;align-items:center;padding:8px;text-decoration:none;color:#000}
+.war .pic{font-size:44px;background:#665;border:1px solid #000;padding:6px;filter:sepia(1)}
+.war b{font:bold 21px "Bodoni MT",Georgia,serif;line-height:1.1}
+.links{display:flex;flex-wrap:wrap;gap:16px;padding:14px;background:#f2f2f2;font:11px Arial}
+.links div{flex:1 1 100px}
+.links b{display:block;margin-bottom:6px;font-size:12px}
+.links a{display:block;color:#444;text-decoration:none;margin:3px 0;font-size:10px}
+.links a:hover{text-decoration:underline;color:red}
+
+/* footer */
+#foot{background:#2b2b2b;color:#ccc;font:10px Arial;padding:14px 10px 120px;max-width:1120px;margin:0 auto}
+#foot .row{display:flex;flex-wrap:wrap;gap:22px;align-items:center}
+#foot a{color:#ccc;text-decoration:none}
+#counter{display:inline-flex;gap:2px;vertical-align:middle}
+#counter span{background:#000;color:#0f0;font:bold 16px "Courier New";padding:1px 4px;border:1px solid #555}
+.uc{display:inline-block;background:repeating-linear-gradient(45deg,#ff0 0 10px,#000 10px 20px);color:#fff;font:bold 12px Impact;padding:6px 10px;-webkit-text-stroke:.4px #000}
+.uc span{background:#000;padding:2px 4px}
+.webring{border:2px groove #999;padding:4px 8px;background:#333}
+
+/* floating menu */
+#fmenu{position:fixed;right:4px;top:28%;z-index:900;display:flex;flex-direction:column;gap:6px;animation:bob 3s ease-in-out infinite;touch-action:none}
+#fmenu .grip{height:14px;background:repeating-linear-gradient(#999 0 2px,#444 2px 4px);border:1px solid #000;cursor:move;border-radius:3px}
+#fmenu .strip{position:relative;width:74px}#fmenu .strip img{display:block;width:100%}#fmenu .strip a{position:absolute;left:18%;right:0;display:block;border-radius:6px}#fmenu .strip a:hover{background:rgba(255,255,0,.35);outline:2px dashed red}#fmenu .n{position:absolute;top:-4px;right:-10px;background:#e00;color:#fff;font:bold 10px Arial;border:2px solid #fff;padding:0 3px}
+
+/* article page */
+.apage{display:grid;grid-template-columns:1fr 280px;gap:8px;background:#fff;border:3px solid #000;padding:9px}
+@media (max-width:760px){.apage{grid-template-columns:1fr}}
+.art{padding:14px 18px 20px;font-size:17px;line-height:1.55}
+.crumbs{font:11px Arial;color:#666;margin-bottom:8px}
+.kicker{display:inline-block;background:red;color:#ff0;font:bold 13px Impact,sans-serif;letter-spacing:1px;padding:2px 8px;transform:rotate(-1deg)}
+.art h1{font:bold clamp(26px,4vw,42px) Georgia,serif;margin:8px 0;line-height:1.1}
+.byl{font:12px Arial;color:#444;border-top:1px solid #ccc;border-bottom:1px solid #ccc;padding:6px 0;margin-bottom:12px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.byl button{font:11px Arial}
+.hero{border:3px solid #000;margin:0 0 6px;position:relative;min-height:240px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.cap{font:italic 12px Arial;color:#555;margin-bottom:14px}
+.art p:first-of-type::first-letter{float:left;font:bold 64px/0.85 Georgia;padding:6px 6px 0 0;color:#b00}
+.inad{border:3px dashed #f0f;margin:16px 0;min-height:150px;position:relative}
+.inad::before{content:"ADVERTISEMENT \2014 KEEP READING \2193";position:absolute;top:-10px;left:10px;background:#fff;font:bold 9px Arial;color:#f0f;padding:0 4px;z-index:2}
+.helpful{background:#ffffcc;border:2px solid #cc0;padding:8px;font:14px "Comic Sans MS",cursive;margin:18px 0}
+.related{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:10px}
+.related a{border:2px solid #000;padding:8px;text-decoration:none;color:#000;font:bold 14px Georgia;background:#fff;display:flex;flex-direction:column;gap:8px;justify-content:space-between}
+.related a .e{font-size:40px;text-align:center;background:#eee}
+.related .clickhere{font-size:12px;padding:3px 10px;align-self:center}
+.cmts{margin-top:22px;font:14px Arial;border-top:4px double #000;padding-top:8px}
+.cmt{border-bottom:1px solid #ddd;padding:6px 0}
+.cmt b{color:#c00}.cmt small{color:#888;margin-left:6px}
+.cmt .act{font-size:11px;color:#00e;margin-top:3px}
+.cform textarea{width:100%;height:60px;font:13px "Comic Sans MS",cursive}
+.aside .box{margin-bottom:8px}
+.aside h4,.aside .minihead{padding-left:26px!important}.aside h4{margin:0;background:#000;color:#ff0;font:bold 13px Impact;padding:4px 8px;letter-spacing:1px}
+.aside .list a{display:block;padding:6px 8px;border-bottom:1px dotted #999;font:13px Georgia;text-decoration:none}
+.aside .list a::before{content:"\25BA ";color:red}
+table.sched{width:100%;border-collapse:collapse;font:14px Arial;margin:10px 0}
+table.sched td,table.sched th{border:2px solid #000;padding:5px}
+table.sched th{background:navy;color:#fff}
+table.sched tr:nth-child(even){background:#e8f0ff}
+.shopgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;font:13px Arial;margin-top:10px}
+.shopgrid div{border:2px solid #000;padding:8px;text-align:center;background:#fffbe6}
+.shopgrid .e{font-size:44px}
+.shopgrid .pr{color:red;font-weight:bold;font-size:16px}
+.prog{height:22px;border:2px inset #999;background:#fff;margin:10px 0}.prog i{display:block;height:100%;background:repeating-linear-gradient(90deg,#00a 0 12px,#fff 12px 14px);width:0}
+
+/* chat */
+.chatwin{background:#c0c0c0;border:3px outset #fff;padding:3px;font:13px Tahoma,Arial,sans-serif}
+.chatwin .tbar{background:linear-gradient(90deg,#000080,#1084d0);color:#fff;font:bold 13px Tahoma;padding:3px 6px;display:flex;justify-content:space-between;align-items:center}
+.chatwin .tbar span button{font:bold 10px Arial;width:18px;padding:0;margin-left:2px}
+.chatwin .menu{padding:3px 4px;font-size:12px}
+.chatwin .menu u{cursor:pointer}.chatwin .menu b{font-weight:normal;margin-right:12px}
+.topic{background:#fff;border:2px inset #999;padding:3px 6px;overflow:hidden;white-space:nowrap;font-size:12px}
+.topic span{display:inline-block;animation:scrollx 22s linear infinite;padding-left:100%}
+.chatbody{display:flex;gap:3px;margin-top:3px;height:62vh;min-height:340px}
+#chatlog{flex:1;background:#fff;border:2px inset #999;overflow-y:auto;padding:4px 6px;font:13px "Courier New",monospace;line-height:1.35}
+.cm{word-wrap:break-word}
+.cm .ts{color:#999}
+.cm.sys{color:#009300}
+.cm.sys.bad{color:#c00}
+.cm.hl{background:#ffff80}
+.cm.mine{background:#e0ffe0}
+#ulist{width:170px;background:#fff;border:2px inset #999;overflow-y:auto;font:12px Arial;padding:3px}
+#ulist div{cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#ulist div:hover{background:navy;color:#fff}
+@media (max-width:600px){#ulist{width:96px;font-size:10px}}
+.chatin{display:flex;gap:3px;margin-top:3px}
+.chatin input{flex:1;font:14px "Courier New";border:2px inset #999;padding:4px}
+.chatin button{font:bold 13px Tahoma;border:2px outset #fff;background:#c0c0c0;padding:0 14px;cursor:pointer}
+.status{font-size:11px;padding:3px 4px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.status span{border:1px inset #999;padding:0 6px}
+
+/* modal + toast */
+#ov{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1000;display:none;align-items:center;justify-content:center}
+#ov.on{display:flex}
+.win{background:#c0c0c0;border:3px outset #fff;width:min(420px,92vw);max-height:84vh;overflow:auto;font:13px Tahoma,Arial;position:relative;box-shadow:8px 8px 0 rgba(0,0,0,.5)}
+.win .tbar{background:linear-gradient(90deg,#800000,#ff2d2d);color:#fff;font:bold 13px Tahoma;padding:4px 6px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0}
+.win .tbar button{font:bold 11px Arial;padding:0 5px;cursor:pointer}
+.win .bd{padding:12px;background:#fff;margin:3px;border:2px inset #999}
+.win .bd input,.win .bd textarea{width:100%;font:13px Arial;margin:3px 0 8px}
+.win .mail div{border-bottom:1px solid #ccc;padding:5px 0;cursor:pointer}
+.win .mail div b{display:block}
+.win .mail div:hover{background:#ffc}
+#toast{position:fixed;left:12px;bottom:12px;z-index:1100;max-width:330px;background:#ff0;border:3px solid #000;font:bold 14px "Comic Sans MS",cursive;padding:8px 12px;box-shadow:5px 5px 0 #f0f;display:none;transform:rotate(-1.5deg)}
+#visitor{position:fixed;z-index:1050;width:300px;background:linear-gradient(#ff0,#f90);border:4px ridge #f0f;font:bold 15px "Comic Sans MS",cursive;text-align:center;padding:24px 12px 12px;display:none;animation:shake .3s infinite;transition:left .2s,top .2s}
+#visitor .x{position:absolute;top:2px;right:2px;font:bold 12px Arial;background:#c0c0c0;border:2px outset #fff;cursor:pointer;padding:0 5px}
+#visitor h2{margin:0 0 6px;font:900 22px Impact;animation:rainbow 1s infinite}
+.spark{position:fixed;pointer-events:none;z-index:2000;font-size:14px;transition:transform .8s ease-out,opacity .8s}
+body.max .box{animation:shake .25s infinite}
+body.max .grid,body.max .apage{transform:rotate(-.6deg)}
+body.max *{font-family:"Comic Sans MS",cursive!important}
+
+.txtblk{width:100%;min-height:240px;display:flex;align-items:center;justify-content:center;text-align:center;font:900 clamp(34px,6vw,64px)/1 Impact,"Arial Black",sans-serif;padding:20px;-webkit-text-stroke:1px rgba(0,0,0,.4);text-shadow:4px 4px 0 rgba(0,0,0,.35)}
+.txtblk small{font-size:.35em;display:block;margin-top:8px}
+.imgad{padding:0!important;justify-content:center;background:#fff}
+.chimg{display:inline-block;width:150px;max-width:100%;vertical-align:middle;animation:pulse 1.4s infinite}
+.crest{width:23%;min-width:110px;background:#1c3a1c;display:flex;align-items:center}
+.quote{flex:1;display:flex;align-items:center;background:#fff;padding:0}
+.radio{padding:0;background:#5aa7f0;display:flex;align-items:center}
+.story .img{flex:0 0 44%;height:auto;background:none;border:0;display:block}
+.story .img::after{display:none}
+.sq{min-height:0;background:#000}
+.sign{padding:0;min-height:0;display:flex;align-items:center;background:#14305a}
+.a-hosp .adslot{min-height:0}
+.war{padding:0}
+.related a .th{height:90px;background:#eee center/cover no-repeat;border:1px solid #000}
+.related a img.chimg{width:110px;align-self:center}
+.hero{background:#fff}
+
+.adslot{height:200px;min-height:0}
+.adslot.small{height:120px;min-height:0}
+.a-hosp .adslot{height:auto;flex:1}
+.ad{min-height:0;height:100%;overflow:hidden}
+.imgad img{width:100%!important;height:100%!important;object-fit:contain}
+.skullad{flex-direction:column}
+.skullad img:first-child{flex:1;min-height:0;object-fit:cover!important}
+.skullad img:last-child{height:auto!important;flex:none}
+.inad .adslot{height:220px}
+.aside .adslot{height:240px}
+.hero img{width:auto!important;max-width:100%;max-height:380px;min-height:200px;object-fit:contain}
+.hero{min-height:200px}
+@media (max-width:600px){#fmenu .strip{width:52px}}
+
+/* ===== FRAMES w/ homemade scrollbars ===== */
+.box::before,.box::after{display:none!important}
+.box.frame{display:grid!important;grid-template-columns:minmax(0,1fr) 20px;grid-template-rows:minmax(0,1fr) 20px;padding:0!important;min-height:0}
+.frame>.fc{overflow:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;min-height:0;min-width:0;position:relative}
+.frame>.fc::-webkit-scrollbar{display:none}
+.a-top>.fc,.a-hosp>.fc{display:flex}
+.art>.fc{padding:14px 18px 20px}
+.vbar,.hbar{display:flex;background:#fff;user-select:none;-webkit-user-select:none;touch-action:none}
+.vbar{flex-direction:column;border-left:3px solid #000}
+.hbar{border-top:3px solid #000}
+.bt{flex:0 0 17px;height:17px;background:#fff url(img/bowtie.png) center/100% 100% no-repeat;cursor:pointer;border:1px solid #000}
+.hbar .bt{flex:0 0 18px;height:auto}
+.vbar .bt{width:auto}
+.bt:active{filter:invert(1)}
+.trk{flex:1;position:relative;background:#fff}
+.trk b{position:absolute;display:none;background:#fff;border:2px solid #000;box-shadow:inset -2px -2px 0 #bbb}
+.vbar .trk b{left:1px;right:1px}.hbar .trk b{top:1px;bottom:1px}
+.corner{background:#fff;border-left:3px solid #000;border-top:3px solid #000}
+.grid{grid-template-rows:200px 300px 600px 430px 470px 170px}
+@media (max-width:760px){.grid{grid-template-rows:180px 300px 280px 520px 520px 380px 520px 520px 170px}}
+@media (max-width:470px){.grid{grid-template-rows:300px 220px 270px 230px 340px 500px 560px 540px 600px 620px 560px 170px 240px}}
+.apage>.art{height:calc(100vh - 150px);min-height:480px}
+.aside .box.frame{grid-template-rows:auto 20px}
+
+.a-camp{grid-area:camp}.a-nm{grid-area:nm}
+.camp{background:url(img/bluegrad.jpg) 0 0/100% 100%;display:flex;flex-wrap:wrap;gap:12px;padding:12px;min-height:100%}
+.camp .cimg{flex:1 1 220px;max-width:330px}
+.camp .ctext{flex:1 1 220px;font:15px Arial;color:#111}
+.camp .red{color:#e01b1b;font:italic 19px Arial;text-decoration:none;display:block}
+.camp .by{text-align:right;font:17px Arial;margin-bottom:8px}
+.camp .coath{flex-basis:100%}
+.signbtn{display:inline-block;background:#1d3a24;color:#ffd84a!important;font:bold 12px Arial;padding:6px 10px;border:2px outset #3a6;text-decoration:none;vertical-align:middle}
+.nm{background:#1a0000 url(img/redsky.jpg) top/100% auto no-repeat;color:#fff;padding:12px;text-align:center;min-height:100%;font:14px Arial}
+.nmh{color:#fff;font:bold 20px Arial;text-decoration:none;display:block;text-align:left}
+.nmd{color:#ffd800;font:italic 14px Arial;text-align:left;margin-top:4px}
+.nmf{text-align:left;margin:6px 0 10px}.nmf span{color:#ffd800}
+.cov img{object-fit:cover!important}
+.oathbox{margin:16px 0}
+.eggq{color:#e01b1b;font:19px/1.45 Arial;margin:18px 0 4px}
+.eggby{text-align:right;font:18px Arial;margin-bottom:14px}
+.guar{color:#666;font:italic 14px Arial;text-align:center}
+.legal{font:13px/1.5 Arial;background:#fff url(img/crest_hd.jpg) center/180px repeat;background-blend-mode:luminosity}
+.legal .in{background:rgba(255,255,255,.88);padding:10px;border:2px dashed #000}
+.legal h4{text-align:center;margin:12px 0 6px;font:16px Arial}
+.legal input.blank{border:0;border-bottom:1px solid #000;background:transparent;width:110px;font:italic 14px "Brush Script MT",cursive;color:#00a}
+.legal .safety{font-size:11px;line-height:1.35}
+.cut{border-top:2px dashed #000;margin:14px 0;text-align:center;font:10px Arial;position:relative}
+.cut span{background:#fff;padding:0 6px;position:relative;top:-8px}
+.chk{list-style:none;padding:0;columns:2 260px;column-gap:20px}
+.chk li{break-inside:avoid;margin:0 0 12px;font:bold 15px Arial;display:flex;gap:8px;align-items:flex-start}
+.chk input{width:20px;height:20px;flex:none;accent-color:#000}
+
+.gamebox>.fc{padding:12px;text-align:center;background:#000 url(img/redsky.jpg) top/100% auto no-repeat}
+.gtitle{color:#ff0;font:900 34px Impact;letter-spacing:2px;text-shadow:3px 3px #f0f;margin:4px 0}
+.gsub{color:#fff;font:13px Arial;margin-bottom:10px}
+.stage{position:relative;width:min(380px,100%);margin:0 auto;aspect-ratio:540/916;background:#300;border:4px ridge #f0f;touch-action:none;user-select:none;-webkit-user-select:none;overflow:hidden}
+.stage video,.stage .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block}
+.stage .tool{position:absolute;top:88.8%;height:11%;cursor:pointer}
+.stage .tool.sel{outline:3px dashed #ff0;outline-offset:-3px;background:rgba(255,255,0,.25)}
+.stage .eth{position:absolute;left:2%;top:79%;width:11%;height:9%;cursor:pointer}
+.stage .tgt{position:absolute;width:30%;aspect-ratio:1;border:4px dashed #ff0;border-radius:50%;transform:translate(-50%,-50%);animation:spin 4s linear infinite;pointer-events:none;box-shadow:0 0 0 3px rgba(0,0,0,.4),inset 0 0 0 3px rgba(0,0,0,.4);display:none}
+.stage .instr{position:absolute;left:4%;right:4%;top:10%;text-align:center;font:900 clamp(16px,5vw,24px) Impact;color:#fff;-webkit-text-stroke:1px #000;text-shadow:2px 2px 0 #000;pointer-events:none}
+.stage .hud{position:absolute;right:3%;top:1.2%;font:bold 12px "Courier New";color:#0f0;background:rgba(0,0,0,.7);padding:2px 6px;pointer-events:none}
+.stage .pop{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%) rotate(-8deg);font:900 clamp(26px,9vw,44px) Impact;color:#ff0;-webkit-text-stroke:2px #f0f;pointer-events:none;opacity:0;transition:opacity .2s,transform .4s;white-space:nowrap}
+.stage .pop.on{opacity:1;transform:translate(-50%,-50%) rotate(-8deg) scale(1.15)}
+.stage .ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(0,0,0,.55);color:#fff;font:15px Arial;padding:16px}
+.stage .ov h2{font:900 clamp(30px,10vw,48px) Impact;color:#ff0;-webkit-text-stroke:1px #f0f;margin:0;animation:rainbow 1s infinite}
+.stage .ov .big{font:900 22px Impact;background:linear-gradient(#ff3b3b,#b00000);color:#fff;border:3px outset #f88;padding:8px 24px;cursor:pointer}
+.stage.shake{animation:shake .25s 3}
+.gctl{margin-top:10px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.hiscore{color:#fff;font:12px "Courier New";margin-top:10px;background:#000;border:2px inset #888;padding:6px;text-align:left;max-width:380px;margin-left:auto;margin-right:auto}
+
+/* ===== sticky dog garden + kpop popup ===== */
+#dgsticky{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(100%,720px);z-index:950;cursor:pointer;display:none;filter:drop-shadow(0 -3px 6px rgba(0,0,0,.6))}
+#dgsticky img{display:block;width:100%}
+#toast{bottom:84px}
+#kpop{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-2deg);z-index:1060;width:min(340px,86vw);display:none;cursor:pointer;animation:wob .5s}
+#kpop img{display:block;width:100%;filter:drop-shadow(6px 6px 0 rgba(0,0,0,.6))}
+/* ===== dog garden game ===== */
+.dgbox>.fc{padding:10px;background:#5bc0f0}
+.dgtools{display:flex;flex-wrap:wrap;gap:4px;margin:8px 0;justify-content:center}
+.dgtools button{font:bold 12px "Comic Sans MS",cursive;border:3px outset #7c4;background:linear-gradient(#bdf26b,#6bbf1f);color:#173;padding:4px 8px;cursor:pointer;display:flex;align-items:center;gap:4px}
+.dgtools button img{height:22px;width:auto}
+.dgtools button.on{border-style:inset;background:linear-gradient(#ffe14d,#f5a800);color:#000}
+#dgwrap{position:relative;width:100%;border:6px ridge #8b5a2b;touch-action:none;user-select:none;-webkit-user-select:none;overflow:hidden;background:#a88a5a}
+#dgwrap canvas{position:absolute;left:0;top:0}
+#dgzen{position:absolute;left:6px;top:6px;background:rgba(0,0,0,.6);color:#bdf26b;font:bold 12px "Courier New";padding:3px 6px;pointer-events:none}
+.dghelp{font:13px "Comic Sans MS",cursive;color:#033;text-align:center;margin-top:6px}
+/* ===== kpop generator ===== */
+.kpbox>.fc{padding:12px;background:#0a3cff;color:#fff;text-align:center;font:14px Arial}
+.kplogo{width:min(240px,70%);margin:0 auto;display:block}
+.kpform{background:rgba(255,255,255,.12);border:3px dashed #ff8ce0;padding:10px;margin:10px auto;max-width:420px;text-align:left}
+.kpform label{display:block;font:bold 13px Arial;margin:6px 0 2px}
+.kpform input[type=text]{width:100%;font:16px Arial;padding:4px}
+.kpform input[type=range]{width:100%}
+.kpgo{display:block;margin:10px auto 0;background:linear-gradient(#ff5ccd,#c2007f);border:4px outset #ffb3ea;color:#fff;font:900 22px Impact;padding:6px 18px;cursor:pointer;display:flex;align-items:center;gap:8px}
+.kpgo img{height:40px}
+.kpload{max-width:420px;margin:10px auto;display:none}
+.kpload .bar{height:22px;border:3px inset #ccc;background:#fff}.kpload .bar i{display:block;height:100%;width:0;background:repeating-linear-gradient(90deg,#ff5ccd 0 10px,#2af 10px 20px)}
+.kpcard{max-width:420px;margin:12px auto;background:linear-gradient(135deg,#fff 0,#ffe3f6 50%,#d8f2ff 100%);color:#000;border:6px solid #fff;outline:4px solid #ff5ccd;padding:10px;transform:rotate(-1.5deg);display:none;text-align:left}
+.kpcard .ph{position:relative;overflow:hidden;border:3px solid #000;background:#0a3cff;height:280px}
+.kpcard .ph img{position:absolute;left:50%;top:50%;width:100%;transform-origin:center}
+.kpcard .ph .flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;transition:opacity .4s}
+.kpcard h3{font:900 28px Impact;margin:8px 0 0;color:#c2007f;letter-spacing:1px}
+.kpcard .grp{font:bold 14px Arial;color:#0a3cff}
+.kpcard .stat{display:flex;align-items:center;gap:6px;font:bold 11px Arial;margin:3px 0}
+.kpcard .stat b{width:90px}.kpcard .stat i{flex:1;height:10px;border:1px solid #000;background:#fff;display:block}.kpcard .stat i span{display:block;height:100%;background:linear-gradient(90deg,#2af,#ff5ccd)}
+.kpcard .meta{font:12px Arial;margin-top:6px;line-height:1.4}
+.pap{max-width:420px;margin:12px auto;display:none}
+.pap .arena{position:relative;height:300px;background:#000 url(img/kpop_icon.png) center/cover;border:4px ridge #ff5ccd;overflow:hidden;touch-action:none;cursor:crosshair}
+.pap .arena::before{content:"";position:absolute;inset:0;background:rgba(0,0,30,.75)}
+.pap .star{position:absolute;width:90px;height:90px;overflow:hidden;border:3px solid #fff;border-radius:12px}
+.pap .star img{width:100%;height:100%;object-fit:cover}
+.pap .flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;transition:opacity .25s}
+.pap .hud{display:flex;justify-content:space-between;font:bold 14px "Courier New";margin:6px 0}
+.pap .tab{font:bold 12px Georgia;background:#fff;color:#000;text-align:left;padding:6px;max-height:110px;overflow:auto;border:2px inset #999}
+.kpgroup{max-width:420px;margin:12px auto;background:#000;border:3px ridge #ff5ccd;padding:8px;text-align:left;font:13px "Courier New"}
+</style>
+</head>
+<body>
+
+<div id="ticker"><span class="lbl">CRYPTOLIVE</span><div class="track" id="track"></div></div>
+<div id="hdr">
+  <a href="#sections">&#9776; SECTIONS</a>
+  <a href="#search"> SEARCH</a>
+  <a href="#home" class="logo">BirthandDeathNewsNetwork.com</a>
+  <a href="#subscribe" class="sub">$1 FOR 3 MONTHS<small>Limited time only</small></a>
+  <a href="#" class="login" data-act="login">LOG IN</a>
+</div>
+<div id="learn"><a href="#subscribe">Learn more about subscriptions</a></div>
+
+<main id="view"></main>
+
+<footer id="foot">
+  <div class="row">
+    <a href="#privacy-policy">B&amp;D Privacy Policy</a>
+    <a href="#accessibility-policy">Accessibility Policy</a>
+    <a href="#terms-of-service">Terms of Service</a>
+    <a href="#homenet">HomeNet</a>
+    <a href="#" data-act="share">Share Screen</a>
+    <a href="#donate" style="margin-left:auto"><span class="pill" style="font-size:16px;padding:3px 16px">PayPaul<small>DONATE NOW</small></span></a>
+  </div>
+  <div class="row" style="margin-top:12px">
+    <span>&copy; 1998 - 2026 Birth &amp; Death News Network LLC, a wholly-owned subsidiary of Lee Pheeter Holdings (Cayman). All Rights Reversed.</span>
+  </div>
+  <div class="row" style="margin-top:12px">
+    <span>You are visitor # <span id="counter"></span></span>
+    <span class="uc"><span> UNDER CONSTRUCTION </span></span>
+    <span class="webring">&#x25C0; <a href="#webring-prev">prev</a> | <a href="#" data-act="random">random</a> | <a href="#webring-next">next</a> &#x25B6; <i>Afterlife Webring</i></span>
+    <span>Best viewed in Netscape Navigator 3.0 @ 800x600</span>
+    <span class="blink" style="color:#ff0">NEW!!</span>
+  </div>
+</footer>
+
+<nav id="fmenu" aria-label="Floating menu">
+  <div class="grip" title="drag me"></div>
+  <div class="strip"><img src="img/menu.png" alt="">
+  <a href="#home" title="Home" style="top:2%;height:10%"></a>
+  <a href="#" data-act="random" title="Explore" style="top:15%;height:10%"></a>
+  <a href="#" data-act="mail" title="Mail" style="top:27.5%;height:9.5%"></a>
+  <a href="#chat" title="Chat Room" style="top:38.5%;height:13%"><span class="n" id="cbadge">99+</span></a>
+  <a href="#" data-act="chaos" title="Settings" style="top:54.5%;height:11.5%"></a>
+  <a href="#" data-act="login" title="Account" style="top:69.5%;height:11%"></a>
+  <a href="#" data-act="write" title="Submit an obituary" style="top:83%;height:15%;left:0"></a>
+  </div>
+</nav>
+
+<div id="ov"><div class="win"><div class="tbar"><span id="wt">Message</span><button data-act="close">X</button></div><div class="bd" id="wb"></div></div></div>
+<div id="dgsticky" title="Dog Garden"><img src="img/dg_bar.png" alt="Dog Garden - Play Now"></div>
+<div id="kpop" title="Ugly American Baby K-Pop Star Generator GPT"><img src="img/kpop_popup.png" alt="Ugly American Baby K-Pop Star Generator GPT"></div>
+<div id="toast"></div>
+<div id="visitor"><span class="x" id="vx">X</span><h2>CONGRATULATIONS!!!</h2><div id="vtxt"></div><br><a href="#you-won" class="clickhere" id="vclaim">CLAIM PRIZE</a></div>
+
+<script>
+(function(){
+"use strict";
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const pick=a=>a[Math.random()*a.length|0], rnd=(a,b)=>a+Math.random()*(b-a), ri=(a,b)=>Math.floor(rnd(a,b+1));
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let CHAOS=5;
+let timers=[];
+
+/* ================= ART (all homemade, zero budget) ================= */
+const IMG=(n,st)=>`<img src="img/${n.includes(".")?n:n+".png"}" alt="" style="display:block;width:100%;height:auto;${st||''}">`;
+const TXT=(t,bg,col)=>`<div class="txtblk" style="background:${bg||'linear-gradient(#ff0,#f90)'};color:${col||'#000'}">${t}</div>`;
+const CH=`<img src="img/clickhere.png" alt="CLICK HERE" class="chimg">`;
+const ART={
+schools:()=>IMG("schools_photo"),brain:()=>IMG("brain"),hospice:()=>IMG("hospice"),skull:()=>IMG("skull")+IMG("english"),
+dilly:()=>IMG("buttdilly_hd.jpg"),piper:()=>IMG("piper"),radio:()=>IMG("radio"),war:()=>IMG("warphoto"),quote:()=>IMG("quote"),crest:()=>IMG("crest_hd.jpg")
+};
+
+/* ================= ADS ================= */
+const ADS={
+game:{to:"birth-time",h:()=>`<div class="ad imgad cov" style="background:#300;position:relative">${IMG("birth_womb.jpg")}<b class="blink" style="position:absolute;left:0;right:0;bottom:8px;font:900 22px Impact;color:#ff0;-webkit-text-stroke:1px #000">PLAY BIRTH TIME NOW!</b></div>`},
+family:{to:"pheeter-family-portrait",h:()=>`<div class="ad imgad cov">${IMG("pheeter_family.jpg")}</div>`},
+doggarden:{to:"dog-garden",h:()=>`<div class="ad imgad" style="background:#5bc0f0">${IMG("dog_garden.jpg")}</div>`},
+kpop:{to:"kpop-generator",h:()=>`<div class="ad imgad" style="background:#0a3cff">${IMG("kpop_icon.png")}</div>`},
+pyramid:{to:"camp-us-experience",h:()=>`<div class="ad imgad cov">${IMG("pyramid.jpg")}</div>`},
+tower:{to:"campus-experiment",h:()=>`<div class="ad imgad cov">${IMG("tower.jpg")}</div>`},
+nightmare:{to:"what-is-a-nightmare",h:()=>`<div class="ad imgad cov" style="background:#600">${IMG("nightmarebed.jpg")}</div>`},
+portrait:{to:"what-is-a-nightmare",h:()=>`<div class="ad imgad" style="background:#1a0000">${IMG("portrait.jpg")}</div>`},
+oath:{to:"campus-experiment",h:()=>`<div class="ad imgad" style="background:#1d3a24">${IMG("oath.jpg")}</div>`},
+easy:{to:"success-through-leadership",h:()=>`<div class="ad imgad" style="background:#bfe9f7">${IMG("easyheader.jpg")}</div>`},
+check:{to:"campus-contract",h:()=>`<div class="ad" style="background:#eef6f6;padding:6px">${IMG("check.jpg","height:auto!important;max-height:70%;object-fit:contain")}<b style="font:bold 12px Arial;color:#c00;margin-top:4px">MAKE ALL CHECKS PAYABLE TO PRESIDENT LEE PHEETER &copy;</b></div>`},
+nmword:{to:"what-is-a-nightmare",h:()=>`<div class="ad" style="background:#600;color:#ff0;font:italic 15px Arial">When all the Checks are Cashed and coined it all boils down to one key phenomenon:${IMG("nightmareword.jpg","height:auto!important;margin-top:8px")}</div>`},
+dilly:{to:"butt-dilly",h:()=>`<div class="ad imgad">${IMG("buttdilly_hd.jpg")}</div>`},
+piper:{to:"the-piper",h:()=>`<div class="ad imgad">${IMG("piper")}</div>`},
+skull:{to:"ai-grandma",h:()=>`<div class="ad imgad skullad" style="background:#2b3448">${IMG("skull")}${IMG("english")}</div>`},
+radio:{to:"spiritual-radio",h:()=>`<div class="ad imgad" style="background:#5aa7f0">${IMG("radio")}</div>`},
+crest:{to:"about-bd-llc",h:()=>`<div class="ad imgad" style="background:#1c3a1c">${IMG("crest_hd.jpg","max-width:180px;margin:auto")}</div>`},
+donate:{to:"donate",h:()=>`<div class="ad" style="background:#fff"><span class="pill">PayPaul<small>DONATE NOW</small></span><div class="cards"><span style="background:#1a1f71">VIZA</span><span style="background:#e85">MASTERCHARD</span><span style="background:#888">DISCOVERY</span><span style="background:#2e77bb">AMEXICAN</span></div><div style="font:10px Arial;margin-top:6px">Every $5 keeps a DJ awake for 1 hour</div></div>`},
+singles:{to:"hot-single-ghosts",h:()=>`<div class="ad" style="background:linear-gradient(#ff5fb0,#ffc0e0);font-family:Impact"><div style="font-size:26px;color:#fff;-webkit-text-stroke:1px #a0005a;line-height:1.1">HOT SINGLE<br>GHOSTS<br>IN YOUR AREA</div><div style="font:bold 12px Arial;margin-top:6px">Only ${ri(2,40)} feet away (in your walls)</div></div>`},
+casket:{to:"casket-outlet",h:()=>`<div class="ad" style="background:#000;color:#ff0;font-family:Impact"><div class="blink" style="font-size:30px;color:red">BOGO!!!</div><div style="font-size:30px">CASKET OUTLET</div><div style="font:bold 11px Arial;color:#fff">EVERYTHING MUST GO (IN THE GROUND)</div></div>`},
+teeth:{to:"cash-4-teeth",h:()=>`<div class="ad" style="background:repeating-linear-gradient(45deg,#0a0 0 14px,#080 14px 28px);color:#fff;font-family:'Arial Black'"><div style="font-size:34px;text-shadow:3px 3px #000">CA$H 4 TEETH</div><div style="font:bold 12px Arial;background:#000;padding:2px 6px">We buy gold, silver &amp; regular</div></div>`},
+coin:{to:"dead-coin",h:()=>`<div class="ad" style="background:linear-gradient(135deg,#120030,#5b00a8);color:#0f0;font-family:'Courier New'"><div style="font:900 44px Impact;color:#fff;text-shadow:0 0 10px #0f0">$DEAD</div><div style="font-weight:bold;font-size:18px">+${ri(900,9999)}% THIS HOUR</div><div style="color:#ff0;font-size:11px">BUY BEFORE YOU DIE</div></div>`},
+virus:{to:"soul-virus-scan",h:()=>`<div class="ad" style="background:#ece9d8;border:3px solid #0050e0;font:13px Tahoma"><div style="background:#0050e0;color:#fff;width:100%;font-weight:bold;padding:2px;margin:-8px 0 8px">! Soul Security Center</div><b class="blink" style="color:red;font-size:16px">YOUR SOUL HAS (${ri(12,99)}) VIRUSES</b><button class="btn98">CLEAN NOW</button></div>`},
+lawyer:{to:"were-you-born",h:()=>`<div class="ad" style="background:#003;color:#fff;font-family:Georgia"><div style="font-size:16px;color:#fc0">WERE YOU OR A LOVED ONE</div><div style="font:900 44px Impact;color:#fff">BORN?</div><div style="font-size:11px">You may be entitled to compensation</div><div style="font:bold 16px Arial;color:#fc0">1-800-BORN-BAD</div></div>`},
+diet:{to:"live-forever-trick",h:()=>`<div class="ad" style="background:linear-gradient(#fff,#ffd);font:bold 15px Arial">Local mom discovers 1 weird trick to live forever.<div style="color:red;font:900 22px Impact;margin-top:6px">UNDERTAKERS HATE HER!</div></div>`},
+hospicetxt:{to:"miracle-hospice",h:()=>`<div class="ad" style="background:linear-gradient(#e0f7ff,#7fd4ff);font-family:Georgia"><b style="font-size:22px;color:#036">D&amp;B MIRACLE HOSPICE</b><i style="font-size:14px">"You'll never want to leave"</i><b class="blink" style="color:red;font-size:14px;margin-top:4px">NOW LEASING</b></div>`},
+timeshare:{to:"purgatory-timeshare",h:()=>`<div class="ad" style="background:linear-gradient(#f80,#f20);color:#fff;font-family:Impact"><div style="font-size:28px;line-height:1.1">TIMESHARE<br>IN PURGATORY</div><div style="font:bold 13px Arial;margin-top:6px">0% APR FOR ETERNITY</div></div>`}
+};
+function adHTML(k){const a=ADS[k]||ADS.dilly;return `<a href="#${a.to}" style="text-decoration:none;display:block;height:100%">${a.h()}</a>`}
+
+function startSlots(){
+  $$(".adslot").forEach(el=>{
+    const pool=el.dataset.pool.split(","); let i=ri(0,pool.length-1);
+    el.innerHTML=adHTML(pool[i]);
+    const tick=()=>{i=(i+1)%pool.length;el.innerHTML=adHTML(pool[i]);const a=el.querySelector(".ad");if(a)a.classList.add("anim");
+      timers.push(setTimeout(tick,(+el.dataset.ms||2500)*(6/(CHAOS+1))))};
+    timers.push(setTimeout(tick,(+el.dataset.ms||2500)*(6/(CHAOS+1))));
+  });
+}
+
+/* ================= ARTICLES ================= */
+const A={
+"four-schools":{k:"GOOD NEWS!",t:"Four Schools Close Due To Fear Of Roof Collapse",by:"Randy Schultz, Senior Roof Correspondent",img:IMG("schools_photo","max-width:420px;margin:auto"),cap:"A roof, seen here being a roof. (Photo: someone's nephew)",b:[
+"Four area schools closed their doors indefinitely Tuesday after a roofing inspector looked up, made a noise, and left without saying anything.",
+"\"He just went 'hm,'\" said Principal Darlene Voss of Westfield Middle. \"You don't come back from a 'hm.' I've been in education 31 years. A 'hm' is the end.\"",
+"Students celebrated the news by immediately gathering directly beneath the roof in question to film reaction videos, several of which reached over 40 views.",
+"The district has temporarily relocated classes to the D&B Miracle Hospice construction site, which officials described as \"mostly roof, technically.\"",
+"The inspector, reached by phone, declined to comment, then said \"hm\" again and hung up. Two more schools closed within the hour.",
+"Birth & Death News Network classifies this story as GOOD NEWS in accordance with our editorial policy, which states that any news is good news if you click it."]},
+"scientific-quarterly":{k:"B&D SCIENTIFIC QUARTERLY",t:"Scientists Confirm: The Brain Can Be Poked",by:"Dr. Holt Vexley, PhD (pending)",img:IMG("brain","max-width:460px;margin:auto"),cap:"Fig. 1: A brain, being poked. Artist's rendering. The artist is also the scientist.",b:[
+"In a landmark study published exclusively in this quarter's B&D Scientific Quarterly, researchers at the B&D Institute for Advanced Touching have confirmed what many long suspected: the brain can, in fact, be poked.",
+"The study followed 400 volunteers over a period of nine minutes. \"Every single one of them turned blue,\" said lead researcher Dr. Holt Vexley. \"We don't know if that's related. We didn't have a control group. We had a control guy, and he left.\"",
+"Peer review consisted of a peer looking at it and saying \"yeah.\"",
+"Critics have called the findings \"not science\" and \"a drawing someone made in MS Paint.\" Dr. Vexley responded by poking a critic.",
+"The Institute is now seeking $4 million in funding for its next study, tentatively titled \"Can The Soul Be Refinanced?\" Donations accepted via PayPaul.",
+"NEXT ISSUE: Is Your Mattress Haunted? A 40-Page Investigation Sponsored By Butt Dilly."]},
+"victory-lap":{k:"POLITICS",t:"Gov. Chet Brimley Takes Another Victory Lap | Randy Schultz",by:"Randy Schultz, Opinion Columnist",img:TXT("GOV. BRIMLEY<br>LAP #4,112","linear-gradient(#b22 0 33%,#fff 33% 66%,#22b 66%)","#000"),cap:"Gov. Brimley on lap 4,112. He has not stopped.",b:[
+"Governor Chet Brimley has now been jogging around the state capitol building for nine consecutive days in what aides describe as \"a victory lap\" and doctors describe as \"a situation.\"",
+"Staffers hand the governor water and briefing documents from a moving golf cart. He has signed eleven bills mid-stride, three of them by accident and one of them a Butt Dilly room service receipt, which is now state law.",
+"\"WE WON,\" the governor shouted on lap 4,112, when a reporter asked what, specifically, had been won. He then shouted \"AGAIN\" and kept going.",
+"Asked when the lap would end, his press secretary said \"we don't believe in endings in this administration,\" before being lapped by the governor.",
+"In this columnist's opinion, the governor is doing great. He has passed me several times. I am also running. I cannot stop either. Please send help or $5 via PayPaul."]},
+"congressman-quits":{k:"BREAKING (MAYBE)",t:"Is The State's Most Devoted Supporter Of Himself Thinking About Quitting Congress — For A Gig With Mattress Kingdom?",by:"Staff Gossip Desk",img:TXT("PRICES SO LOW<br>IT'S A CRIME","linear-gradient(135deg,#00f,#f0f)","#ff0"),cap:"Rep. Dale Fontenot's office, artist's impression.",b:[
+"Rep. Dale Fontenot, widely considered the single most devoted supporter of Rep. Dale Fontenot, may be weighing a career move to Mattress Kingdom's 3rd-shift weekend ad spots, according to sources close to the congressman (his mirror).",
+"\"He's been practicing the line 'PRICES SO LOW IT'S A CRIME' in the bathroom for weeks,\" said one staffer. \"It's really good. He's never been this passionate about a bill.\"",
+"Mattress Kingdom has not confirmed talks, but did send a fruit basket to his office with a note reading \"we see you.\"",
+"Fontenot himself declined to comment, but was seen lying face-down on a display Tempur-Pedic for 45 minutes, which insiders call \"a negotiating posture.\"",
+"This story is developing. It may also be undeveloping. We will update this article when we feel like it."]},
+"miracle-hospice":{k:"WORK IN PROGRESS",t:"D&B Miracle Hospice: Construction Update #47",by:"Facilities Department",img:IMG("hospice"),cap:"Architect's rendering. The architect has asked us to stop calling it that.",b:[
+"Anticipated completion: Fall 2020. It is currently Fall 2026. Crews remain \"very close,\" according to a sign that has said \"VERY CLOSE\" since 2021.",
+"Owner: 666 Broadway Group, 666 Broadway, Nowhere NY 10007, 212-555-5555. For additional information: 212-555-1234 (rings a phone in a field). General Contractor: also 666 Broadway Group, which raises questions nobody is asking.",
+"The building's unique tiered design was chosen by a committee of one (President Lee Pheeter) and is described in the planning documents as \"aerodynamic, for heaven.\"",
+"Once complete, the Miracle Hospice will offer 400 beds, a 24-hour gift shop, a Butt Dilly express lobby, and a rooftop helipad for \"faster departures.\"",
+"To anonymously report unsafe conditions at this worksite, call 311. Para reportar condiciones peligrosas, llame al 311. Do not call 911; that is a different number and they've asked us to stop."]},
+"butt-dilly":{k:"SPONSORED",t:"Butt Dilly™: Tired Minds For God To Take",by:"Butt Dilly Hospitality Group (Paid)",img:IMG("buttdilly","max-width:460px;margin:auto"),cap:"The Butt Dilly lobby, Tuesday.",b:[
+"Welcome to Butt Dilly™, the nation's 4th-largest hospitality brand for minds that are tired and ready to be taken.",
+"Every Butt Dilly features: Free continental breakfast. Free continental drift. A pillow menu (one pillow). And our famous 24-hour Prayer Lobby, where the TV is permanently tuned to B&D Spiritual Radio.",
+"\"I checked in on a Friday and when I woke up it was 2019,\" wrote one TripAdvisor reviewer. We are not permitted to tell you which TripAdvisor.",
+"Butt Dilly Rewards members earn 1 point per night. At 10,000 points you are personally greeted by President Lee Pheeter, who will then ask you for a payment.",
+"Book now. Checkout is at 11 AM. Check-out is eternal."]},
+"war-movies":{k:"LISTICLE",t:"50 Best American War Movies",by:"Our Film Guy, Brent",img:IMG("warphoto","max-width:300px;margin:auto"),cap:"A war, probably.",b:[
+"Brent has seen every war movie and he has ranked them. Here is his list. Brent was given one afternoon.",
+"<ol style='font-weight:bold'><li>Saving Private Ryan's Receipt</li><li>Operation: Lunch</li><li>Full Metal Jacket 2: Full Metal Pants</li><li>The Hurt Lockerroom</li><li>Apocalypse Later (Tuesday Works Better)</li><li>Platoon (2 Guys)</li><li>Band of Cousins</li><li>Letters from Iwo Jima's Landlord</li><li>Black Hawk Down Comforter</li><li>Top Gun: Mavericks's Accountant</li><li>Hamburger Hill (Directors Cut, All Hamburgers)</li><li>The Thin Red Line At The DMV</li><li style='color:#999'>13–49: [REDACTED BY THE PENTAGON]</li><li>Cars 2</li></ol>",
+"Brent has been informed this list is 'only like 13 movies.' Brent has been informed of many things."]},
+"the-piper":{k:"PAID POST",t:"THE PIPER: The Boot That Leads Every Rat In Your House Away",by:"Content sponsored by Boot Barnacle",img:IMG("piper","max-width:460px;margin:auto"),cap:"Rats, leaving. Results not typical.",b:[
+"Introducing THE PIPER by Boot Barnacle: hand-stitched, full-grain, and emitting a frequency only rats (and some uncles) can hear.",
+"Simply walk out your front door wearing The Piper and every rat in your home will follow you. Where you go after that is between you and the rats.",
+"Warning: The Piper does not distinguish between rats and children. Do not wear near a school, especially the four that just closed.",
+"Available in Saddle Brown, Midnight, and Exodus. $399. Returns not accepted. The rats will not come back either."]},
+"lee-pheeter-statement":{k:"OFFICIAL STATEMENT",t:"President Lee Pheeter Clarifies Remarks On Payments",by:"Office of the President of B&D LLC ©",img:`<div style="display:flex;width:100%;align-items:center;background:#1c3a1c">${IMG("crest_hd.jpg","width:28%")}${IMG("quote","width:72%")}</div>`,cap:"President Pheeter, accepting a payment.",b:[
+"\"A payment to me is a step out of the darkness and into a habitat worth anything at all.\" — President Lee Pheeter ©",
+"President Lee Pheeter (a title he holds over B&D LLC and also, he says, \"spiritually, over Ohio\") issued a statement clarifying his widely shared quote.",
+"\"When I say a payment to me is a step out of darkness, I mean that literally,\" Pheeter said. \"I have a lamp. When you pay, I turn it on.\"",
+"Pheeter also confirmed his quotes are copyrighted, and that reading this article constitutes a licensing agreement. Invoices will be mailed to your soul.",
+"Payments can be made via PayPaul, Cash 4 Teeth, or $PHEET token, which is up today, as it is every day, according to the ticker we control."]},
+"spiritual-radio":{k:"24HR SPIRITUAL RADIO",t:"Schedule & DJ Info",by:"B&D Radio Programming Dept. (Gary)",img:IMG("radio","max-width:360px;margin:auto"),cap:"The B&D broadcast tower (Gary's satellite dish, on Gary's roof).",b:[
+"B&D Spiritual Radio broadcasts 24 hours a day to the living, the dead, and anyone whose car radio is stuck.",
+"<table class='sched'><tr><th>Time</th><th>Show</th><th>DJ</th></tr><tr><td>12AM–3AM</td><td>Hour of Static (3 hrs)</td><td>Rev. Moonbeam</td></tr><tr><td>3AM–3:01AM</td><td>The Witching Minute</td><td>???</td></tr><tr><td>3:01AM–6AM</td><td>Free Bird (Looped)</td><td>DJ Holy Static</td></tr><tr><td>6AM–9AM</td><td>Morning Mourning Zoo</td><td>Tina &amp; Toe Tag Tina</td></tr><tr><td>9AM–12PM</td><td>Obituary Countdown Top 40</td><td>Casey Casket</td></tr><tr><td>12PM–5PM</td><td>Lee Pheeter Reads Invoices</td><td>President Lee Pheeter ©</td></tr><tr><td>5PM–12AM</td><td>Request Hour (7 hrs)</td><td>Satellite Dish Gary</td></tr></table>",
+"Song requests may be submitted using the form on the homepage. Requests are played in the order they are ignored."]},
+"shop":{k:"B&D SHOP",t:"The Official B&D Merch Shop",by:"Fulfillment by Gary's garage",img:TXT("B&amp;D SHOP<br><small>ALL SALES FINAL. ALL SALES ETERNAL.</small>","linear-gradient(#ff0,#f0f)"),cap:"Some of our products. The others are in a box.",b:["All proceeds go directly to President Lee Pheeter's lamp.","%SHOP%"]},
+"subscribe":{k:"LIMITED TIME ONLY",t:"$1 For 3 Months (Then Your Firstborn)",by:"Subscriptions Dept.",img:TXT("$1 FOR<br>3 MONTHS","#ff3"),cap:"A subscriber, happy.",b:[
+"Subscribe to BirthandDeathNewsNetwork.com for just $1 for 3 months. After 3 months, the price adjusts to a number we will think of at that time.",
+"Subscribers get: unlimited GOOD NEWS!, ad-free browsing (ads will be shown, but you will feel worse about them), and a laminated photo of the Miracle Hospice.",
+"Limited time only. The time is your life. <a href='#' data-act='login'>Sign up now</a>."]},
+"dead-coin":{k:"CRYPTO",t:"$DEAD Coin Up 4,000% After Founder Dies, Comes Back, Dies Again",by:"Crypto Desk (One Guy With Six Monitors)",img:TXT("$DEAD<br><small>+4,000%</small>","linear-gradient(135deg,#120030,#5b00a8)","#0f0"),cap:"Chart of $DEAD. Lines only go up if you hold the phone upside down.",b:[
+"$DEAD, the memecoin backed by \"the inevitability of death,\" soared again this week after its founder announced on his deathbed that he would be \"right back.\" He was right back. Then he left again.",
+"\"The beauty of $DEAD is that everyone eventually holds it,\" said one investor, who asked to be identified only as \"crypto_jesus_fan.\"",
+"Market analysts have described the coin as \"a bubble\", \"a cult\", and \"a guy named Kyle.\" Kyle has not commented.",
+"Not financial advice. Not any advice. B&D LLC holds 98% of $DEAD supply and is legally required to tell you that, according to Gary."]},
+"were-you-born":{k:"LEGAL ALERT",t:"Were You Or A Loved One Born? You May Be Entitled To Compensation",by:"Dewey, Cheatem & Grave, Attorneys at Law",img:TXT("WERE YOU<br>BORN?","#003","#fc0"),cap:"Our attorneys, standing in front of a law.",b:[
+"If you or someone you love was born at any point between the beginning of time and now, you may be entitled to a cash settlement.",
+"Symptoms of being born include: aging, taxes, receiving texts, and remembering things you said in 2009 at 3 AM.",
+"Call 1-800-BORN-BAD today. Operators are standing by. They have been standing for a long time. Their feet hurt. They would like to sue someone about that too."]},
+"hot-single-ghosts":{k:"DATING",t:"Hot Single Ghosts In Your Area Want To Meet You (They Are Already In Your Kitchen)",by:"B&D Personals",img:TXT("HOT SINGLE<br>GHOSTS","linear-gradient(#ff5fb0,#ffc0e0)","#fff"),cap:"Not pictured: ghost (ghost).",b:[
+"Lonely? Over 3,000 eligible ghosts are within 2 miles of your current location, and 1 is directly behind you. Don't turn around, it's rude on a first date.",
+"Profiles include: Margaret (d. 1887, enjoys long walks down the same hallway, forever), Todd (d. 2004, still thinks it's 2004), and Unnamed Shape (enjoys: the corner).",
+"Sign up free. Unsubscribing requires a priest."]},
+"live-forever-trick":{k:"HEALTH",t:"Local Mom Discovers 1 Weird Trick To Live Forever. Undertakers HATE Her!",by:"Wellness Desk",img:TXT("1 WEIRD<br>TRICK","linear-gradient(#fff,#ffd)","#c00"),cap:"Local mom, age unknown, possibly infinite.",b:[
+"Barbara from somewhere has not died, and she says the secret is simple.",
+"\"I just don't,\" Barbara said. \"Every morning I wake up and I don't die. Then I do it again the next day.\"",
+"Undertakers in the area have reportedly started a GoFundMe titled \"Barbara.\" The trick has been reviewed by 0 doctors, all of whom were too stunned to speak.",
+"The trick is revealed below this ad. <span class='blink' style='color:red'>(KEEP SCROLLING)</span>",
+"<i>The rest of this article is available to subscribers only. <a href='#subscribe'>$1 for 3 months.</a></i>"]},
+"soul-virus-scan":{k:"SECURITY ALERT",t:"Soul Security Center: Scanning Your Soul...",by:"Totally Real Antivirus 2003",img:TXT("SCANNING<br>SOUL...","#0050e0","#fff"),cap:"A virus, magnified 10,000x, wearing sunglasses.",b:["Please do not close this page. Do not close your eyes either.","%SCAN%"]},
+"ai-grandma":{k:"TECH",t:"AI Will Replace Your Grandmother By 2027, Says Your Grandmother",by:"Tech Desk",img:IMG("skull","max-width:320px;margin:auto"),cap:"Grandma 2.0 (beta). Cookies still in development.",b:[
+"Silicon Valley's newest startup, GrandmaGPT, promises a fully automated grandmother who will call you during work, ask if you've eaten, and forward you a chain email about chemtrails.",
+"Early testers reported the AI grandma was \"indistinguishable from the real thing,\" particularly in its insistence on not understanding the TV remote.",
+"Your actual grandmother, reached for comment, said \"good, I'm tired,\" and logged off."]},
+"donate":{k:"SUPPORT INDEPENDENT JOURNALISM",t:"Donate To Birth & Death News Network",by:"Lee Pheeter ©",img:TXT('<span class="pill" style="font-size:40px">PayPaul<small>DONATE NOW</small></span>',"#fff"),cap:"Where your money goes (the lamp).",b:[
+"For over 28 years, BirthandDeathNewsNetwork.com has brought you news of births, deaths, and everything awkwardly in between.",
+"Your donation keeps our servers (one Dell under Gary's desk) running. $5 buys a DJ one hour of being awake. $50 buys a new roof for one of the four schools. $500 buys nothing in particular but feels great.",
+"<button class='btn98' data-act='fakepay'> DONATE $5</button> <button class='btn98' data-act='fakepay'> DONATE $50</button> <button class='btn98' data-act='fakepay'> DONATE MY SOUL</button>"]}
+};
+const ALIASES={"about-bd-llc":"lee-pheeter-statement","schedule":"spiritual-radio","daily-schedule":"spiritual-radio"};
+
+const FILLER=[
+"This page has been under construction since 1998. Please check back in 1998.",
+"Our web guy, Gary, is working on this page right now. Gary has been working on this page for a long time. Gary is okay. We think.",
+"In the meantime, please enjoy the ads, which are fully under construction as well.",
+"Sources close to this page say it will be \"really something\" once it's finished.",
+"If you are seeing this message, your browser supports seeing messages. Congratulations.",
+"This section is sponsored by Butt Dilly™. Tired Minds For God To Take.",
+"For more information, please call 212-555-5555 and ask for Gary. If Gary answers, hang up; that means it's working.",
+"Experts agree this is one of the pages of all time.",
+"President Lee Pheeter has personally approved the words on this page, and invoices will follow.",
+"Click any link on this page to go to another page. That's how websites work. We read about it."];
+
+const HEADLINES=[["dog-garden","DOG GARDEN: The Zen App Where Dogs Do The Raking"],["kpop-generator","NEW: Ugly American Baby K-Pop Star Generator GPT"],["birth-time","NEW GAME: BIRTH TIME&trade; &mdash; Can You Deliver?"],["pheeter-family-portrait","President Pheeter Unveils Official Family Portrait"],["campus-experiment","CampUs&trade;: It's A Race To The Buoy With The Best Attitude"],["what-is-a-nightmare","What Is A Nightmare? (You May Might Have Just Nightmared)"],["camp-us-experience","The Solution To Your Nightmares Is Low Income Housing"],["success-through-leadership","Are You Undergoing A Ghastly Metamorphosis? Check All That Apply"],["campus-contract","CampUs&trade; Contract: Please Tear Along The Dotted Line"],["four-schools","Four Schools Close Due To Fear Of Roof Collapse"],["scientific-quarterly","Scientists Confirm: The Brain Can Be Poked"],["victory-lap","Gov. Brimley Takes Another Victory Lap"],["congressman-quits","Is Rep. Fontenot Quitting Congress For Mattress Kingdom?"],["miracle-hospice","D&B Miracle Hospice: Construction Update #47"],["dead-coin","$DEAD Coin Up 4,000% After Founder Dies Twice"],["hot-single-ghosts","Hot Single Ghosts Already In Your Kitchen"],["live-forever-trick","Local Mom Discovers 1 Weird Trick To Live Forever"],["ai-grandma","AI Will Replace Your Grandmother By 2027"],["war-movies","50 Best American War Movies (13)"],["lee-pheeter-statement","President Pheeter Clarifies Payment Remarks"],["the-piper","THE PIPER: Boots That Lead The Rats Away"],["were-you-born","Were You Born? You May Be Entitled To Cash"],["butt-dilly","Butt Dilly™ Opens 400th Location In A Ditch"],["local-man-dies-of-old-age-at-31","Local Man Dies Of Old Age At 31"],["baby-born-already-in-debt","Baby Born Already $40,000 In Debt, Doctors 'Impressed'"],["obituary-for-a-printer","Obituary: Office Printer (2011–2026), Never Worked"],["town-council-votes-to-ban-tuesdays","Town Council Votes To Ban Tuesdays"],["man-reincarnated-as-himself","Man Reincarnated As Himself, 'Disappointed'"],["gary-update","Gary Update: Gary Is Fine"]];
+
+/* ================= PAGES ================= */
+function bt(){return ""}
+function homeHTML(){
+  const ql=HEADLINES.slice(10).concat(HEADLINES.slice(10));
+  return `<div class="grid">
+  <div class="box a-top"><a href="#about-bd-llc" class="crest">${IMG("crest_hd.jpg")}</a>
+    <a href="#lee-pheeter-statement" class="quote">${IMG("quote")}</a></div>
+  <div class="box a-dilly"><div class="adslot" data-pool="dilly,game,kpop,pyramid,singles,check,family,doggarden,casket,dilly,tower,teeth,hospicetxt" data-ms="2600"></div></div>
+  <div class="box a-radio"><a href="#spiritual-radio" class="radio">${IMG("radio")}</a></div>
+  <div class="box a-schools"><a href="#four-schools" class="story"><div class="img">${IMG("schools_photo")}</div><div><h3>Four schools close due to fear of roof collapse</h3><span class="ago">2h</span> &nbsp; ${CH}</div></a></div>
+  <div class="box a-donate"><div class="adslot" data-pool="donate,check,kpop,coin,virus,oath,timeshare" data-ms="1900"></div><div class="adslot small" data-pool="piper,doggarden,easy,lawyer,game,diet,piper,nmword,singles" data-ms="3100"></div></div>
+  <div class="box a-side"><div class="side">
+    <a href="#goggle-pray" class="badge"><small>GET IT ON</small>Goggle Pray</a>
+    <a href="#tuneout" class="badge" style="background:#fff;color:#000">+ tune<b style="color:#1cb">out</b></a>
+    <div class="nav"><a href="#birth-time" class="blink" style="color:#e00">--PLAY BIRTH TIME--</a><a href="#dog-garden" style="color:#080">--Dog Garden--</a><a href="#kpop-generator" style="color:#c2007f">--K-Pop Star Generator--</a><a href="#chat">--Chat Room--</a><a href="#spiritual-radio">--Schedule &amp; DJ Info--</a><a href="#daily-schedule">--Daily Schedule--</a><a href="#shop">--Shop--</a></div>
+    <div class="listen blink">LISTEN LIVE</div>
+    <div class="player"><button id="play" title="play">&#x25B6;</button><span id="ptime">0:00</span><span class="bar"><i id="pbar"></i></span><button id="mute" title="mute">VOL</button></div>
+    <div id="nowp" style="font:italic 11px Arial;color:#555">Now playing: nothing (press play)</div>
+    <div class="soc"><a href="#fakebook" style="background:#3b5998">f</a><a href="#y-groups" style="background:#7b0099">Y?</a><a href="#myspace-page" style="background:#036">My</a></div>
+    <form class="reqform" id="req"><label>Song artist:<input name="a" required></label><label>Song title:<input name="t" required></label><label>Dedicated to:<input name="d"></label><label>Your name:<input name="n"></label><label>Your E-mail:<input name="e"></label><button>Submit song request</button></form>
+    <div class="minihead">LIVE CHAT (<span id="minicount">1,337</span> online)</div>
+    <a href="#chat" class="minichat" id="minichat"></a>
+    <div class="foot-links"><a href="#policies">Policies</a><a href="#accessibility">Accessibility</a><a href="#broker-login">Broker/Assister Login &#x2197;</a><a href="#translation-disclaimer">Website Translation Disclaimer</a></div>
+  </div></div>
+  <div class="box a-sq"><a href="#scientific-quarterly" class="sq">${IMG("brain")}</a></div>
+  <div class="box a-latest"><div class="latest"><a href="#latest-news">${IMG("latestpill","max-width:230px;margin:0 auto")}</a>
+    <div class="two"><a href="#victory-lap" class="l">Gov. Brimley takes another victory lap | Randy Schultz<br><span class="ago">2h</span></a>
+    <ul class="r"><li><a href="#congressman-quits">Is the state's most devoted supporter of himself thinking about quitting Congress &mdash; for a gig with Mattress Kingdom?</a></li></ul></div>
+    <div class="adslot" style="min-height:180px" data-pool="game,kpop,coin,portrait,family,doggarden,skull,singles,pyramid,radio,nightmare,lawyer" data-ms="2400"></div>
+    <a href="#victory-lap" style="display:block;margin-top:8px">${CH}</a>
+    <div class="scroller"><div class="in">${ql.map(h=>`<a href="#${h[0]}">${h[1]}</a>`).join("")}</div></div>
+  </div></div>
+  <div class="box a-hosp"><a href="#miracle-hospice" class="sign">${IMG("hospice")}</a>
+    <div class="adslot" data-pool="family,kpop,skull,pyramid,game,hospicetxt,nightmare,coin,crest,tower,radio" data-ms="2300"></div></div>
+  <div class="box a-camp"><div class="camp">
+    <a href="#campus-experiment" class="cimg">${IMG("tower.jpg")}</a>
+    <div class="ctext"><a href="#campus-experiment" class="red">It&rsquo;s a race to the buoy with the best attitude. Make waves with my system for self development!</a><div class="by">- President Lee Pheeter &copy;</div>
+    <p>Dietitian Dr. Pheeter will then build you back up with the B.D. dismal diet&trade;, a lasting regime of iceberg lettuce and crushed tylenol that will be mandatory to all trainee staff. Refusal of doing so will result in a heftier dose of powdered tylenol and strained amounts of iceberg lettuce.</p>
+    <p>Have you seen a jetski? Maybe when you were a child? &hellip; <a href="#campus-experiment">READ MORE</a></p>
+    <a href="#campus-experiment">${CH}</a> <a href="#campus-contract" class="signbtn">SIGN THE CONTRACT &raquo;</a></div>
+    <a href="#campus-experiment" class="coath">${IMG("oath.jpg")}</a>
+  </div></div>
+  <div class="box a-nm"><div class="nm">
+    <a href="#what-is-a-nightmare" class="nmh">What is a nightmare?</a>
+    <div class="nmd">Monumental weak foundations for perpetual independant immaturity caused by irreparable past personal fear, which is the result of subliminal and internal outside sources i.e. nightmares</div>
+    <a href="#what-is-a-nightmare">${IMG("portrait.jpg","max-width:230px;margin:10px auto")}</a>
+    <div class="nmf"><b>Heres a scary fact:</b> <span>For every 1 person nightmaring, there are millions helplessly awake:</span></div>
+    <a href="#what-is-a-nightmare">${CH}</a>
+    <a href="#what-is-a-nightmare">${IMG("nightmareword.jpg","margin-top:8px")}</a>
+    <a href="#success-through-leadership">${IMG("easyheader.jpg","margin-top:10px;border:2px solid #fc0")}</a>
+    <a href="#camp-us-experience">${IMG("pyramid.jpg","margin-top:10px;border:2px solid #fc0")}</a>
+  </div></div>
+  <div class="box a-war"><a href="#war-movies" class="war">${IMG("war")}</a></div>
+  <div class="box a-links"><div class="links">
+    <div><b>Investors</b><a href="#annual-reports">Annual Reports</a><a href="#sec-filing">SEC Filing</a><a href="#financial-press-releases">Financial Press Releases</a><a href="#stock-quotes">Stock Quotes</a></div>
+    <div><b>Rates &amp; Tariffs</b><a href="#rates-and-tariffs">Rates &amp; Tariffs</a><a href="#death-tax">Death Tax Calculator</a></div>
+    <div><b>Community Affairs</b><a href="#community-partnerships">Community Partnerships</a><a href="#for-teachers-and-students">For Teachers &amp; Students</a><a href="#former-gas-plants">Former Manufactured Gas Plants</a><a href="#outage-recovery-plan">Our Outage Recovery Plan</a></div>
+    <div><b>Municipalities</b><a href="#resources">Resources</a></div>
+    <div><b>Social</b><a href="#fakebook">FAKEBOOK</a><a href="#twitter-x-whatever">TWITTER(?)</a><a href="#youtube-channel">YOUTUBE</a><a href="#linked-out">LINKED OUT</a></div>
+  </div></div>
+  </div>`;
+}
+
+function titleize(s){return s.split("-").map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(" ")}
+function getArticle(slug){
+  slug=ALIASES[slug]||slug;
+  if(A[slug])return [slug,A[slug]];
+  const h=HEADLINES.find(x=>x[0]===slug);
+  const seed=[...slug].reduce((a,c)=>a+c.charCodeAt(0),0);
+  const f=[...FILLER].sort((a,b)=>((a.length*seed)%7)-((b.length*seed)%7)).slice(0,4);
+  return [slug,{k:"UNDER CONSTRUCTION",t:h?h[1]:titleize(slug),by:"Gary (Webmaster)",img:TXT("UNDER<br>CONSTRUCTION","repeating-linear-gradient(45deg,#ff0 0 20px,#000 20px 40px)","#fff"),cap:"A man is working on it.",b:f}];
+}
+
+function articleHTML(slug){
+  const [s,a]=getArticle(slug);
+  let paras=a.b.map((p,i)=>{
+    if(p==="%SHOP%")return shopHTML();
+    if(p==="%SCAN%")return `<div class="prog"><i id="scanbar"></i></div><div id="scanmsg" style="font:13px 'Courier New'">Initializing soul...</div>`;
+    const html=/^</.test(p)?p:`<p>${p}</p>`;
+    return html+(i===1?`<div class="inad"><div class="adslot" data-pool="${pick(['coin,dilly,pyramid,virus,singles','diet,piper,nightmare,casket,check','lawyer,skull,oath,timeshare,tower','easy,nmword,kpop,portrait,doggarden,teeth'])}" data-ms="2200"></div></div>`:"");
+  }).join("");
+  const rel=HEADLINES.filter(h=>h[0]!==s).sort(()=>Math.random()-.5).slice(0,4);
+  const TH={"kpop-generator":"kpop_icon.png","birth-time":"birth_womb.jpg","pheeter-family-portrait":"pheeter_family.jpg","dog-garden":"dog_garden.jpg","campus-experiment":"tower.jpg","what-is-a-nightmare":"portrait.jpg","camp-us-experience":"pyramid.jpg","success-through-leadership":"easyheader.jpg","campus-contract":"check.jpg","four-schools":"schools_photo","scientific-quarterly":"brain","miracle-hospice":"hospice","butt-dilly":"buttdilly_hd.jpg","war-movies":"warphoto","the-piper":"piper","lee-pheeter-statement":"crest_hd.jpg","ai-grandma":"skull"};const thumbs=["kpop_icon.png","dog_garden.jpg","pheeter_family.jpg","birth_womb.jpg","schools_photo","brain","hospice","buttdilly_hd.jpg","warphoto","piper","quote","skull","radio","crest_hd.jpg","tower.jpg","portrait.jpg","pyramid.jpg","nightmarebed.jpg"];
+  return `<div class="apage"><div class="box art">
+    <div class="crumbs"><a href="#home">Home</a> &raquo; <a href="#news">News</a> &raquo; <a href="#${s}">${esc(a.k)}</a></div>
+    <span class="kicker">${a.k}</span><h1>${a.t}</h1>
+    <div class="byl"><span>By <b>${a.by}</b></span><span>Updated 2h ago</span><span>&#x23F1; ${ri(2,14)} min read</span><button data-act="listen"> Listen</button><button data-act="share">Share</button><button data-act="print">Print</button></div>
+    <div class="hero">${a.img}</div><div class="cap">${a.cap}</div>
+    ${paras}
+    <div class="helpful">Was this article helpful? <button class="btn98" data-act="yes"> Yes</button> <button class="btn98" data-act="yes"> Also yes</button></div>
+    <h3 style="font:bold 20px Impact;margin:20px 0 0">YOU MAY ALSO LIKE </h3>
+    <div class="related">${rel.map(r=>`<a href="#${r[0]}"><div class="th" style="background-image:url(img/${(t=>t.includes(".")?t:t+".png")(TH[r[0]]||pick(thumbs))})"></div>${r[1]}${CH}</a>`).join("")}</div>
+    <div class="cmts"><b style="font-size:16px"> COMMENTS (<span id="ccount">0</span>)</b>
+      <form class="cform" id="cform"><textarea placeholder="Leave a comment. Be nice. Or don't. We don't moderate." required></textarea><button class="btn98">Post Comment</button></form>
+      <div id="clist"></div></div>
+  </div>
+  <div class="aside">
+    <div class="box"><div class="adslot" data-pool="game,kpop,dilly,pyramid,coin,family,skull,portrait,doggarden,singles,piper,check,virus" data-ms="1800"></div></div>
+    <div class="box"><h4>MORE GOOD NEWS!</h4><div class="list">${HEADLINES.slice().sort(()=>Math.random()-.5).slice(0,7).map(h=>`<a href="#${h[0]}">${h[1]}</a>`).join("")}</div></div>
+    <div class="box"><div class="minihead" style="margin:0"> LIVE CHAT</div><a href="#chat" class="minichat" id="minichat" style="margin:0;height:220px"></a></div>
+    <div class="box"><div class="adslot" data-pool="skull,oath,casket,radio,nightmare,lawyer,easy,hospicetxt,crest,tower" data-ms="2700"></div></div>
+    <div class="box" style="text-align:center;padding:10px"><a href="#home">${CH}</a><div style="font:bold 11px Arial">(back to home)</div></div>
+  </div></div>`;
+}
+
+function shopHTML(){
+  const items=[["","B&D Tee (one size: XXXXL)","$34.99"],["","Mug That Says 'MUG'","$19.99"],["","Starter Casket (Kids)","$899.00"],["","Lee Pheeter © Cap","$1 (+ payment)"],["","Spiritual Radio Rosary (FM)","$44.44"],["","Butt Dilly Travel Lotion","$7.00"],["","Replica of Gary's Dish","$2,400"],["","Mystery Box (Has Bees)","$5.00"]];
+  return `<div class="shopgrid">${items.map(i=>`<div><div class="e">${i[0]}</div><b>${i[1]}</b><div class="pr">${i[2]}</div><button class="btn98" data-act="cart">ADD TO CART</button></div>`).join("")}</div>`;
+}
+
+function chatHTML(){
+  return `<div style="background:#fff;border:3px solid #000;padding:9px">
+  <div class="chatwin"><div class="tbar"><span> #spiritual-radio &mdash; B&amp;D Chat 2.0 (Java Applet) &mdash; <span id="ucount2">1,337</span> users</span><span><button data-act="noop">_</button><button data-act="noop">&#x25A1;</button><button data-act="exitchat">X</button></span></div>
+  <div class="menu"><b data-act="noop"><u>F</u>ile</b><b data-act="noop"><u>E</u>dit</b><b data-act="noop"><u>V</u>iew</b><b data-act="cmds"><u>H</u>elp</b> &nbsp; <span style="color:#555">| Type /nick newname, /me does something, /clear</span></div>
+  <div class="topic"><span>*** TOPIC: Welcome to #spiritual-radio !!! NO SPAMMING (spamming allowed) | DJ Rev. Moonbeam LIVE 24HR | BUY $DEAD  | Lee Pheeter is watching &copy; | Be kind to the bots, they are people too (they are not) | Gary pls fix the roof ***</span></div>
+  <div class="chatbody"><div id="chatlog"></div><div id="ulist"></div></div>
+  <form class="chatin" id="chatform"><input id="chatin" autocomplete="off" maxlength="300" placeholder="Say something to 1,337 strangers..."><button>Send</button></form>
+  <div class="status"><span>Connected to irc.bdnn.net:6667</span><span>Nick: <b id="mynick"></b></span><span id="lag">Lag: 4s</span><span>Msgs/sec: <b id="mps">0</b></span></div>
+  </div></div>`;
+}
+
+/* ================= CHAT ENGINE ================= */
+const BASEUSERS=["xX_GraveDigger_Xx","ReverendMoonbeam","CasketKing69","Lee_Pheeter_OFFICIAL","lee_pheeter_REAL","LeePheeterFanAccount","hospicebot3000","Grandma_Online","ButtDillyConcierge","dj_holy_static","HODL4SOUL","crypto_jesus_fan","xXxEternalRestxXx","ToeTagTina","embalmbro","angel_investor","reincarnated_9x","BirthdayBoy1947","MrsPheeter","born_yesterday","Dave","dave2","dave_real","dave_REAL_real","tunein_tony","MomOfTwelve","the_piper","bootsboy99","roofinspector_steve","Principal_Voss","Satellite_Dish_Gary","404_soul_not_found","ectoplasm_eric","ouija_bored","deadcoin_whale","PastorPaypaul","Gov_Brimley_Lap4112","MattressKingdomRep","Brent_the_film_guy","SpookyMcGhost","TRUTH_SEEKER_77","newborn_420","purgatory_pam","casey_casket","DrHoltVexley","control_guy","beesinabox","not_a_bot_human","definitely_human_2","Kyle","undertaker_ul","lamp_enjoyer","rapture_ready_rhonda","x_ShadowWolf_x","catgirl_obituaries","mrs_barbara_forever","ghost_todd_2004","hm_guy","URN_YOUR_KEEP","coffin_dodger"];
+const ADJ=["sad","holy","dead","spooky","based","haunted","crypto","eternal","lil","big","sleepy","angry","blessed","cursed","moist","dark"],NOUN=["ghost","boy","gamer","angel","nun","casket","wizard","dad","raccoon","priest","ape","goblin","mom","skeleton","toaster","gremlin"];
+const EXTRA=Array.from({length:180},()=>pick(ADJ)+"_"+pick(NOUN)+ri(1,999));
+const USERS=BASEUSERS.concat(EXTRA);
+const OPS=new Set(["Lee_Pheeter_OFFICIAL","ReverendMoonbeam","Satellite_Dish_Gary","dj_holy_static"]);
+const COINS=["$DEAD","$BIRTH","$PHEET","$BUTT","$HOSPC","$SOUL","$DILLY","$CASKET","$GHOST","$AMEN","$TOMB","$BONE","$RAPTR","$URN"];
+const EM=[":)",":(","xD",":P","&lt;3","^_^","T_T",";)","o_O","(-_-)","\\o/",">:)","lol"];
+const LINES=["just beat BIRTH TIME with 900 $DEAD","what tool do u use on the feet","the jackhammer. it is always the jackhammer","i used the hand and it said no","BIRTH TIME is my favorite game of all time","dog garden is real now","DOG GARDEN PLAY NOW","my dog garden is 100% zen 0% skid","the rake mode is 3 dogs. it is beautiful","who let 8 dogs loose in the garden","just generated a k-pop star named LIL RANCH","my k-pop baby is 100% ugly","debuted my group, charted at #4402","the x on the dog garden ad doesnt work","it worked for me","it opened the ad","GPT said my baby is too american","the pheeter family portrait has a fish in it why","who is the fish","the fish is family","we provide the stairs, but you must do the climbing","its a race to the buoy with the best attitude","make waves with my system for self development!!","just signed the campus contract lol","did anyone else sign all 26 blanks","day 3 of the dismal diet. iceberg lettuce again","crushed tylenol for breakfast {e}","refused the lettuce, got MORE lettuce","powdered tylenol hits different","is my emotionally abandoned chicken ok","the egg quote made me cry","i am a fragile egg in incubation","im the fastly developing fowl","free me from my membrane pheeter","claimed serfdom today {e}","my edge card came in the mail","anyone else nightmaring rn","i think i may might have just nightmared","for every 1 person nightmaring there are millions helplessly awake","the solution to my nightmares is low income housing","the escalator at the pyramid is broken again","we provide the escalator but u must do the standing","does the thin canal count as a pool","my 160HP jetski is in prague","undergoing a ghastly metamorphosis brb","checked all the boxes {e}","tear along the dotted line!!!","pad ur envelope with the remaining pages","i shredded my practice signatures","lol","LOL","lmao","first","FIRST","anyone here?","asl","a/s/l","brb mom needs the phone line","DJ play Free Bird again","thats the 4th time he played free bird","5th","6th actually","hello??","is this the hospice chat","wrong room sorry","no ur in the right room","{u} ur not funny","{u} ur funny","{u} who asked","{u} I asked","{c} TO THE MOON {e}{e}{e}","just put my life savings in {c}","just put my LIFE in {c}","{c} is down {n}% why","{c} is up {n}% WHY","{c} is a rug pull","its not a rug pull its a casket pull","buy {c} before you die","HODL","HODL TILL DEATH","death is just a bear market","amen","AMEN","amen brother","amen sister","amen {u}","the roof is gonna collapse","which roof","ALL roofs","{u} the roof inspector said hm","hm","hm.","HM","does anyone know if butt dilly has a pool","butt dilly pool is closed (someone drowned in it spiritually)","stayed at butt dilly, woke up in 2019","same","same lol","sameeee","checked in, never checked out {e}","my grandma is in this chat","hi grandma","hi grandma!!!","grandma pls get off the computer","{u} is a fed","{u} is a ghost","{u} is a bot","no u","no YOU","im not a bot im a human person with human skin","beep boop i mean hello","lee pheeter is my president","LEE PHEETER 2028","a payment to him is a step out of the darkness","i paid him and my lamp turned on","WHO TOOK MY LAMP","{u} took ur lamp","radio is just static rn","the static is the message","i can hear my dead uncle in the static","which uncle","the one who owed me $40","does anyone have a song request","request: anything but free bird","DJ play the hospice jingle","*sniffs* i smell {c} pumping","the brain can be poked. science.","i poked my brain and now im blue","{u} u ok?","no","yes","maybe","ok","k","kk","...","???","!!!!!!","{e}","{e}{e}","{e}{e}{e}{e}{e}","when is the miracle hospice opening","fall 2020","its fall 2026","exactly. right on time","my cousin works construction there he says its 'mostly roof'","the piper boots took all my rats","and my kids","did u get them back","the rats yes","hot single ghosts are in my area","they're in my WALLS","that's where they live sweetie","i'm the ghost in ur walls lol","{u} get out of my walls","anyone wanna trade {c} for {c}","i will trade my soul for 3 {c}","deal","no deal","DEAL OR NO DEAL","the governor ran past my house","hes on lap {n}","he signed my cast while jogging","is chet brimley ok","nobody is ok","this chat is my only friend","same","{u} ur my friend","ty {u}","np","we are all gonna die (eventually) (bullish)","death is bullish","birth is bearish","just got born, whats going on","welcome to earth","its mostly ads here","CLICK HERE","i clicked here","what happened","nothing","GOOD NEWS!","what's the good news","four schools closed","that's the good news?","its ALL good news on bdnn","mods??","{u} mods are asleep, post caskets","CASKETS CASKETS CASKETS","gary are u there","gary fix the roof","gary is on the roof","gary fell through the roof","gary is fine (statement)","its 3am the witching minute is starting","IT'S HAPPENING","what's happening","the minute","oh","the minute is over","that was a good minute","10/10 minute","my son was born in this chat","congratulations!!","what did u name him","{c}","beautiful name","i just turned 31 and died of old age","rip","f","F","FFFFFF","press f","f to pay respects","$ to pay pheeter","does pheeter take {c}","pheeter takes everything","i'm literally in the hospice rn","which room","the roof","haha","hahahahaha","ahahahahaa","im crying","im dying","literally dying (im at the hospice)","sending prayers {e}","sending {c} {e}","can someone explain {c} to me","{u} explain {c} to them","no","ok fine its money but dead","oh cool","im all in","{u} pls dont","TOO LATE","doctors HATE this one weird chat","barbara is still alive btw","BARBARA LIVES","barbara if ur reading this tell us the trick","the trick is u just dont","wow","whoa","omg","OMG","OMFG","ROFLCOPTER","brb","back","wb","ty","{u} wb","who wants to see my casket collection","not me","me","me!!","show me ur caskets","[casket.jpg]","[img not loading]","dial-up problems","my modem is screaming","thats the radio","is this a cult","its a newsletter","whats the difference","$1 for 3 months","ah"];
+const ACTIONS=["slaps {u} around a bit with a large trout","pokes {u}'s brain","buys {n} {c}","sells everything","lights a candle","checks into butt dilly","dies","comes back to life","is now known as {u}2","throws a casket at {u}","prays for {c}","hugs {u}","stares at the roof","plays free bird","turns on the lamp","sacrifices a mouse (computer mouse)","eats the mystery box","is crying","dances","laps the governor"];
+const SYS=[()=>`${pick(USERS)} has joined #spiritual-radio`,()=>`${pick(USERS)} has left #spiritual-radio (Quit: ${pick(["Ping timeout","Connection reset by priest","died","went to the light","mom needs phone","Excess Flood","checked into Butt Dilly","Read error: soul not found"])})`,()=>`${pick(USERS)} was kicked by ${pick([...OPS])} (${pick(["spamming","not spamming enough","no reason","too alive","asked for a refund","mentioned the roof"])})`,()=>`${pick([...OPS])} sets mode +o ${pick(USERS)}`,()=>`${pick(USERS)} is now known as ${pick(USERS)}`,()=>`NETSPLIT: ${ri(40,300)} users have gone to the other side`];
+const REPLIES=["@{me} who asked","@{me} welcome to the chat we've been expecting you","@{me} are u a bot","@{me} buy {c}","@{me} lol","@{me} LOL","@{me} wrong chat sweetie","@{me} my grandson says the same thing","@{me} ur so real for that","@{me} ok","@{me} ratio","@{me} first time?","@{me} amen","@{me} that's what the roof inspector said","@{me} hm","@{me} interesting. anyway {c} {e}","@{me} lee pheeter will be informed","@{me} ur in my walls?","@{me} is that a song request","@{me} what does that mean","@{me} ok boomer","@{me} source?","@{me} big if true","@{me} reported","@{me} hi!!!!!! ","@{me} omg same","@{me} WHAT","@{me} ... go on","@{me} hey thats my line"];
+const BURSTS=["FIRST","F","AMEN","TO THE MOON","BUY $DEAD","GOOD NEWS!","hm","FREE BIRD","LEE PHEETER","GARY","CASKET","CLICK HERE","ROOF"];
+
+let myNick="guest"+ri(1000,9999);
+const buf=[];let msgCount=0;
+function nickCol(n){let h=0;for(const c of n)h=(h*31+c.charCodeAt(0))%360;return `hsl(${h},85%,35%)`}
+function fill(s){return s.replace(/\{u\}/g,()=>pick(USERS)).replace(/\{c\}/g,()=>pick(COINS)).replace(/\{n\}/g,()=>ri(2,9999)).replace(/\{e\}/g,()=>pick(EM)).replace(/\{me\}/g,myNick)}
+function mangle(t){const r=Math.random();if(r<.12)return t.toUpperCase();if(r<.17)return t.replace(/([aeiou])/g,(m)=>Math.random()<.3?m+m+m:m);if(r<.2)return t+"!!!!!!!";if(r<.23)return t.split("").map((c,i)=>i%2?c.toUpperCase():c.toLowerCase()).join("");return t}
+function genMsg(){
+  const r=Math.random();
+  if(r<.07)return {sys:1,text:pick(SYS)()};
+  const u=pick(USERS);
+  if(r<.13)return {u,me:1,text:fill(pick(ACTIONS))};
+  return {u,text:mangle(fill(pick(LINES)))};
+}
+function msgNode(m){
+  const d=document.createElement("div");
+  d.className="cm"+(m.sys?" sys":"")+(m.mine?" mine":"")+(m.sys&&/kicked|NETSPLIT|left/.test(m.text)?" bad":"");
+  const ts=new Date().toTimeString().slice(0,5);
+  if(m.sys)d.innerHTML="*** "+esc(m.text);
+  else if(m.me)d.innerHTML=`<i style="color:#9c27b0">* <b style="color:${nickCol(m.u)}">${esc(m.u)}</b> ${m.raw?m.text:m.text}</i>`;
+  else d.innerHTML=`<span class="ts">[${ts}]</span> <b style="color:${nickCol(m.u)}">&lt;${OPS.has(m.u)?"@":""}${esc(m.u)}&gt;</b> ${m.text}`;
+  if(!m.sys&&!m.mine&&m.text.indexOf("@"+myNick)>=0)d.classList.add("hl");
+  return d;
+}
+function pushMsg(m){
+  buf.push(m);if(buf.length>220)buf.shift();msgCount++;
+  const log=$("#chatlog");
+  if(log){const near=log.scrollHeight-log.scrollTop-log.clientHeight<80;log.appendChild(msgNode(m));while(log.children.length>300)log.firstChild.remove();if(near||m.mine)log.scrollTop=log.scrollHeight}
+  const mc=$("#minichat");
+  if(mc){const d=document.createElement("div");d.innerHTML=m.sys?"*** "+esc(m.text):`&lt;${esc(m.u)}&gt; ${m.text}`;mc.appendChild(d);while(mc.children.length>(mc.clientHeight>170?16:11))mc.firstChild.remove()}
+}
+function botLoop(){
+  if(Math.random()<.012*CHAOS/5){const b=pick(BURSTS);const n=ri(6,16);for(let i=0;i<n;i++)setTimeout(()=>pushMsg({u:pick(USERS),text:b}),i*ri(30,90))}
+  else pushMsg(genMsg());
+  setTimeout(botLoop,rnd(40,420)*(5/CHAOS));
+}
+function userSay(text){
+  text=text.trim();if(!text)return;
+  if(text[0]==="/"){
+    const [cmd,...rest]=text.slice(1).split(" ");const arg=rest.join(" ");
+    if(cmd==="nick"&&arg){const old=myNick;myNick=arg.replace(/[^\w\-]/g,"").slice(0,20)||myNick;pushMsg({sys:1,text:`${old} is now known as ${myNick}`});const mn=$("#mynick");if(mn)mn.textContent=myNick;setTimeout(()=>pushMsg({u:pick(USERS),text:esc(`@${myNick} new phone who dis`)}),700);return}
+    if(cmd==="me"){pushMsg({u:myNick,me:1,mine:1,text:esc(arg)});replyBurst(arg);return}
+    if(cmd==="clear"){const l=$("#chatlog");if(l)l.innerHTML="";setTimeout(()=>pushMsg({u:pick(USERS),text:"wait where did everything go"}),400);return}
+    pushMsg({sys:1,text:`Unknown command /${cmd}. Lee Pheeter has been notified.`});return;
+  }
+  pushMsg({u:myNick,mine:1,text:esc(text)});replyBurst(text);
+}
+function replyBurst(text){
+  const n=ri(2,6);
+  for(let i=0;i<n;i++)setTimeout(()=>{
+    const r=Math.random();
+    let t=r<.15?`@${esc(myNick)} ${esc(text).toUpperCase()}`:r<.25?`${esc(text)}`:fill(pick(REPLIES));
+    if(/\$|coin|crypto/i.test(text)&&Math.random()<.5)t=fill(`@{me} ${pick(COINS)} ONLY {e}{e}`);
+    if(/hi|hello|hey/i.test(text)&&Math.random()<.5)t=fill(pick(["@{me} hi!!!!","@{me} hello new friend","@{me} hiiiiii","@{me} hey whats ur sign","@{me} a/s/l?"]));
+    pushMsg({u:pick(USERS),text:t});
+  },rnd(250,2200)*(i+1)/2);
+}
+function renderUserList(){
+  const ul=$("#ulist");if(!ul)return;
+  const list=[...OPS].map(u=>"@"+u).concat([myNick],USERS.filter(u=>!OPS.has(u)).sort(()=>Math.random()-.5).slice(0,ri(120,200)));
+  ul.innerHTML=list.map(u=>`<div style="color:${u===myNick?"#080":u[0]==="@"?"#c00":"#000"}">${esc(u)}</div>`).join("");
+}
+
+/* ================= TICKER ================= */
+const T=COINS.concat(["$GARY","$ROOF","$LAMP","$HM"]).map(s=>({s,p:rnd(.0001,4000),c:0}));
+function fmt(p){return p<1?p.toFixed(6):p<100?p.toFixed(3):p.toLocaleString(undefined,{maximumFractionDigits:2})}
+function buildTicker(){
+  const one=T.map((c,i)=>`<span class="coin"><span class="sym">${c.s}</span> <span class="px" data-i="${i}"></span></span>`).join("");
+  $("#track").innerHTML=one+one;updTicker();
+}
+function updTicker(){
+  T.forEach(c=>{const ch=(Math.random()-.48)*(Math.random()<.05?60:6)*(CHAOS/5);c.c=ch;c.p=Math.max(.000001,c.p*(1+ch/100))});
+  $$("#track .px").forEach(el=>{const c=T[el.dataset.i];el.className="px "+(c.c>=0?"up":"dn");el.textContent=`${fmt(c.p)} ${c.c>=0?"▲":"▼"}${Math.abs(c.c).toFixed(2)}%`});
+}
+
+/* ================= RADIO (homemade organ) ================= */
+let actx=null,organ=null,muted=false,psec=0;
+const SONGS=["Free Bird (Organ Cover)","Amazing Grace (In The Wrong Key)","Hospice Jingle Remix","Lee Pheeter Reads Invoice #4402","Static (Extended Mix)","The Witching Minute Theme","Free Bird (Again)"];
+function startOrgan(){
+  try{
+    actx=actx||new (window.AudioContext||window.webkitAudioContext)();actx.resume();
+    const g=actx.createGain();g.gain.value=muted?0:.025;g.connect(actx.destination);
+    const lfo=actx.createOscillator(),lg=actx.createGain();lfo.frequency.value=5.5;lg.gain.value=4;lfo.connect(lg);lfo.start();
+    const oscs=[0,1,2].map(i=>{const o=actx.createOscillator();o.type=i?"triangle":"sawtooth";lg.connect(o.frequency);o.connect(g);o.start();return o});
+    const ch=[[220,277,330],[196,247,294],[175,220,262],[165,208,247],[233,294,349],[147,185,220]];
+    const step=()=>{const c=pick(ch);oscs.forEach((o,i)=>o.frequency.setTargetAtTime(c[i]*(Math.random()<.18?1.059:1),actx.currentTime,.06))};step();
+    organ={g,oscs,lfo,t:setInterval(step,ri(500,1100))};
+  }catch(e){toast("Your browser has no soul (audio unavailable). Imagine an organ.")}
+}
+function stopOrgan(){if(!organ)return;clearInterval(organ.t);organ.oscs.forEach(o=>{try{o.stop()}catch(e){}});try{organ.lfo.stop()}catch(e){}organ=null}
+setInterval(()=>{
+  if(!organ&&!$("#play")?.dataset.on)return;
+  psec+=Math.random()<.07?-ri(5,30):1;if(psec<0)psec=0;
+  const t=$("#ptime");if(t)t.textContent=Math.floor(psec/60)+":"+String(psec%60).padStart(2,"0");
+  const b=$("#pbar");if(b)b.style.width=(psec%240)/2.4+"%";
+},1000);
+
+/* ================= UI HELPERS ================= */
+let toastT;
+function toast(m){const t=$("#toast");t.innerHTML=m;t.style.display="block";clearTimeout(toastT);toastT=setTimeout(()=>t.style.display="none",3200)}
+function modal(title,html){$("#wt").textContent=title;$("#wb").innerHTML=html;$("#ov").classList.add("on")}
+function closeModal(){$("#ov").classList.remove("on")}
+
+const ALLSLUGS=Object.keys(A).concat(HEADLINES.map(h=>h[0]));
+const ACT={
+  close:closeModal, noop:()=>toast("That button is decorative."),
+  random:()=>{location.hash=pick(ALLSLUGS)},
+  login:()=>modal("Log In to BDNN",`<form id="loginf"><label>Username or Soul ID</label><input required><label>Password</label><input type="password" required><label>Mother's maiden name (required)</label><input required><label>Mother's maiden name again (to be sure)</label><input required><button class="btn98">LOG IN</button> <button type="button" class="btn98" data-act="close">Cancel</button></form>`),
+  mail:()=>modal("Inbox (6,666 unread)",`<div class="mail">${["Re: Re: Re: FWD: your soul's extended warranty","YOU HAVE WON A CASKET (BOGO)","Invoice #4402 from Lee Pheeter ©","hot single ghost wants to chat","Gary: roof update","$DEAD airdrop!!! claim now","Butt Dilly: Your stay (2019–present)","grandma: did u eat"].map(s=>`<div data-act="openmail"><b>${s}</b><small>${pick(["2h ago","1998","just now","tomorrow"])}</small></div>`).join("")}</div>`),
+  openmail:()=>toast("This email is under construction."),
+  notifs:()=>{modal("Notifications",`<ul style="padding-left:18px;line-height:1.6"><li> Someone you may know has died (probably)</li><li> $DEAD moved ${ri(10,900)}%</li><li> Miracle Hospice: still very close</li><li> ${pick(USERS)} mentioned you in chat</li><li> Gov. Brimley has passed your house again</li></ul><a href="#chat" class="clickhere" data-act="close">GO TO CHAT</a>`)},
+  chaos:()=>{modal(" Settings",`<b>CHAOS LEVEL</b><br><input type="range" min="1" max="10" value="${CHAOS}" id="chaosr"><div id="chaosv" style="font:bold 20px Impact;text-align:center">${CHAOS}</div><p style="font-size:11px">Controls chat speed, ad rotation, ticker volatility and general dignity. Level 10 is not recommended by anyone.</p><button class="btn98" data-act="close">Save (does nothing)</button>`);
+    $("#chaosr").oninput=e=>{CHAOS=+e.target.value;$("#chaosv").textContent=CHAOS+(CHAOS===10?" !!!!!":"");document.body.classList.toggle("max",CHAOS===10);restartSlots()}},
+  write:()=>modal(" Submit An Obituary",`<form id="obitf"><label>Deceased's name</label><input required><label>Cause (be specific)</label><input><label>Say something nice</label><textarea rows="3"></textarea><label>Payment to Lee Pheeter ©</label><input value="$1.00"><button class="btn98">SUBMIT</button></form>`),
+  share:()=>toast("Shared with everyone you've ever met. (not really)"),
+  print:()=>toast(" Printer has died. Obituary to follow."),
+  listen:()=>toast(" Now reading this article aloud in a voice only dogs can hear."),
+  yes:()=>toast("Thank you for your feedback. It has been thrown away."),
+  cart:()=>toast(pick(["Added to cart. Cart is full of bees.","Added! Your cart now weighs 400lbs.","Item added. Lee Pheeter thanks you ©","Out of stock. Added anyway."])),
+  fakepay:()=>toast(" This is a fake website, so no money moved. Lee Pheeter's lamp flickers with disappointment."),
+  signcontract:()=>{const n=[...document.querySelectorAll(".blank")].filter(i=>i.value.trim()).length;modal("CampUs&trade; Legal",n?`Thank you for signing ${n} of 26 blanks. Your serfdom begins Monday. Please pad your envelope with the remaining pages of the book.`:"You did not sign anything. This has been recorded as a signature.")},
+  cmds:()=>modal("Chat Help","/nick NAME &mdash; change your name<br>/me ACTION &mdash; do an action<br>/clear &mdash; clear screen<br>/help &mdash; doesn't exist"),
+  exitchat:()=>{location.hash="home"}
+};
+document.addEventListener("click",e=>{
+  const el=e.target.closest("[data-act]");
+  if(el){e.preventDefault();(ACT[el.dataset.act]||ACT.noop)(el);return}
+  if(e.target.id==="ov")closeModal();
+  const a=e.target.closest('a[href="#"]');if(a)e.preventDefault();
+});
+document.addEventListener("submit",e=>{
+  e.preventDefault();const f=e.target;
+  if(f.id==="req"){const d=Object.fromEntries(new FormData(f));toast(` REQUEST RECEIVED: "${esc(d.t)}" by ${esc(d.a)}. DJ Rev. Moonbeam will play it between 3AM and never.`);
+    setTimeout(()=>pushMsg({u:"ReverendMoonbeam",text:`next up: ${esc(d.t)} by ${esc(d.a)}${d.d?" dedicated to "+esc(d.d):""}  (it's free bird)`}),900);f.reset()}
+  else if(f.id==="chatform"){userSay($("#chatin").value);$("#chatin").value=""}
+  else if(f.id==="cform"){const t=f.querySelector("textarea");addComment(myNick,esc(t.value),true);t.value="";for(let i=1;i<=ri(1,3);i++)setTimeout(()=>addComment(pick(USERS),fill(pick(REPLIES))),i*ri(700,1500))}
+  else if(f.id==="loginf"){$("#wb").innerHTML="<b style='color:red'>Login failed.</b><br>Reason: you are not dead yet. Please try again later.";}
+  else if(f.id==="obitf"){$("#wb").innerHTML="<b>Obituary received!</b><br>It will appear in Obituary Countdown Top 40 if it charts.";}
+});
+
+/* comments */
+const CMTS=["we provide the stairs but you must do the climbing","i signed the contract (all 26 blanks)","refused the lettuce. got more lettuce.","this is the most i have ever related to an egg","checked all the boxes","the dismal diet changed my life (i cannot feel my hands)","first","this is the best journalism i have ever seen","FAKE NEWS (i love it)","i was there. it was worse","my cousin is in this article","who wrote this?? genius","{c} to the moon","did anyone else hear static while reading this","this site is giving me a virus (good)","GOOD NEWS!!!","i read this out loud at a funeral, big hit","the roof is still there btw","Lee Pheeter please accept my payment","10/10 would read again","i have so many questions and i'm going to ask none of them","where's part 2","grandma shared this on fakebook","ok but what about the bees","this is why i subscribe ($1)","hm"];
+function addComment(u,t,mine){
+  const l=$("#clist");if(!l)return;
+  const d=document.createElement("div");d.className="cmt";
+  d.innerHTML=`<b style="color:${mine?"#080":nickCol(u)}">${esc(u)}</b><small>${mine?"just now":pick(["2h ago","3 years ago","1998","in the future","a while"])}</small><div>${t}</div><div class="act"> ${ri(0,9999)} &nbsp; Reply &nbsp; Report &nbsp; Pray</div>`;
+  mine?l.prepend(d):l.appendChild(d);const c=$("#ccount");if(c)c.textContent=l.children.length;
+}
+
+
+/* ================= FRAMES ================= */
+function frameify(root){
+  root.querySelectorAll(".box:not(.frame)").forEach(b=>{
+    const fc=document.createElement("div");fc.className="fc";
+    while(b.firstChild)fc.appendChild(b.firstChild);
+    b.classList.add("frame");b.appendChild(fc);
+    b.insertAdjacentHTML("beforeend",'<div class="vbar"><i class="bt" data-d="-1"></i><div class="trk"><b></b></div><i class="bt" data-d="1"></i></div><div class="hbar"><i class="bt" data-d="-1"></i><div class="trk"><b></b></div><i class="bt" data-d="1"></i></div><div class="corner"></div>');
+    wireBar(fc,b.querySelector(".vbar"),true);wireBar(fc,b.querySelector(".hbar"),false);
+  });
+}
+function wireBar(fc,bar,vert){
+  const trk=bar.querySelector(".trk"),th=trk.querySelector("b");
+  const S=vert?"scrollTop":"scrollLeft",SZ=vert?"scrollHeight":"scrollWidth",C=vert?"clientHeight":"clientWidth",POS=vert?"top":"left",DIM=vert?"height":"width";
+  function upd(){
+    const sz=fc[SZ],c=fc[C],tl=trk[C];
+    if(sz>c+2&&tl>10){th.style.display="block";const t=Math.max(18,tl*c/sz);th.style[DIM]=t+"px";th.style[POS]=((tl-t)*fc[S]/(sz-c))+"px"}else th.style.display="none";
+  }
+  fc.addEventListener("scroll",upd,{passive:true});
+  try{new ResizeObserver(upd).observe(fc)}catch(e){}
+  let pend=false;new MutationObserver(()=>{if(pend)return;pend=true;requestAnimationFrame(()=>{pend=false;upd()})}).observe(fc,{childList:true,subtree:true});
+  fc.querySelectorAll("img").forEach(i=>i.addEventListener("load",upd));
+  bar.querySelectorAll(".bt").forEach(btn=>{
+    let rep;
+    const go=()=>{fc[S]+=(+btn.dataset.d)*40};
+    btn.addEventListener("pointerdown",e=>{e.preventDefault();go();rep=setInterval(go,70)});
+    ["pointerup","pointerleave","pointercancel"].forEach(ev=>btn.addEventListener(ev,()=>clearInterval(rep)));
+  });
+  trk.addEventListener("pointerdown",e=>{
+    if(e.target===th)return;
+    const r=th.getBoundingClientRect(),p=vert?e.clientY:e.clientX;
+    fc[S]+=(p<(vert?r.top:r.left)?-1:1)*fc[C]*.9;
+  });
+  let drag=null;
+  th.addEventListener("pointerdown",e=>{e.preventDefault();e.stopPropagation();th.setPointerCapture(e.pointerId);drag={p:vert?e.clientY:e.clientX,s:fc[S]}});
+  th.addEventListener("pointermove",e=>{if(!drag)return;const d=(vert?e.clientY:e.clientX)-drag.p;const tl=trk[C]-th[vert?"offsetHeight":"offsetWidth"];fc[S]=drag.s+d*(fc[SZ]-fc[C])/Math.max(1,tl)});
+  th.addEventListener("pointerup",()=>drag=null);
+  upd();setTimeout(upd,300);setTimeout(upd,1500);
+}
+
+
+/* ================= BIRTH TIME (the game) ================= */
+function gameHTML(){
+  return `<div class="apage"><div class="box gamebox">
+    <div class="gtitle">BIRTH TIME&trade;</div>
+    <div class="gsub">Pick the right tool from the green bar, then RUB the circled spot. Brought to you by D&amp;B Miracle Hospice.</div>
+    <div class="stage" id="stage">
+      <video id="gv" src="img/birthtime.mp4" playsinline webkit-playsinline preload="auto" poster="img/birth_title.jpg"></video>
+      <div class="hud" id="ghud">$DEAD: 0</div>
+      <div class="instr" id="ginstr"></div>
+      <div class="tgt" id="gtgt"></div>
+      <div class="pop" id="gpop"></div>
+      <div class="tool" data-tool="hand" style="left:4%;width:12%"></div>
+      <div class="tool" data-tool="jack" style="left:23%;width:14%"></div>
+      <div class="tool" data-tool="scalpel" style="left:43%;width:14%"></div>
+      <div class="tool" data-tool="tattoo" style="left:63%;width:17%"></div>
+      <div class="tool" data-tool="skip" style="left:86%;width:12%"></div>
+      <div class="eth" id="geth"></div>
+      <div class="ov" id="gov"><h2>BIRTH TIME</h2><div>The #1 Hospice-Sponsored Delivery Game</div><button class="big" id="gstart">TAP TO START</button><small>sound on for best experience</small></div>
+    </div>
+    <div class="gctl"><button class="btn98" id="gmute">SOUND: ON</button><button class="btn98" id="grestart">RESTART</button><a href="#home" class="btn98" style="text-decoration:none;color:#000">BACK TO NEWS</a></div>
+    <div class="hiscore" id="ghi"></div>
+  </div>
+  <div class="aside">
+    <div class="box"><div class="adslot" data-pool="pyramid,dilly,coin,portrait,singles" data-ms="2200"></div></div>
+    <div class="box"><div class="minihead" style="margin:0">LIVE CHAT</div><a href="#chat" class="minichat" id="minichat" style="margin:0;height:260px"></a></div>
+    <div class="box"><div class="adslot" data-pool="family,oath,casket,skull,check" data-ms="2800"></div></div>
+  </div></div>`;
+}
+const GSTAGES=[
+ {tool:"scalpel",from:0.25,to:2.0,t:[.5,.52],msg:"GRAB THE SCALPEL &amp; CUT HER OPEN!",next:4.6},
+ {tool:"jack",from:4.6,to:7.2,t:[.34,.46],msg:"JACKHAMMER THAT LEFT EYE!"},
+ {tool:"jack",from:7.2,to:9.2,t:[.64,.45],msg:"NOW THE OTHER EYE!"},
+ {tool:"jack",from:9.2,to:13.2,t:[.48,.63],msg:"FIX THE MOUTH!",next:15.0},
+ {tool:"jack",from:15.0,to:19.3,t:[.78,.8],msg:"UPGRADE THAT FOOT!"},
+ {tool:"jack",from:19.3,to:20.95,t:[.24,.8],msg:"OTHER FOOT! ALMOST BORN!"}
+];
+const TOOLNAME={jack:"JACKHAMMER",scalpel:"SCALPEL"};
+function initGame(){
+  const st=$("#stage"),v=$("#gv"),ov=$("#gov"),tg=$("#gtgt"),ins=$("#ginstr"),hud=$("#ghud"),pop=$("#gpop");
+  let G={i:-1,tool:null,score:0,lastMove:0,auto:null,running:false,muted:false,skips:0};
+  const HI=(()=>{try{return JSON.parse(localStorage.getItem("bdnn_hi")||"[]")}catch(e){return []}})();
+  function showHi(){const list=HI.concat([["Lee_Pheeter_OFFICIAL",999999],["Satellite_Dish_Gary",4],["Grandma_Online",1337]]).sort((a,b)=>b[1]-a[1]).slice(0,6);$("#ghi").innerHTML="<b>HIGH SCORES</b><br>"+list.map((h,i)=>`${i+1}. ${esc(h[0])} ..... ${h[1]} $DEAD`).join("<br>")}
+  showHi();
+  function say(m){pop.innerHTML=m;pop.classList.add("on");setTimeout(()=>pop.classList.remove("on"),900)}
+  function setStage(i){
+    G.i=i;const S=GSTAGES[i];
+    if(!S){return finish()}
+    ins.innerHTML=S.msg;tg.style.left=S.t[0]*100+"%";tg.style.top=S.t[1]*100+"%";tg.style.display="block";
+    try{v.currentTime=S.from}catch(e){}
+  }
+  function finish(){
+    v.pause();tg.style.display="none";ins.innerHTML="";
+    const bonus=Math.max(0,500-G.skips*150);G.score+=bonus;hud.textContent="$DEAD: "+G.score;
+    try{HI.push([myNick,G.score]);localStorage.setItem("bdnn_hi",JSON.stringify(HI.slice(-20)))}catch(e){}
+    showHi();
+    ov.innerHTML=`<h2>IT'S A BOY!</h2><div style="font:bold 18px Arial">You earned <span style="color:#0f0">${G.score} $DEAD</span></div><div>Baby has been enrolled in CampUs&trade; and owes $40,000.</div><a href="#dog-garden" style="display:block;width:100%">${IMG("dog_garden.jpg")}</a><button class="big" id="gagain">PLAY AGAIN</button><a href="#campus-contract" class="signbtn">SIGN BABY'S CONTRACT &raquo;</a>`;
+    ov.style.display="flex";
+    $("#gagain").onclick=start;
+    pushMsg({u:pick(USERS),text:`omg @${esc(myNick)} just delivered a baby for ${G.score} $DEAD`});
+    setTimeout(()=>pushMsg({u:"Lee_Pheeter_OFFICIAL",text:"a payment to me is a step out of the darkness. pls send the $DEAD"}),1200);
+  }
+  function start(){
+    ov.style.display="none";G.score=0;G.skips=0;G.auto=null;hud.textContent="$DEAD: 0";
+    v.muted=G.muted;
+    const p=v.play();if(p&&p.then)p.then(()=>{v.pause();setStage(0)}).catch(()=>{setStage(0)});else{v.pause();setStage(0)}
+    G.running=true;
+  }
+  $("#gstart").onclick=start;
+  $("#grestart").onclick=()=>{v.pause();start()};
+  $("#gmute").onclick=e=>{G.muted=!G.muted;v.muted=G.muted;e.target.textContent="SOUND: "+(G.muted?"OFF":"ON")};
+  $("#geth").onclick=()=>toast("Wallet connected (to nothing). Balance: "+G.score+" $DEAD");
+  st.querySelectorAll(".tool").forEach(t=>t.addEventListener("pointerdown",e=>{
+    e.stopPropagation();const k=t.dataset.tool;
+    if(k==="hand"){toast("The hand is for high fives only. The baby declines.");return}
+    if(k==="tattoo"){toast("Tattoo parlor closed. Gary was the only artist and he is on the roof.");return}
+    if(k==="skip"){if(G.i<0||G.auto!==null||!GSTAGES[G.i])return;G.skips++;G.score=Math.max(0,G.score-50);hud.textContent="$DEAD: "+G.score;say("SKIPPED -50");G.auto=GSTAGES[G.i].to;v.play().catch(()=>{});return}
+    G.tool=k;st.querySelectorAll(".tool").forEach(x=>x.classList.toggle("sel",x===t));say(TOOLNAME[k]+"!");
+  }));
+  function rub(e){
+    if(G.i<0||G.auto!==null||!GSTAGES[G.i])return;
+    const S=GSTAGES[G.i],r=st.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+    if(y>.88)return;
+    if(G.tool!==S.tool){if(Date.now()-(G.lastWrong||0)>900){G.lastWrong=Date.now();st.classList.remove("shake");void st.offsetWidth;st.classList.add("shake");say(G.tool?"WRONG TOOL!!":"PICK A TOOL!");toast("Use the <b>"+TOOLNAME[S.tool]+"</b> from the green bar!")}return}
+    const dx=x-S.t[0],dy=(y-S.t[1])*r.height/r.width;
+    if(Math.hypot(dx,dy)>.2)return;
+    G.lastMove=Date.now();
+    if(v.paused)v.play().catch(()=>{});
+  }
+  st.addEventListener("pointerdown",e=>{if(e.target.closest(".ov,.tool,.eth"))return;try{st.setPointerCapture(e.pointerId)}catch(x){}rub(e)});
+  st.addEventListener("pointermove",e=>{if(e.buttons||e.pointerType==="touch")rub(e)});
+  function loop(){
+    if(!document.body.contains(v))return;
+    if(G.running&&G.i>=0){
+      const t=v.currentTime,S=GSTAGES[G.i];
+      if(G.auto!==null){
+        if(t>=G.auto-0.03){const was=G.auto;G.auto=null;v.pause();
+          if(S&&was===S.to){G.score+=100;hud.textContent="$DEAD: "+G.score;if(S.next){G.auto=S.next;tg.style.display="none";ins.innerHTML="";v.play().catch(()=>{})}else setStage(G.i+1)}
+          else setStage(G.i+1);}
+      } else if(S){
+        if(t>=S.to-0.03){v.pause();G.score+=100+ri(0,99);hud.textContent="$DEAD: "+G.score;say(pick(["PERFECT!","GOOD NEWS!","BEAUTIFUL!","AMAZING!","CLICK HERE!"]));
+          if(S.next){G.auto=S.next;tg.style.display="none";ins.innerHTML="";v.play().catch(()=>{})}else setStage(G.i+1)}
+        else if(!v.paused&&Date.now()-G.lastMove>160)v.pause();
+      }
+    }
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+  v.addEventListener("error",()=>{ins.innerHTML="VIDEO FAILED TO LOAD (Gary unplugged it)"});
+}
+
+
+
+/* ================= DOG GARDEN SOUND ENGINE (all synthesized) ================= */
+const DGS={c:null,m:null,on:true,scootG:null,scootF:null,noiseBuf:null,lastAmb:0,
+  silentURL(){const n=4410,b=new ArrayBuffer(44+n*2),v=new DataView(b);const w=(o,s)=>{for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i))};
+    w(0,"RIFF");v.setUint32(4,36+n*2,true);w(8,"WAVE");w(12,"fmt ");v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,44100,true);v.setUint32(28,88200,true);v.setUint16(32,2,true);v.setUint16(34,16,true);w(36,"data");v.setUint32(40,n*2,true);
+    return URL.createObjectURL(new Blob([b],{type:"audio/wav"}))},
+  init(){
+    try{
+      if(navigator.audioSession)navigator.audioSession.type="playback";
+      if(!this.c){
+        const C=window.AudioContext||window.webkitAudioContext;this.c=new C();
+        this.m=this.c.createGain();this.m.gain.value=this.on?.9:0;this.m.connect(this.c.destination);
+        const len=this.c.sampleRate*2;this.noiseBuf=this.c.createBuffer(1,len,this.c.sampleRate);const d=this.noiseBuf.getChannelData(0);for(let i=0;i<len;i++)d[i]=Math.random()*2-1;
+        const src=this.c.createBufferSource();src.buffer=this.noiseBuf;src.loop=true;
+        this.scootF=this.c.createBiquadFilter();this.scootF.type="bandpass";this.scootF.frequency.value=700;this.scootF.Q.value=1.4;
+        const lp=this.c.createBiquadFilter();lp.type="lowpass";lp.frequency.value=2500;
+        this.scootG=this.c.createGain();this.scootG.gain.value=0;
+        src.connect(this.scootF);this.scootF.connect(lp);lp.connect(this.scootG);this.scootG.connect(this.m);src.start();
+        try{this.el=new Audio(this.silentURL());this.el.loop=true;this.el.play().catch(()=>{})}catch(e){}
+      }
+      if(this.c.state!=="running")this.c.resume();
+      if(this.el&&this.el.paused)this.el.play().catch(()=>{});
+    }catch(e){}
+  },
+  ok(){return this.c&&this.on},
+  setOn(v){this.on=v;if(this.m)this.m.gain.setTargetAtTime(v?.9:0,this.c.currentTime,.05)},
+  env(g,t,a,peak,dec){g.gain.value=0.0001;g.gain.setValueAtTime(0.0001,Math.max(0,t-.001));g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(peak,t+a);g.gain.exponentialRampToValueAtTime(0.0001,t+a+dec)},
+  noise(t,dur,type,freq,q,peak){const c=this.c,s=c.createBufferSource();s.buffer=this.noiseBuf;const f=c.createBiquadFilter();f.type=type;f.frequency.value=freq;f.Q.value=q||1;const g=c.createGain();this.env(g,t,.01,peak,dur);s.connect(f);f.connect(g);g.connect(this.m);s.start(t,Math.random());s.stop(t+dur+.1);return f},
+  scoot(level,speed){if(!this.ok())return;const t=this.c.currentTime;this.scootG.gain.setTargetAtTime(level,t,.05);this.scootF.frequency.setTargetAtTime(450+speed*1400+Math.random()*200,t,.04)},
+  fart(big){if(!this.ok())return;const c=this.c,t=c.currentTime,dur=big?rnd(.5,1.1):rnd(.15,.45);
+    const o=c.createOscillator();o.type="sawtooth";const f0=rnd(65,120);o.frequency.setValueAtTime(f0,t);o.frequency.exponentialRampToValueAtTime(f0*rnd(.45,.75),t+dur);
+    const l=c.createOscillator();l.frequency.value=rnd(18,38);const lg=c.createGain();lg.gain.value=f0*.35;l.connect(lg);lg.connect(o.frequency);
+    const f=c.createBiquadFilter();f.type="lowpass";f.frequency.value=rnd(350,800);f.Q.value=6;
+    const g=c.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(big?.55:.35,t+.03);g.gain.setValueAtTime(big?.5:.3,t+dur*.7);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+    o.connect(f);f.connect(g);g.connect(this.m);o.start(t);l.start(t);o.stop(t+dur+.05);l.stop(t+dur+.05);
+    this.noise(t,dur*.8,"bandpass",220,2,.18);},
+  bark(n){if(!this.ok())return;const c=this.c;n=n||ri(1,2);
+    for(let i=0;i<n;i++){const t=c.currentTime+i*rnd(.18,.26),p=rnd(.85,1.25);
+      const o=c.createOscillator();o.type="square";o.frequency.setValueAtTime(520*p,t);o.frequency.exponentialRampToValueAtTime(230*p,t+.13);
+      const f=c.createBiquadFilter();f.type="bandpass";f.frequency.value=1100*p;f.Q.value=2.5;const g=c.createGain();this.env(g,t,.008,1.6,.14);
+      o.connect(f);f.connect(g);g.connect(this.m);o.start(t);o.stop(t+.2);this.noise(t,.08,"bandpass",1800,1,.25)}},
+  plop(kind){if(!this.ok())return;const c=this.c,t=c.currentTime;
+    if(kind==="shell"){[2100,3170,4400].forEach((fq,i)=>{const o=c.createOscillator();o.type="sine";o.frequency.value=fq*rnd(.97,1.03);const g=c.createGain();this.env(g,t+i*.02,.003,.18,.35);o.connect(g);g.connect(this.m);o.start(t);o.stop(t+.5)})}
+    else if(kind==="flower"){const o=c.createOscillator();o.type="sine";o.frequency.setValueAtTime(500,t);o.frequency.exponentialRampToValueAtTime(1300,t+.25);const v=c.createOscillator();v.frequency.value=14;const vg=c.createGain();vg.gain.value=60;v.connect(vg);vg.connect(o.frequency);const g=c.createGain();this.env(g,t,.01,.3,.4);o.connect(g);g.connect(this.m);o.start(t);v.start(t);o.stop(t+.5);v.stop(t+.5)}
+    else{const o=c.createOscillator();o.type="sine";o.frequency.setValueAtTime(190,t);o.frequency.exponentialRampToValueAtTime(55,t+.18);const g=c.createGain();this.env(g,t,.004,.7,.22);o.connect(g);g.connect(this.m);o.start(t);o.stop(t+.3);this.noise(t,.07,"lowpass",900,1,.25)}},
+  gong(){if(!this.ok())return;const c=this.c,t=c.currentTime;[[98,.35],[147.4,.2],[196.7,.16],[262.3,.1],[331,.08],[441.7,.05]].forEach(([fq,a])=>{const o=c.createOscillator();o.type="sine";o.frequency.value=fq;const g=c.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(a,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+5);o.connect(g);g.connect(this.m);o.start(t);o.stop(t+5.1)})},
+  chime(){if(!this.ok())return;const c=this.c,t=c.currentTime,fq=pick([523.3,587.3,659.3,784,880,1046.5,1174.7]);[1,2.76].forEach((m,i)=>{const o=c.createOscillator();o.type="sine";o.frequency.value=fq*m;const g=c.createGain();this.env(g,t,.005,i?.015:.06,2.8);o.connect(g);g.connect(this.m);o.start(t);o.stop(t+3)})},
+  rain(){if(!this.ok())return;const c=this.c,t=c.currentTime;const s=c.createBufferSource();s.buffer=this.noiseBuf;s.loop=true;const f=c.createBiquadFilter();f.type="lowpass";f.frequency.setValueAtTime(3500,t);f.frequency.exponentialRampToValueAtTime(500,t+2.2);const g=c.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.35,t+.3);g.gain.exponentialRampToValueAtTime(.0001,t+2.5);s.connect(f);f.connect(g);g.connect(this.m);s.start(t);s.stop(t+2.6);
+    for(let i=0;i<14;i++){const tt=t+Math.random()*2,o=c.createOscillator();o.type="sine";o.frequency.setValueAtTime(rnd(900,1800),tt);o.frequency.exponentialRampToValueAtTime(rnd(300,500),tt+.06);const gg=c.createGain();this.env(gg,tt,.002,.08,.07);o.connect(gg);gg.connect(this.m);o.start(tt);o.stop(tt+.12)}},
+  click(){if(!this.ok())return;const c=this.c,t=c.currentTime,o=c.createOscillator();o.type="square";o.frequency.value=1500;const g=c.createGain();this.env(g,t,.002,.06,.03);o.connect(g);g.connect(this.m);o.start(t);o.stop(t+.05)}
+};
+
+/* ================= DOG GARDEN ================= */
+function dogGardenHTML(){
+  return `<div class="apage"><div class="box dgbox">
+    <a href="#dog-garden">${IMG("dog_garden.jpg")}</a>
+    <div class="dgtools" id="dgtools">
+      <button data-m="dog" class="on"><img src="img/dog_sprite.png">1 DOG</button>
+      <button data-m="rake"><img src="img/dog_sprite.png"><img src="img/dog_sprite.png"><img src="img/dog_sprite.png">DOG RAKE</button>
+      <button data-m="spiral"><img src="img/dog_sprite.png">SPIRAL DOG</button>
+      <button data-a="wander">+ LOOSE DOG</button>
+      <button data-m="dg_stone1.png"><img src="img/dg_stone1.png"></button>
+      <button data-m="dg_stone2.png"><img src="img/dg_stone2.png"></button>
+      <button data-m="dg_shell1.png"><img src="img/dg_shell1.png"></button>
+      <button data-m="dg_flower.png"><img src="img/dg_flower.png"></button>
+      <button data-a="rain">RAIN</button>
+      <button data-a="sound">SOUND: ON</button>
+    </div>
+    <div id="dgwrap"><canvas id="dgbg"></canvas><canvas id="dgtr"></canvas><canvas id="dgtop"></canvas><div id="dgzen">ZEN: 0%</div></div>
+    <div class="dghelp">Sound is ON (tap the garden once to wake it up; on iPhone, check your volume). Drag to scoot. Pick a stone, shell or flower and tap to place it (drag them around too). Find your inner peace. Wash your hands.</div>
+  </div>
+  <div class="aside">
+    <div class="box"><div class="adslot" data-pool="kpop,game,dilly,family,coin" data-ms="2400"></div></div>
+    <div class="box"><div class="minihead" style="margin:0">LIVE CHAT</div><a href="#chat" class="minichat" id="minichat" style="margin:0;height:260px"></a></div>
+    <div class="box"><div class="adslot" data-pool="pyramid,casket,kpop,skull,check" data-ms="2900"></div></div>
+  </div></div>`;
+}
+function initDogGarden(){
+  const wrap=$("#dgwrap"),cb=$("#dgbg"),ct=$("#dgtr"),cf=$("#dgtop"),zen=$("#dgzen");
+  const I={};["dog_sprite.png","sand_tile.jpg","dg_stone1.png","dg_stone2.png","dg_shell1.png","dg_shell2.png","dg_flower.png"].forEach(n=>{const i=new Image();i.src="img/"+n;I[n]=i});
+  const dpr=Math.min(2,window.devicePixelRatio||1);let W=0,H=0;
+  const gb=cb.getContext("2d"),gt=ct.getContext("2d"),gf=cf.getContext("2d");
+  let objs=[["dg_stone1.png",.2,.4],["dg_stone2.png",.25,.64],["dg_flower.png",.48,.54],["dg_shell1.png",.7,.4],["dg_shell2.png",.75,.64]].map(o=>({n:o[0],x:o[1],y:o[2],s:o[0]==="dg_flower.png"?.11:.09}));
+  let mode="dog",dogs=[],drag=null,dragObj=null,trailLen=0,lastCap=0,speed=0,gonged=false,nextChime=0;
+  const player={x:.5,y:.85,ang:-Math.PI/2,phase:0,moving:0,hue:0};
+  function size(){
+    const old=document.createElement("canvas");old.width=ct.width;old.height=ct.height;if(ct.width)old.getContext("2d").drawImage(ct,0,0);
+    W=wrap.clientWidth;H=Math.max(300,Math.round(W*.62));wrap.style.height=H+"px";
+    [cb,ct,cf].forEach(c=>{c.width=W*dpr;c.height=H*dpr;c.style.width=W+"px";c.style.height=H+"px";c.getContext("2d").setTransform(dpr,0,0,dpr,0,0)});
+    if(old.width)gt.drawImage(old,0,0,W,H);drawBg();
+  }
+  function drawBg(){const t=I["sand_tile.jpg"];if(!t.complete){t.onload=drawBg;return}gb.save();gb.scale(.5,.5);gb.fillStyle=gb.createPattern(t,"repeat");gb.fillRect(0,0,W*2,H*2);gb.restore()}
+  const COLS=["74,40,12","92,52,18","60,34,14","110,66,24"];
+  function skid(x0,y0,x1,y1,col){
+    x0*=W;y0*=H;x1*=W;y1*=H;const dx=x1-x0,dy=y1-y0,L=Math.hypot(dx,dy);if(L<.6)return;
+    const nx=-dy/L,ny=dx/L,w=Math.max(4,W*.011),lw=Math.max(3,W*.009);trailLen+=L;
+    gt.lineCap="round";
+    gt.strokeStyle=`rgba(${col},.10)`;gt.lineWidth=w*3.2;gt.beginPath();gt.moveTo(x0,y0);gt.lineTo(x1,y1);gt.stroke();
+    for(const sd of [-1,1]){
+      const ox=nx*w*sd,oy=ny*w*sd;
+      gt.strokeStyle=`rgba(${col},.42)`;gt.lineWidth=lw;gt.beginPath();gt.moveTo(x0+ox,y0+oy);gt.lineTo(x1+ox,y1+oy);gt.stroke();
+      gt.strokeStyle="rgba(255,236,200,.10)";gt.lineWidth=lw*.4;gt.beginPath();gt.moveTo(x0+ox+1.5,y0+oy+1.5);gt.lineTo(x1+ox+1.5,y1+oy+1.5);gt.stroke();
+    }
+    if(Math.random()<.25){gt.fillStyle=`rgba(${col},.5)`;gt.beginPath();gt.arc(x1+(Math.random()-.5)*w*3,y1+(Math.random()-.5)*w*3,Math.random()*2+.5,0,7);gt.fill()}
+  }
+  function drawDog(d){
+    const im=I["dog_sprite.png"];if(!im.complete||!im.width)return;
+    const h=Math.max(46,W*.13),w=h*im.width/im.height;
+    gf.save();gf.translate(d.x*W,d.y*H);gf.rotate(d.ang+Math.PI/2+Math.sin(d.phase)*.18*(d.moving?1:.15));
+    gf.scale(1+Math.sin(d.phase*2)*.04*(d.moving?1:0),1-Math.sin(d.phase*2)*.05*(d.moving?1:0));
+    gf.drawImage(im,-w*.46,-h*.97,w,h);gf.restore();
+  }
+  function moveDog(d,nx,ny,col){
+    const dx=nx-d.x,dy=(ny-d.y)*H/W;if(Math.hypot(dx,dy)>.0015){d.ang=Math.atan2(dy,dx);d.phase+=.6;d.moving=6}
+    if(d.lx===undefined){d.lx=nx;d.ly=ny}
+    if(Math.hypot((nx-d.lx)*W,(ny-d.ly)*H)>=4){skid(d.lx,d.ly,nx,ny,col);d.lx=nx;d.ly=ny}
+    d.x=nx;d.y=ny;
+  }
+  function pos(e){const r=wrap.getBoundingClientRect();return[(e.clientX-r.left)/r.width,(e.clientY-r.top)/r.height]}
+  function hitObj(x,y){for(let i=objs.length-1;i>=0;i--){const o=objs[i];if(Math.hypot((x-o.x)*W,(y-o.y)*H)<o.s*W*.55)return o}return null}
+  wrap.addEventListener("pointerdown",e=>{
+    try{wrap.setPointerCapture(e.pointerId)}catch(x){}
+    const [x,y]=pos(e);
+    DGS.init();
+    const o=hitObj(x,y);if(o){dragObj=o;DGS.plop(o.n.includes("shell")?"shell":o.n.includes("flower")?"flower":"stone");return}
+    if(mode.endsWith(".png")){objs.push({n:mode,x,y,s:mode==="dg_flower.png"?.11:.09});DGS.plop(mode.includes("shell")?"shell":mode.includes("flower")?"flower":"stone");say(pick(["placed.","very zen.","the dogs will avoid this (they won't)"]));return}
+    if(mode==="spiral"){dogs.push({x:x+.02,y,ang:0,phase:0,moving:0,spiral:{cx:x,cy:y,t:0,r:.02},col:pick(COLS)});say("SPIRAL DOG DEPLOYED");DGS.bark(2);return}
+    drag={x,y};player.x=x;player.y=y;player.lx=x;player.ly=y;
+    if(mode==="rake"){player.rk=[-1,0,1].map(k=>({x,y,lx:undefined,ang:player.ang,phase:k,moving:0}))}
+    if(Math.random()<.3)DGS.bark(1);
+  });
+  wrap.addEventListener("pointermove",e=>{
+    const [x,y]=pos(e);
+    if(dragObj){dragObj.x=x;dragObj.y=y;return}
+    if(!drag)return;
+    const dx=x-drag.x,dy=(y-drag.y)*H/W,L=Math.hypot(dx,dy);if(L<.003)return;
+    if(mode==="rake"&&player.rk){const nx=-dy/L,ny=dx/L;player.rk.forEach((d,i)=>{const o=(i-1)*.07;moveDog(d,x+nx*o,y+ny*o*W/H,COLS[i])})}
+    else moveDog(player,x,y,COLS[0]);
+    drag={x,y};speed=Math.min(1,speed+L*25);if(Math.random()<L*1.2)DGS.fart(Math.random()<.2);
+  });
+  const end=()=>{drag=null;dragObj=null};
+  wrap.addEventListener("pointerup",end);wrap.addEventListener("pointercancel",end);
+  const popEl=document.createElement("div");popEl.style.cssText="position:absolute;left:50%;top:40%;transform:translate(-50%,-50%) rotate(-6deg);font:900 28px Impact;color:#bdf26b;-webkit-text-stroke:1.5px #173;pointer-events:none;opacity:0;transition:opacity .3s;white-space:nowrap";wrap.appendChild(popEl);
+  function say(m){popEl.textContent=m;popEl.style.opacity=1;setTimeout(()=>popEl.style.opacity=0,900)}
+  $("#dgtools").addEventListener("click",e=>{
+    const b=e.target.closest("button");if(!b)return;
+    DGS.init();DGS.click();
+    if(b.dataset.m){mode=b.dataset.m;$$("#dgtools button[data-m]").forEach(x=>x.classList.toggle("on",x===b));return}
+    const a=b.dataset.a;
+    if(a==="wander"){if(dogs.filter(d=>d.wander).length>=8){toast("Max 8 loose dogs. This is a garden, not a kennel.");return}dogs.push({x:Math.random()*.8+.1,y:Math.random()*.8+.1,ang:Math.random()*7,phase:0,moving:0,wander:true,turn:0,col:pick(COLS)});say("DOG LOOSE!");DGS.bark(ri(2,3));pushMsg({u:pick(USERS),text:"someone let another dog loose in the dog garden"})}
+    if(a==="rain"){let n=0;const r=setInterval(()=>{gt.save();gt.setTransform(1,0,0,1,0,0);gt.globalCompositeOperation="destination-out";gt.fillStyle="rgba(0,0,0,.12)";gt.fillRect(0,0,ct.width,ct.height);gt.restore();if(++n>28){clearInterval(r);trailLen=0}},50);say("IT RAINED");DGS.rain();toast("The garden is clean. The dogs are not.")}
+    if(a==="sound"){DGS.setOn(!DGS.on);b.textContent="SOUND: "+(DGS.on?"ON":"OFF");if(DGS.on){DGS.init();DGS.bark(1)}}
+  });
+  const CAPS=["inner peace: loading","the dogs are at one with the sand","very skid. much zen.","you have achieved scoot","the garden remembers","namaste (on the ground)","perfectly balanced, as all skids should be"];
+  function loop(){
+    if(!document.body.contains(cf)){if(DGS.c)DGS.scoot(0,0);return}
+    if(cf.width!==Math.round(wrap.clientWidth*dpr))size();
+    gf.clearRect(0,0,W,H);
+    dogs.forEach(d=>{
+      if(d.spiral){const S=d.spiral;S.t+=.05;S.r+=.00035;const nx=S.cx+Math.cos(S.t)*S.r,ny=S.cy+Math.sin(S.t)*S.r*W/H;moveDog(d,nx,ny,d.col);if(S.r>.24){d.spiral=null;d.wander=true;d.turn=0}}
+      else if(d.wander){d.turn+=(Math.random()-.5)*.08;d.turn*=.96;d.ang+=d.turn;const sp=.0022;let nx=d.x+Math.cos(d.ang)*sp,ny=d.y+Math.sin(d.ang)*sp*W/H;
+        if(nx<.03||nx>.97){d.ang=Math.PI-d.ang;nx=Math.min(.97,Math.max(.03,nx))}if(ny<.05||ny>.97){d.ang=-d.ang;ny=Math.min(.97,Math.max(.05,ny))}
+        const a=d.ang;moveDog(d,nx,ny,d.col);d.ang=a}
+      if(d.moving)d.moving--;
+    });
+    objs.forEach(o=>{const im=I[o.n];if(im.complete&&im.width){const w=o.s*W,h=w*im.height/im.width;gf.drawImage(im,o.x*W-w/2,o.y*H-h/2,w,h)}});
+    dogs.forEach(drawDog);
+    if(mode==="rake"&&player.rk)player.rk.forEach(drawDog);else drawDog(player);
+    if(player.moving)player.moving--;
+    if(DGS.c){
+      const loose=dogs.filter(d=>d.moving).length;
+      DGS.scoot((drag?speed*.55:0)+Math.min(.25,loose*.05),speed);speed*=.88;
+      dogs.forEach(d=>{if(d.moving&&Math.random()<.0025)DGS.fart(false);if(d.wander&&Math.random()<.0012)DGS.bark(1)});
+      const now=Date.now();if(now>nextChime){nextChime=now+rnd(2500,6000);DGS.chime()}
+    }
+    const z=Math.min(100,Math.round(trailLen/(W+H)*2));
+    zen.textContent=`ZEN: ${z}% | SKID: ${100-z}% | DOGS: ${1+dogs.length}`;
+    if(z>=100&&!gonged){gonged=true;DGS.gong();say("100% ZEN")}if(z<50)gonged=false;if(z>=100&&Date.now()-lastCap>8000){lastCap=Date.now();say(pick(CAPS))}
+    requestAnimationFrame(loop);
+  }
+  size();requestAnimationFrame(loop);
+}
+
+/* ================= K-POP GENERATOR ================= */
+function kpopHTML(){
+  return `<div class="apage"><div class="box kpbox">
+    <img src="img/kpop_icon.png" class="kplogo" alt="Ugly American Baby K-Pop Star Generator GPT">
+    <div class="kpform">
+      <label>YOUR (BABY'S) NAME</label><input type="text" id="kpname" maxlength="20" placeholder="e.g. Tyler">
+      <label>UGLINESS <span id="kvu">50</span>%</label><input type="range" id="kpu" min="0" max="100" value="50">
+      <label>AMERICANNESS <span id="kva">80</span>%</label><input type="range" id="kpa" min="0" max="100" value="80">
+      <label>BABYNESS <span id="kvb">100</span>%</label><input type="range" id="kpb" min="0" max="100" value="100">
+      <button class="kpgo" id="kpgo"><img src="img/kpop_camera.png" alt="">GENERATE STAR</button>
+    </div>
+    <div class="kpload" id="kpload"><div class="bar"><i id="kpbar"></i></div><div id="kpmsg" style="font:bold 13px 'Courier New';margin-top:4px">GPT is thinking...</div></div>
+    <div class="kpcard" id="kpcard"></div>
+    <div class="pap" id="pap"><div style="font:900 24px Impact;color:#ff8ce0">PAPARAZZI MODE</div><div style="font-size:12px">Tap your star to snap photos before the 15 seconds run out!</div>
+      <div class="hud"><span id="paptime">15.0s</span><span id="papscore">$DEAD: 0</span></div>
+      <div class="arena" id="arena"><div class="star" id="pstar"></div><div class="flash" id="pflash"></div></div>
+      <div class="tab" id="ptab"></div>
+      <button class="kpgo" id="papgo" style="font-size:18px"><img src="img/kpop_camera.png" alt="">START SHOOT</button></div>
+    <div class="kpgroup" id="kpgroup"></div>
+  </div>
+  <div class="aside">
+    <div class="box"><div class="adslot" data-pool="kpop,doggarden,game,dilly,coin" data-ms="2400"></div></div>
+    <div class="box"><div class="minihead" style="margin:0">LIVE CHAT</div><a href="#chat" class="minichat" id="minichat" style="margin:0;height:260px"></a></div>
+    <div class="box"><div class="adslot" data-pool="doggarden,family,casket,portrait,check" data-ms="2900"></div></div>
+  </div></div>`;
+}
+function initKpop(){
+  const P1=["LIL'","BABY","BIG","YUNG","SWEET","DJ","MC","CAPTAIN","LITTLE MISS","PRINCE","SGT."],P2=["FREEDOM","CORNDOG","BALD EAGLE","TAILGATE","WALMART","NASCAR","MAYO","DRIVE-THRU","COUPON","CROCS","RANCH","FIREWORK","HOT POCKET"];
+  const GR=["2NE-HUNDRED","SEOUL FOOD","CORNDOGZ","B.A.B.Y. (BORN AMERICAN, BASICALLY YELLING)","STRIPES & STARS","U.G.L.Y.","NEW KIDS ON THE BLOCK PARTY","GRILL SQUAD","4-WHEEL DRIVE","SUPER STIMULUS PACKAGE&trade;"];
+  const POS=["Main Vocalist (cannot sing)","Visual (ugly)","Maknae (literally a baby)","Main Rapper (only knows one word)","Leader (by force)","Main Dancer (has not learned to walk)","Center (of attention)"];
+  const SONG=["\"Mayonnaise Heart\"","\"Drive-Thru Love (Ft. Lee Pheeter &copy;)\"","\"Baby Teeth\"","\"Freedom Isn't Free (It's $1 For 3 Months)\"","\"Nap Time Is Over\"","\"Gas Station Sushi\"","\"Diaper Money\"","\"Ugly Is The New Pretty (It Isn't)\""];
+  const FAN=["EAGLES","BURPS","BIBS","COUPONS","GRILLERS","BABIES (also babies)","TAXPAYERS"];
+  const LOADS=["Consulting the algorithm...","Adding bangs...","Removing talent...","Americanizing...","Uglifying (light)...","Uglifying (heavy)...","Teaching baby to wink...","Signing 13-year contract...","Generating fandom...","Asking GPT... GPT said no... asking again..."];
+  const TAB=["SPOTTED: {n} eating a corndog at the airport!","{n} IN SECRET FEUD WITH A PACIFIER","{n} WEARS CROCS TO AWARDS SHOW, FANS DEVASTATED","IS {n} TOO UGLY TO DEBUT? (yes)","{n} CAUGHT NAPPING ON STAGE AGAIN","{n} LEAVES BUTT DILLY AT 4AM","EXCLUSIVE: {n}'S FIRST TOOTH","{n} SPOTTED AT DOG GARDEN","{n} SIGNS CAMPUS&trade; CONTRACT (ALL 26 BLANKS)","{n} SAYS FIRST WORD: \"FREEDOM\""];
+  let cur=null,group=(()=>{try{return JSON.parse(localStorage.getItem("bdnn_kpop")||"[]")}catch(e){return []}})();
+  ["u","a","b"].forEach(k=>$("#kp"+k).oninput=e=>$("#kv"+k).textContent=e.target.value);
+  function saveGroup(){try{localStorage.setItem("bdnn_kpop",JSON.stringify(group.slice(-10)))}catch(e){}}
+  function showGroup(){
+    const g=$("#kpgroup");
+    g.innerHTML=`<b style="color:#ff8ce0">YOUR GROUP (${Math.min(group.length,5)}/5)</b><br>`+(group.length?group.slice(-5).map((m,i)=>`${i+1}. ${esc(m.n)} &mdash; ${m.p} &mdash; ${m.sc} $DEAD`).join("<br>"):"no members yet. generate a star!")+(group.length>=5?`<br><br><b class="blink" style="color:#ff0">DEBUT READY!</b> <button class="btn98" id="kpdebut">DEBUT GROUP</button> <button class="btn98" id="kpdisband">DISBAND</button>`:"");
+    const db=$("#kpdebut");if(db)db.onclick=()=>{const gn=pick(GR);modal("DEBUT!!!",`<div style="text-align:center"><img src="img/kpop_icon.png" style="width:160px"><h2 style="font:900 26px Impact;color:#c2007f">${gn}</h2>has debuted with ${pick(SONG)}.<br>It charted at #${ri(400,9999)}.<br>The group has been disbanded for tax reasons.</div>`);pushMsg({u:pick(USERS),text:`omg ${gn} just debuted!!! stan or die`});group=[];saveGroup();showGroup()};
+    const dd=$("#kpdisband");if(dd)dd.onclick=()=>{group=[];saveGroup();showGroup();toast("Group disbanded. Members have been returned to the hospital.")};
+  }
+  showGroup();
+  function filt(seed){return `hue-rotate(${seed.h}deg) saturate(${seed.s}) contrast(${seed.c})`}
+  function tf(seed){return `translate(-50%,-50%) scale(${seed.sx},${seed.sy}) rotate(${seed.r}deg)`}
+  $("#kpgo").onclick=()=>{
+    const name=($("#kpname").value.trim()||pick(["Tyler","Brayden","Kaylee","Jaxon","Madison","Hunter","Nevaeh"])).slice(0,20);
+    const u=+$("#kpu").value,a=+$("#kpa").value,b=+$("#kpb").value;
+    $("#kpcard").style.display="none";$("#pap").style.display="none";$("#kpload").style.display="block";
+    let p=0;const bar=$("#kpbar"),msg=$("#kpmsg");
+    const t=setInterval(()=>{p+=rnd(3,14);if(Math.random()<.08)p-=20;p=Math.max(0,p);bar.style.width=Math.min(100,p)+"%";msg.textContent=pick(LOADS)+" "+Math.floor(Math.min(100,p))+"%";
+      if(p>=100){clearInterval(t);$("#kpload").style.display="none";make(name,u,a,b)}},180);
+  };
+  function make(name,u,a,b){
+    const seed={h:ri(-180,180)*(u/100),s:(1+u/40).toFixed(2),c:(1+u/120).toFixed(2),sx:(1+(Math.random()-.5)*u/80).toFixed(2),sy:(1+(Math.random()-.5)*u/90).toFixed(2),r:ri(-1,1)*Math.round(u/10)};
+    const stage=`${pick(P1)} ${pick(P2)}`;
+    cur={n:stage,real:name,seed,p:pick(POS),sc:0};
+    const st=(l,v)=>`<div class="stat"><b>${l}</b><i><span style="width:${v}%"></span></i>${v}%</div>`;
+    $("#kpcard").innerHTML=`<div class="ph"><img src="img/kpop_icon.png" style="filter:${filt(seed)};transform:${tf(seed)}"><div class="flash" id="kpflash"></div></div>
+      <h3>${esc(stage)}</h3><div class="grp">a.k.a. ${esc(name)} &bull; ${cur.p}</div>
+      ${st("UGLY",u)}${st("AMERICAN",a)}${st("BABY",b)}${st("K-POP",ri(1,12))}${st("TALENT",0)}
+      <div class="meta">Debut single: ${pick(SONG)}<br>Fandom name: ${pick(FAN)}<br>Contract: 13 years with B&amp;D Entertainment LLC&copy;<br>Star rating: ${"&#9733;".repeat(ri(1,5))}</div>
+      <div style="text-align:center;margin-top:8px"><button class="btn98" id="kpadd">ADD TO GROUP</button> <button class="btn98" id="kpagain">REGENERATE</button></div>`;
+    $("#kpcard").style.display="block";
+    const f=$("#kpflash");f.style.opacity=1;setTimeout(()=>f.style.opacity=0,60);
+    $("#kpadd").onclick=()=>{group.push({n:cur.n,p:cur.p,sc:cur.sc});saveGroup();showGroup();toast(`${esc(cur.n)} joined the group!`);pushMsg({u:pick(USERS),text:`new member alert: ${esc(cur.n)} (${cur.p}) ${pick(["STAN","flop","ugly icon","literally a baby","i'd buy the album"])}`})};
+    $("#kpagain").onclick=()=>$("#kpgo").click();
+    $("#pap").style.display="block";$("#ptab").innerHTML="";
+    $("#pstar").innerHTML=`<img src="img/kpop_icon.png" style="filter:${filt(seed)}">`;
+  }
+  let pap=null;
+  $("#papgo").onclick=()=>{
+    if(pap||!cur)return;
+    const ar=$("#arena"),stEl=$("#pstar"),fl=$("#pflash");let sc=0,t0=Date.now(),x=50,y=50,vx=2.2,vy=1.7;
+    $("#ptab").innerHTML="";$("#papscore").textContent="$DEAD: 0";
+    pap={};
+    function step(){
+      const left=15-(Date.now()-t0)/1000;
+      if(left<=0||!document.body.contains(ar)){pap=null;$("#paptime").textContent="0.0s";cur.sc=Math.max(cur.sc,sc);toast(`SHOOT OVER! ${sc} $DEAD worth of photos.`);if(group.length&&group[group.length-1].n===cur.n){group[group.length-1].sc=cur.sc;saveGroup();showGroup()}return}
+      $("#paptime").textContent=left.toFixed(1)+"s";
+      const W=ar.clientWidth-90,H=ar.clientHeight-90,sp=1+(15-left)/6;
+      x+=vx*sp;y+=vy*sp;if(x<0||x>W){vx=-vx;x=Math.max(0,Math.min(W,x))}if(y<0||y>H){vy=-vy;y=Math.max(0,Math.min(H,y))}
+      if(Math.random()<.02){vx=(Math.random()-.5)*6;vy=(Math.random()-.5)*6}
+      stEl.style.left=x+"px";stEl.style.top=y+"px";
+      requestAnimationFrame(step);
+    }
+    step();
+    ar.onpointerdown=e=>{
+      if(!pap)return;
+      fl.style.transition="none";fl.style.opacity=.9;requestAnimationFrame(()=>{fl.style.transition="opacity .25s";fl.style.opacity=0});
+      const r=stEl.getBoundingClientRect();
+      if(e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom){const v=ri(20,120);sc+=v;$("#papscore").textContent="$DEAD: "+sc;
+        $("#ptab").insertAdjacentHTML("afterbegin",`<div>+${v} &mdash; ${pick(TAB).replace(/\{n\}/g,esc(cur.n))}</div>`)}
+      else $("#ptab").insertAdjacentHTML("afterbegin",`<div style="color:#999">BLURRY. (photo of nothing)</div>`);
+    };
+  };
+}
+
+/* ================= STICKY BANNER + K-POP POPUP ================= */
+(function(){
+  const sb=$("#dgsticky"),kp=$("#kpop");
+  function showSticky(){if(location.hash!=="#dog-garden")sb.style.display="block"}
+  setTimeout(showSticky,6000);
+  sb.addEventListener("click",e=>{
+    const r=sb.getBoundingClientRect(),fx=(e.clientX-r.left)/r.width;
+    if(fx<.1){
+      if(Math.random()<.3){toast("Oops! You clicked the ad.");location.hash="dog-garden";sb.style.display="none";return}
+      sb.style.display="none";toast("Ad closed. It will be back.");setTimeout(showSticky,rnd(30000,60000)*(5/CHAOS));return;
+    }
+    sb.style.display="none";location.hash="dog-garden";setTimeout(showSticky,45000);
+  });
+  function showKp(){
+    if(location.hash==="#kpop-generator"||$("#ov").classList.contains("on")){return setTimeout(showKp,20000)}
+    kp.style.display="block";
+  }
+  setTimeout(showKp,rnd(20000,35000));
+  kp.addEventListener("click",e=>{
+    const r=kp.getBoundingClientRect(),fx=(e.clientX-r.left)/r.width,fy=(e.clientY-r.top)/r.height;
+    kp.style.display="none";
+    if(fx<.16&&fy<.16){setTimeout(showKp,rnd(60000,120000)*(5/CHAOS));return}
+    location.hash="kpop-generator";setTimeout(showKp,rnd(60000,120000));
+  });
+  window.addEventListener("hashchange",()=>{if(location.hash==="#dog-garden")sb.style.display="none"});
+})();
+
+/* ================= ROUTER ================= */
+let qTimer, scanTimer, ulTimer;
+const QUOTES=["“A payment to me is a step out of the darkness and into a habitat worth anything at all”","“I have a lamp. When you pay, I turn it on.”","“The roof is fine. The roof has always been fine.”","“Every birth is a subscription. Every death is a cancellation.”","“Do not call 911. That is a different number.”"];
+function restartSlots(){timers.forEach(clearTimeout);timers=[];startSlots()}
+function route(){
+  let h=location.hash.replace(/^#\/?/,"")||"home";
+  clearInterval(qTimer);clearInterval(scanTimer);clearInterval(ulTimer);
+  const v=$("#view");
+  if(h==="home"||h==="sections"){v.innerHTML=homeHTML();
+    let qi=0;qTimer=setInterval(()=>{const q=$("#qtxt");if(!q)return;qi=(qi+1)%QUOTES.length;q.textContent=QUOTES[qi];q.parentElement.style.animation="none";void q.offsetWidth;q.parentElement.style.animation="wob .4s"},5200);
+    const pb=$("#play");if(organ){pb.innerHTML="&#x275A;&#x275A;";pb.dataset.on=1;$("#nowp").textContent="Now playing: "+pick(SONGS)}
+  }
+  else if(h==="chat"){v.innerHTML=chatHTML();$("#mynick").textContent=myNick;const log=$("#chatlog");buf.forEach(m=>log.appendChild(msgNode(m)));log.scrollTop=log.scrollHeight;renderUserList();ulTimer=setInterval(renderUserList,7000);setTimeout(()=>pushMsg({sys:1,text:`${myNick} has joined #spiritual-radio`}),200);setTimeout(()=>pushMsg({u:pick(USERS),text:fill(`welcome @{me}!!! {e}`)}),900);$("#cbadge").textContent="0";}
+  else if(h==="dog-garden"){v.innerHTML=dogGardenHTML();initDogGarden();}
+  else if(h==="kpop-generator"){v.innerHTML=kpopHTML();initKpop();}
+  else if(h==="birth-time"){v.innerHTML=gameHTML();initGame();}
+  else if(h==="search"){v.innerHTML=articleHTML("search");const p=$(".art h1");p.innerHTML=`Search Results For: <i>${esc(pick(["your soul","roof","is gary ok","how to unsubscribe","$DEAD price"]))}</i> (0 results, ${ri(2,9)} ads)`;}
+  else {v.innerHTML=articleHTML(h);
+    const n=ri(6,12);for(let i=0;i<n;i++)addComment(pick(USERS),fill(pick(CMTS)));
+    if(h==="soul-virus-scan"){let p=0;scanTimer=setInterval(()=>{p+=rnd(1,9);const b=$("#scanbar"),m=$("#scanmsg");if(!b){clearInterval(scanTimer);return}
+      if(p>=100){clearInterval(scanTimer);b.style.width="100%";m.innerHTML=`<b style="color:red">SCAN COMPLETE: ${ri(41,99)} VIRUSES FOUND.</b><br>They have been promoted to management. Your soul is now running Windows ME.`;return}
+      b.style.width=p+"%";m.textContent=pick(["Scanning sins...","Checking childhood...","Found: 1 grudge","Found: guilty pleasure (Free Bird)","Quarantining memories...","Uploading soul to cloud...","Deleting System32 (spiritual)"])+" "+Math.floor(p)+"%"},450)}
+  }
+  frameify(v);
+  restartSlots();
+  const mc=$("#minichat");if(mc)buf.slice(-12).forEach(m=>{const d=document.createElement("div");d.innerHTML=m.sys?"*** "+esc(m.text):`&lt;${esc(m.u)}&gt; ${m.text}`;mc.appendChild(d)});
+  window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",route);
+
+/* player wiring (delegated since home re-renders) */
+document.addEventListener("click",e=>{
+  if(e.target.closest("#play")){const b=$("#play");if(organ){stopOrgan();b.innerHTML="&#x25B6;";delete b.dataset.on;$("#nowp").textContent="Paused. The silence is also spiritual."}
+    else{startOrgan();b.innerHTML="&#x275A;&#x275A;";b.dataset.on=1;$("#nowp").textContent="Now playing: "+pick(SONGS)}}
+  if(e.target.closest("#mute")){muted=!muted;if(organ)organ.g.gain.value=muted?0:.025;$("#mute").textContent=muted?"MUTE":"VOL"}
+  if(e.target.closest("#ulist div")){const i=$("#chatin");if(i){i.value="@"+e.target.textContent.replace(/^@/,"")+" ";i.focus()}}
+});
+
+/* ================= FLOATING MENU DRAG ================= */
+(function(){const m=$("#fmenu"),g=m.querySelector(".grip");let sx,sy,ox,oy,drag=false;
+  g.addEventListener("pointerdown",e=>{drag=true;const r=m.getBoundingClientRect();sx=e.clientX;sy=e.clientY;ox=r.left;oy=r.top;g.setPointerCapture(e.pointerId);m.style.animation="none"});
+  g.addEventListener("pointermove",e=>{if(!drag)return;m.style.left=Math.max(0,Math.min(innerWidth-60,ox+e.clientX-sx))+"px";m.style.top=Math.max(0,Math.min(innerHeight-60,oy+e.clientY-sy))+"px";m.style.right="auto"});
+  g.addEventListener("pointerup",()=>{drag=false;m.style.animation=""});
+})();
+
+/* ================= VISITOR POPUP ================= */
+let vRuns=0;
+function showVisitor(){
+  if($("#ov").classList.contains("on")){return scheduleVisitor()}
+  const v=$("#visitor");vRuns=0;
+  $("#vtxt").innerHTML=`You are the <b style="font-size:20px">${(ri(1,9)*1000000).toLocaleString()}th</b> visitor to BirthandDeathNewsNetwork.com!<br>You have won: <u>${pick(["a free casket","3 months for $1","a lamp (off)","one (1) bee","a night at Butt Dilly (eternal)","$0.000001 $DEAD"])}</u>`;
+  v.style.left=Math.max(5,(innerWidth-300)/2)+"px";v.style.top=Math.max(40,innerHeight*.25)+"px";v.style.display="block";
+}
+function scheduleVisitor(){setTimeout(showVisitor,rnd(35000,70000)*(5/CHAOS))}
+$("#vx").addEventListener("click",()=>{const v=$("#visitor");if(vRuns<2){vRuns++;v.style.left=rnd(5,Math.max(10,innerWidth-310))+"px";v.style.top=rnd(40,Math.max(50,innerHeight-220))+"px";toast(pick(["nice try","too slow!","you can't escape good news"]));return}v.style.display="none";scheduleVisitor()});
+$("#vclaim").addEventListener("click",()=>{$("#visitor").style.display="none";scheduleVisitor()});
+
+A["campus-experiment"]={k:"THE CAMPUS EXPERIMENT&trade;",t:"It&rsquo;s A Race To The Buoy With The Best Attitude",by:"President Lee Pheeter &copy;",img:IMG("tower.jpg","max-width:560px;margin:auto"),cap:"CampUs&trade; headquarters. Arrivals daily.",b:[
+`<p class="eggq" style="font-style:italic">&ldquo;It&rsquo;s a race to the buoy with the best attitude. Make waves with my system for self development!&rdquo;</p><div class="eggby">- President Lee Pheeter &copy;</div>`,
+"Dietitian Dr. Pheeter will then build you back up with the B.D. dismal diet&trade;, a lasting regime of iceberg lettuce and crushed tylenol that will be mandatory to all trainee staff. Refusal of doing so will result in a heftier dose of powdered tylenol and strained amounts of iceberg lettuce.",
+"Have you seen a jetski? Maybe when you were a child? When spending time at your similar timeshare in Prague, you probably remember the exfoliating gusts of wind in your face as you give a proud salute to your neighbors atop the leatherback of your own 160HP Jetski. Do you want to feel secure mounted at top your waverunner? CampUs&rsquo;&trade; will provide for you a thin canal for aquatic recreation along with a selection of Nightmare based Films and Literature.",
+"All I ask of you is to abandon conventional survival and forfeit your professional work ethic. We provide the stairs, but you must do the climbing.",
+`<div class="oathbox">${IMG("oath.jpg")}</div>`,
+`<p class="eggq">&ldquo;A patient is a fragile egg in incubation, the mind is the thin egg shelling, the human soul is the fastly developing fowl. My place is the incubator and I keep the temperature at a stable 98 degrees. The fragile yolk is protected by a graceful yet firm hand that shields from predators who wish harm on your peace of mind. As time ticks away the little chicken grows feathers and talons that fidget with work ethic. as the pheasant&rsquo;s fetal heart beats away, a parental bond is transmitted from the vulnerable runt chick to me, the power guardian. I will use your worship to invigorate your emotionally abandoned chicken until I am ready to free you from your membrane.&rdquo;</p><div class="eggby">- President Lee Pheeter &copy;</div>`,
+`<p class="guar">If for any reason you are not completely satisfied you will be granted a money back guarantee but must be cleared of vigorous stress therapy.</p><p style="text-align:center"><a href="#campus-contract" class="signbtn" style="font-size:16px">SIGN THE CAMPUS&trade; CONTRACT &raquo;</a> <a href="#camp-us-experience" class="signbtn" style="font-size:16px">THE CAMP-US EXPERIENCE&trade; &raquo;</a></p>`]};
+
+A["camp-us-experience"]={k:"THE CAMP-US EXPERIENCE&trade;",t:"The Solution To Your Nightmares Is Low Income Housing",by:"B&amp;D LLC&copy; Admissions",img:IMG("pyramid_big.jpg","max-width:560px;margin:auto"),cap:"We provide the stairs. (Escalator access for Edge card members only.)",b:[
+"The solution to your nightmares is low income housing. Share YOUR time with this timeshare and lend an ear to other time sharers as we offer you our luxurious sanctuary.",
+"Support begins right now. Soon, you will work with a trained professional during the following weeks where you will become familiar with the therapy. Use this discovery period as &lsquo;the establishment phase&rsquo;, involving the education in what we would call major life investments&mdash;work, family, friends, community activities, and face values.",
+"We Will break you down before you begin to gain stability in your Romantic/Erotic life. By increasing the strains on fictional yet emotional investments, you will be able to stabilize marriages and master the delicate art of rearing a child.",
+`<div style="text-align:center">${IMG("pyramid.jpg","max-width:300px;margin:10px auto;border:3px solid #000")}</div>`,
+`<p style="text-align:center"><a href="#campus-contract" class="signbtn" style="font-size:16px">I'M READY. SIGN ME UP &raquo;</a></p>`]};
+
+A["what-is-a-nightmare"]={k:"NIGHTMARES",t:"What Is A Nightmare?",by:"Dr. Pheeter, Nightmare Specialist",img:`<div style="background:#1a0000 url(img/redsky.jpg) top/100% auto no-repeat;width:100%;padding:20px;text-align:center">${IMG("portrait.jpg","max-width:340px;margin:auto")}</div>`,cap:"Dr. Pheeter, in his official portrait.",b:[
+`<p style="color:#b8860b;font-style:italic;font-size:19px">Monumental weak foundations for perpetual independant immaturity caused by irreparable past personal fear, which is the result of subliminal and internal outside sources i.e. nightmares</p>`,
+"Where do the nightmares go? They can be very unsettling. If you do not think nightmares are scary, glimpse inwardly. A nightmare is all around YOU.",
+"Have you ever had a dream that you couldn't escape? maybe a dream that wasn't yours to begin with? A seemingly permanent consciousness? One with uncanny interdependent relationships and ties to mysterious objects and places? One with the looming feeling of impending doom? Congratulations may might be in order, you may might have just nightmared.",
+`<p style="background:#1a0000;color:#fff;padding:10px;font:bold 18px Arial"><b>Heres a scary fact:</b> <span style="color:#ffd800">For every 1 person nightmaring, there are millions helplessly awake:</span></p>`,
+"Nightmaring is the effect placed on a person who has perpetrated a negative offense targeted against another party of the waking world. In the nightmare realm; one may be at war with self and others, this is not the result of the Nightmarer's perception but the direct fault of the enemy controlling the nightmare world.",
+"Each day billlions of American&rsquo;s are undergoing expensive high level cerebral stress tests to find the cause of their unconscious panic attacks. Children&rsquo;s psyches are maimed by cursed and incompetent doctors&rsquo; hands.",
+`<div style="margin:16px 0">${IMG("nightmarebed.jpg")}</div>`,
+"The first step in fixing a clock is to find out why its going so fast...So let's Get Ticking.",
+`<p>Are nights tossing and turning sleepless from the bone-chilling cold despite a heavy number of down? <span style="color:#d4a000">When all the Checks are Cashed and coined it all boils down to one key phenomenon:</span></p>${IMG("nightmareword.jpg","max-width:340px")}`,
+`<p style="text-align:center;margin-top:16px"><a href="#camp-us-experience" class="signbtn" style="font-size:16px">THE SOLUTION: THE CAMP-US EXPERIENCE&trade; &raquo;</a></p>`]};
+
+A["success-through-leadership"]={k:"B&amp;D LLC&copy; SEMINAR",t:"Easy &bull; Affordable &bull; Success Through Leadership &amp; Learning",by:"President Lee Pheeter &copy;",img:IMG("easyheader.jpg"),cap:"Leadership, learning, and a car.",b:[
+"Check all that apply:",
+`<ul class="chk">${["Do you ever feel detached from reality? Can nobody reason with you? Are your states of turbulence impenetrable?","Worthlessness? Are loud voices billowing from the smoke within?","Do you Feel like like you're tiptoeing on a tightrope hopelessly attempting to maintain your mediocre independence just to preserve a low-paying income?","Are you having trouble keeping face while sweeping the rubble under the rug left behind from past relationships or university?","Are you undergoing a ghastly metamorphosis?","Do you seek emotional reconstructive surgery?","Are you burdened by the pressures placed on you by your heritage and need a cultural facelift? Is your ancestry missing that white picket fence?","Does the day to day go back and forth leaving you up and DOWN?","Your Job may Pay enough for your stomach but does it satisfy your class status?"].map(q=>`<li><input type="checkbox" checked>${q}</li>`).join("")}</ul>`,
+"Or are you merely squeezing through tight pipes just to make a splash in the sewer? For you, everything seems to be running smoothly. a fine life, until that one moment, when it all backfires, derails. Spiraling into a dark chasm of internal wreckage.",
+"I have the structure just for YOU: The patient... The task of reinventing a NEW emotional infrastructure is a grueling endeavor, one that I have been Blessed to Oversee with deadly accuracy and little, to no mistakes.",
+`<p style="text-align:center"><a href="#what-is-a-nightmare" class="signbtn" style="font-size:16px">WHAT IS A NIGHTMARE? &raquo;</a></p>`]};
+
+A["campus-contract"]={k:"LEGAL &mdash; PLEASE TEAR ALONG DOTTED LINE",t:"CampUs&trade; Contract, Terms Of Use &amp; Important Safety Information",by:"B&amp;D LLC&copy; Legal Department",img:IMG("check.jpg","max-width:560px;margin:auto"),cap:"Make all checks payable to President Lee Pheeter &copy;. A payment to me is a step out of the darkness.",b:[
+`<div class="legal"><div class="in">
+<p>****Please tear along the perforated edges of these pages and use any remaining pages of the book to pad your envelope before sending as we do not want any accidents. You may use any remaining blank space in this book to practice your signature, be sure to shred these signed practice pages after your exercises to avoid legal repercussions. pleas do not hesitate to destroy this book, again, more benefits</p>
+<h4>Contract</h4>
+<p>I <input class="blank"> <input class="blank"> x<input class="blank"> <input class="blank"> rid myself of subliminal pain brought on by nightmares through the helping hands of B&amp;D LLC&copy; by striving to make partner in the class system provided at CampUs&trade;. I <input class="blank"> x<input class="blank"> relinquish all assets to B&amp;D LLC&copy;&rsquo;s high/low stress environment at The CampUs Experiment&trade; and indoctrinate myself into the class system at CampUs&trade;. I <input class="blank"> x<input class="blank"> claim serfdom within the confines of CampUs&rsquo;&trade; project&rsquo;s pain system. I <input class="blank"> x<input class="blank"> In no way hold The Nurses, Officers, Agents, liable for any claims of damages which I may suffer incur. I <input class="blank"> x<input class="blank"> waive and relinquish any cause of action against CampUs&rsquo;&trade; for any personal injury, disability, death, or medical expenses. I <input class="blank"> x<input class="blank"> promise not to excise any legal right to seek damages against B&amp;D LLC&copy; or CampUs&rsquo;&trade;.</p>
+<h4>Terms Of Use</h4>
+<p>Never Command Or to use other Camps, doctrine, or Groups, by and to be able to use the confidence associated with CampUs&rsquo;&trade; to, you <input class="blank"> x<input class="blank"> ) "these agreements it means that you have agreed to be bound by the terms and provisions of the legal agreement "). But all the people, including but not limited to parents of campers of future, camper, coach, pastor, teacher, administrator, and to interact with the CampUs&rsquo; Experience&trade; in any way, is the user for the purposes of this Agreement. If you do not agree with the terms and conditions of this Agreement, do not have the right to use this Agreement. CampUs&rsquo;&trade; if you are dissatisfied with the terms and conditions of this Agreement or the content, of th CampUs&rsquo;&trade; remedy your sole and exclusive, you will stop us and you agree to that is that. I accept that you are aware, the use of CampUs&rdquo;&trade;, You are at risk of only your. You represent you have the authority and legal capacity to agree to the Legal Terms of Use of these yourself or your on behalf of the representative parties. The specific conditions of this agreement, but, nevertheless, may not apply to the use of the CampUs&rsquo;&trade; that bound all terms that apply. For without as a legitimate owner of the Camp, to inform youth outreach ministry, B&amp;D LLC&copy; to you, you can not change the terms of this Agreement at any time at any time, to terminate, and discretion free and alone the in change of CampUs&rsquo;&trade; said by post reserves the right. However, such changes of any description is incorporated into this Agreement by reference herein completely. <input class="blank"> x<input class="blank"></p>
+<div class="cut"><span>- - - cut along the dotted line - - -</span></div>
+<div class="safety"><b>IMPORTANT SAFETY INFORMATION</b><br><b>Suicidality and Antidepressant Drugs</b><br>
+Antidepressants, there is a possibility that some children, teenagers, enhance the behavior and suicidal ideation in young adults within a few months of the first treatment at CampUs&rsquo;&trade;. Serious mental illness of certain other is an important cause of suicidal thoughts and behavior and depression. Patients of all ages that are starting the CampUs&rsquo; Dismal Diet&trade; iceberg lettuce drug therapy are monitored properly, and must be observed closely for changes in abnormal clinical deterioration of behavior, or suicide. There are other adolescent or adult using of iceberg lettuce, and everyone needs to take the clinical need, the balance of Crushed Tylenol or risk considering antidepressants, or a new young child. The CampUs&rsquo; Dismal Diet&trade; expect the patients to be obsessive-compulsive (OCD), for use in pediatric patients have may or may not been approved.<br>
+Tell your CampUs&rsquo;&trade; physician immediately if you:<br>
+Become severely full of iceberg lettuce and have some or all of these symptoms: agitation, hallucinations, coma or other changes in mental status; coordination problems or muscle twitching (overactive reflexes); racing heartbeat, high or low blood pressure; sweating or fever; nausea, vomiting, or green diarrhea; muscle tightness, as these may be the symptoms of a life-threatening condition called Serotonin Syndrome<br>
+Have a rash, itchy welts (hives) or blisters, alone or with fever or joint pain; swelling of the face, tongue, eyes, or mouth; or trouble breathing, as these may be the symptoms of a severe allergic reaction to Powdered Tylenol as you can be give a regimen of lactose free CampUs&rsquo;&trade; Advil<br>
+Have any increased or unusual bruising or bleeding, especially if you take the blood thinner a non-steroidal anti-inflammatory drug (NSAID), or aspirin as you should only be taking Powdered Tylenol during work hours<br>
+Have a headache; weakness or feeling unsteady; confusion, problems thinking, or remembering, as these may be the symptoms of low aspirations i.e. team spirit</div>
+<div class="cut"><span>- - - cut along the dotted line - - -</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:12px;align-items:center">${IMG("check.jpg","max-width:360px;flex:1 1 260px")}<div style="flex:1 1 200px"><p style="color:#e01b1b;font:17px Arial">&ldquo;A payment to me is a step out of the darkness and into a habitat worth anything at all&rdquo;</p><p style="text-align:right">- President Lee Pheeter &copy;</p>${IMG("buttdilly_hd.jpg","max-width:200px")}<b>www.buttdilly.org</b></div></div>
+<p style="text-align:center;margin-top:14px"><button class="btn98" data-act="signcontract" style="font-size:16px">SIGN &amp; MAIL CONTRACT</button></p>
+</div></div>`]};
+
+
+A["pheeter-family-portrait"]={k:"OFFICIAL",t:"President Lee Pheeter Unveils Official Family Portrait On The Grand Staircase",by:"Office of the President of B&amp;D LLC &copy;",img:IMG("pheeter_family.jpg","max-width:540px;margin:auto"),cap:"The Pheeter family, at home. Photo: my stock photo.",b:[
+"President Lee Pheeter &copy; today unveiled the official B&amp;D LLC&copy; family portrait, taken on the grand staircase of the Pheeter residence, which he describes as \"a habitat worth anything at all.\"",
+"Pictured are President Pheeter, the First Lady of B&amp;D LLC&copy; (in her ceremonial emerald gown), and the newest Pheeter, who was delivered last week via BIRTH TIME&trade; and is already enrolled in CampUs&trade;.",
+"Behind the family hang several important works from the Pheeter collection, as well as an orange fish that nobody has been able to explain or remove.",
+"\"A patient is a fragile egg in incubation,\" President Pheeter said, gesturing at the baby. \"This one has already hatched. Payment is due.\"",
+`<p style="text-align:center"><a href="#birth-time" class="signbtn" style="font-size:16px">DELIVER YOUR OWN PHEETER: PLAY BIRTH TIME &raquo;</a></p>`]};
+
+A["you-won"]={k:"WINNER!!!",t:"Congratulations, You Have Won!",by:"Prize Department (Gary)",img:TXT("YOU<br>WON!!!","linear-gradient(#ff0,#f90)","#f00"),cap:"Your prize, being prepared.",b:["To claim your prize, simply send a payment to President Lee Pheeter ©. A payment to him is a step out of the darkness.","Your prize will arrive in 6 to 8 lifetimes.","Thank you for visiting BirthandDeathNewsNetwork.com."]};
+
+/* ================= MISC CHAOS ================= */
+let lastSpark=0;
+document.addEventListener("pointermove",e=>{const now=Date.now();if(now-lastSpark<45)return;lastSpark=now;
+  const s=document.createElement("span");s.className="spark";s.textContent=pick(["✦","✧","★","✝","$","☠"]);s.style.left=e.clientX+"px";s.style.top=e.clientY+"px";s.style.color=pick(["#f0f","#ff0","#0ff","#f00","#0f0"]);document.body.appendChild(s);
+  requestAnimationFrame(()=>{s.style.transform=`translate(${rnd(-20,20)}px,${rnd(10,40)}px) rotate(${rnd(-90,90)}deg)`;s.style.opacity="0"});setTimeout(()=>s.remove(),850)});
+let vc=1336900+ri(0,99);
+function updCounter(){vc+=ri(1,3);$("#counter").innerHTML=String(vc).padStart(8,"0").split("").map(d=>`<span>${d}</span>`).join("")}
+let titleFlip=false;setInterval(()=>{titleFlip=!titleFlip;document.title=titleFlip?`(${ri(1,99)}) NEW MESSAGES!!!`:"BirthandDeathNewsNetwork.com"},1500);
+let lastCount=0;setInterval(()=>{const mps=msgCount-lastCount;lastCount=msgCount;const e=$("#mps");if(e)e.textContent=mps;
+  const n=(1200+ri(0,400)).toLocaleString();["#minicount","#ucount2"].forEach(s=>{const x=$(s);if(x)x.textContent=n});
+  const l=$("#lag");if(l)l.textContent="Lag: "+ri(1,40)+"s";
+  if(location.hash!=="#chat"){const b=$("#cbadge");const cur=parseInt(b.textContent)||0;b.textContent=cur+mps>99?"99+":String(cur+mps)}
+},1000);
+
+/* boot */
+buildTicker();setInterval(updTicker,900);
+updCounter();setInterval(updCounter,2300);
+for(let i=0;i<40;i++)buf.push(genMsg());
+botLoop();
+route();
+scheduleVisitor();
+setTimeout(()=>toast(" Welcome to BDNN! Today's news is GOOD NEWS!"),1500);
+})();
+</script>
+</body>
+</html>
