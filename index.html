@@ -401,6 +401,32 @@ body.max *{font-family:"Comic Sans MS",cursive!important}
 .pap .hud{display:flex;justify-content:space-between;font:bold 14px "Courier New";margin:6px 0}
 .pap .tab{font:bold 12px Georgia;background:#fff;color:#000;text-align:left;padding:6px;max-height:110px;overflow:auto;border:2px inset #999}
 .kpgroup{max-width:420px;margin:12px auto;background:#000;border:3px ridge #ff5ccd;padding:8px;text-align:left;font:13px "Courier New"}
+
+/* ===== FLATLINE game ===== */
+.flbox>.fc{padding:10px;background:linear-gradient(#0b1f3a,#2a5c8a);text-align:center}
+.flstage{position:relative;width:min(440px,100%);aspect-ratio:3/4.2;margin:0 auto;border:5px solid #fff;border-radius:18px;overflow:hidden;background:#cfe6f5;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+#fl3d{position:absolute;inset:0}#fl3d canvas{display:block;width:100%!important;height:100%!important}
+.flav{position:absolute;top:8px;text-align:center;font:bold 10px Arial;color:#123;pointer-events:none;z-index:3}
+.flav.l{left:42px}.flav.r{right:42px}
+.flav .fc2{width:46px;height:46px;border-radius:50%;border:3px solid #fff;margin:0 auto 2px;display:flex;align-items:center;justify-content:center;font:900 16px Arial;color:#fff;box-shadow:0 2px 4px rgba(0,0,0,.4)}
+.flav span{background:rgba(255,255,255,.85);padding:0 4px;border-radius:4px;display:inline-block}
+.flbub{position:absolute;top:72px;left:50%;transform:translateX(-50%);max-width:76%;background:#fff;border:3px solid #123;border-radius:14px;padding:6px 10px;font:bold 14px Arial;color:#123;z-index:4;display:none;box-shadow:3px 3px 0 rgba(0,0,0,.3)}
+.flbub.md{border-color:#c0392b}.flbub.rn{border-color:#2471a3}
+.fltabs{position:absolute;top:22%;display:flex;flex-direction:column;gap:6px;z-index:3}
+.fltabs.l{left:0}.fltabs.r{right:0}
+.fltabs button{writing-mode:vertical-rl;background:#fff;border:1px solid #bbb;font:13px Arial;color:#333;padding:10px 4px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+.fltabs.l button{border-radius:0 10px 10px 0;transform:rotate(180deg)}
+.fltabs.r button{border-radius:10px 0 0 10px}
+.flmeter{position:absolute;right:36px;bottom:92px;width:16px;height:46%;background:rgba(0,0,0,.35);border:2px solid #fff;border-radius:8px;z-index:3;overflow:hidden}
+.flmeter i{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(#fff,#7ff,#39f);height:0}
+.flmeter b{position:absolute;top:-1px;left:0;right:0;font:bold 7px Arial;color:#ff0;text-align:center}
+.flhud{position:absolute;left:36px;bottom:96px;font:bold 12px "Courier New";color:#fff;background:rgba(0,0,0,.55);padding:3px 6px;border-radius:4px;z-index:3;text-align:left}
+.flbig{position:absolute;left:0;right:0;top:40%;text-align:center;font:900 clamp(30px,10vw,52px) Impact;color:#fff;-webkit-text-stroke:2px #c0392b;z-index:5;pointer-events:none;opacity:0;transition:opacity .2s}
+.flbtn{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);width:72%;height:70px;border-radius:40px;border:4px solid #fff;background:radial-gradient(ellipse at 50% 25%,#9ff,#1aa6e8 60%,#0b5fa5);color:#fff;font:900 32px Impact;letter-spacing:2px;text-shadow:2px 2px 0 #036;box-shadow:0 6px 0 #04386a,0 8px 12px rgba(0,0,0,.4);z-index:6;cursor:pointer;touch-action:manipulation}
+.flbtn:active,.flbtn.hit{transform:translateX(-50%) translateY(4px);box-shadow:0 2px 0 #04386a}
+.flstage .ov{position:absolute;inset:0;z-index:7;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(5,20,40,.72);color:#fff;font:15px Arial;padding:18px}
+.flstage .ov h2{margin:0;font:900 clamp(28px,9vw,46px) Impact;color:#7ff;-webkit-text-stroke:1px #036;text-align:center}
+.flstage .ov .big{font:900 22px Impact;background:linear-gradient(#ff3b3b,#b00000);color:#fff;border:3px outset #f88;padding:8px 24px;cursor:pointer}
 </style>
 </head>
 <body>
@@ -477,6 +503,7 @@ dilly:()=>IMG("buttdilly_hd.jpg"),piper:()=>IMG("piper"),radio:()=>IMG("radio"),
 
 /* ================= ADS ================= */
 const ADS={
+flat:{to:"flatline",h:()=>`<div class="ad" style="background:linear-gradient(#0b1f3a,#2a5c8a);color:#fff;font-family:Impact"><div style="font-size:30px;color:#7ff;letter-spacing:2px">FLATLINE&trade;</div><div style="font:bold 13px Arial">Mash the button. Free the soul.</div><div class="blink" style="font-size:18px;color:#ff0;margin-top:6px">DON'T LET THEM LIVE!</div><div style="font:10px Arial;margin-top:4px">#1 game in Hospice category</div></div>`},
 game:{to:"birth-time",h:()=>`<div class="ad imgad cov" style="background:#300;position:relative">${IMG("birth_womb.jpg")}<b class="blink" style="position:absolute;left:0;right:0;bottom:8px;font:900 22px Impact;color:#ff0;-webkit-text-stroke:1px #000">PLAY BIRTH TIME NOW!</b></div>`},
 family:{to:"pheeter-family-portrait",h:()=>`<div class="ad imgad cov">${IMG("pheeter_family.jpg")}</div>`},
 doggarden:{to:"dog-garden",h:()=>`<div class="ad imgad" style="background:#5bc0f0">${IMG("dog_garden.jpg")}</div>`},
@@ -624,7 +651,7 @@ const FILLER=[
 "President Lee Pheeter has personally approved the words on this page, and invoices will follow.",
 "Click any link on this page to go to another page. That's how websites work. We read about it."];
 
-const HEADLINES=[["dog-garden","DOG GARDEN: The Zen App Where Dogs Do The Raking"],["kpop-generator","NEW: Ugly American Baby K-Pop Star Generator GPT"],["birth-time","NEW GAME: BIRTH TIME&trade; &mdash; Can You Deliver?"],["pheeter-family-portrait","President Pheeter Unveils Official Family Portrait"],["campus-experiment","CampUs&trade;: It's A Race To The Buoy With The Best Attitude"],["what-is-a-nightmare","What Is A Nightmare? (You May Might Have Just Nightmared)"],["camp-us-experience","The Solution To Your Nightmares Is Low Income Housing"],["success-through-leadership","Are You Undergoing A Ghastly Metamorphosis? Check All That Apply"],["campus-contract","CampUs&trade; Contract: Please Tear Along The Dotted Line"],["four-schools","Four Schools Close Due To Fear Of Roof Collapse"],["scientific-quarterly","Scientists Confirm: The Brain Can Be Poked"],["victory-lap","Gov. Brimley Takes Another Victory Lap"],["congressman-quits","Is Rep. Fontenot Quitting Congress For Mattress Kingdom?"],["miracle-hospice","D&B Miracle Hospice: Construction Update #47"],["dead-coin","$DEAD Coin Up 4,000% After Founder Dies Twice"],["hot-single-ghosts","Hot Single Ghosts Already In Your Kitchen"],["live-forever-trick","Local Mom Discovers 1 Weird Trick To Live Forever"],["ai-grandma","AI Will Replace Your Grandmother By 2027"],["war-movies","50 Best American War Movies (13)"],["lee-pheeter-statement","President Pheeter Clarifies Payment Remarks"],["the-piper","THE PIPER: Boots That Lead The Rats Away"],["were-you-born","Were You Born? You May Be Entitled To Cash"],["butt-dilly","Butt Dilly™ Opens 400th Location In A Ditch"],["local-man-dies-of-old-age-at-31","Local Man Dies Of Old Age At 31"],["baby-born-already-in-debt","Baby Born Already $40,000 In Debt, Doctors 'Impressed'"],["obituary-for-a-printer","Obituary: Office Printer (2011–2026), Never Worked"],["town-council-votes-to-ban-tuesdays","Town Council Votes To Ban Tuesdays"],["man-reincarnated-as-himself","Man Reincarnated As Himself, 'Disappointed'"],["gary-update","Gary Update: Gary Is Fine"]];
+const HEADLINES=[["flatline","NEW GAME: FLATLINE&trade; &mdash; Mash To Set Them Free"],["dog-garden","DOG GARDEN: The Zen App Where Dogs Do The Raking"],["kpop-generator","NEW: Ugly American Baby K-Pop Star Generator GPT"],["birth-time","NEW GAME: BIRTH TIME&trade; &mdash; Can You Deliver?"],["pheeter-family-portrait","President Pheeter Unveils Official Family Portrait"],["campus-experiment","CampUs&trade;: It's A Race To The Buoy With The Best Attitude"],["what-is-a-nightmare","What Is A Nightmare? (You May Might Have Just Nightmared)"],["camp-us-experience","The Solution To Your Nightmares Is Low Income Housing"],["success-through-leadership","Are You Undergoing A Ghastly Metamorphosis? Check All That Apply"],["campus-contract","CampUs&trade; Contract: Please Tear Along The Dotted Line"],["four-schools","Four Schools Close Due To Fear Of Roof Collapse"],["scientific-quarterly","Scientists Confirm: The Brain Can Be Poked"],["victory-lap","Gov. Brimley Takes Another Victory Lap"],["congressman-quits","Is Rep. Fontenot Quitting Congress For Mattress Kingdom?"],["miracle-hospice","D&B Miracle Hospice: Construction Update #47"],["dead-coin","$DEAD Coin Up 4,000% After Founder Dies Twice"],["hot-single-ghosts","Hot Single Ghosts Already In Your Kitchen"],["live-forever-trick","Local Mom Discovers 1 Weird Trick To Live Forever"],["ai-grandma","AI Will Replace Your Grandmother By 2027"],["war-movies","50 Best American War Movies (13)"],["lee-pheeter-statement","President Pheeter Clarifies Payment Remarks"],["the-piper","THE PIPER: Boots That Lead The Rats Away"],["were-you-born","Were You Born? You May Be Entitled To Cash"],["butt-dilly","Butt Dilly™ Opens 400th Location In A Ditch"],["local-man-dies-of-old-age-at-31","Local Man Dies Of Old Age At 31"],["baby-born-already-in-debt","Baby Born Already $40,000 In Debt, Doctors 'Impressed'"],["obituary-for-a-printer","Obituary: Office Printer (2011–2026), Never Worked"],["town-council-votes-to-ban-tuesdays","Town Council Votes To Ban Tuesdays"],["man-reincarnated-as-himself","Man Reincarnated As Himself, 'Disappointed'"],["gary-update","Gary Update: Gary Is Fine"]];
 
 /* ================= PAGES ================= */
 function bt(){return ""}
@@ -636,11 +663,11 @@ function homeHTML(){
   <div class="box a-dilly"><div class="adslot" data-pool="dilly,game,kpop,pyramid,singles,check,family,doggarden,casket,dilly,tower,teeth,hospicetxt" data-ms="2600"></div></div>
   <div class="box a-radio"><a href="#spiritual-radio" class="radio">${IMG("radio")}</a></div>
   <div class="box a-schools"><a href="#four-schools" class="story"><div class="img">${IMG("schools_photo")}</div><div><h3>Four schools close due to fear of roof collapse</h3><span class="ago">2h</span> &nbsp; ${CH}</div></a></div>
-  <div class="box a-donate"><div class="adslot" data-pool="donate,check,kpop,coin,virus,oath,timeshare" data-ms="1900"></div><div class="adslot small" data-pool="piper,doggarden,easy,lawyer,game,diet,piper,nmword,singles" data-ms="3100"></div></div>
+  <div class="box a-donate"><div class="adslot" data-pool="donate,flat,check,kpop,coin,virus,oath,timeshare" data-ms="1900"></div><div class="adslot small" data-pool="piper,doggarden,easy,lawyer,game,diet,piper,nmword,singles" data-ms="3100"></div></div>
   <div class="box a-side"><div class="side">
     <a href="#goggle-pray" class="badge"><small>GET IT ON</small>Goggle Pray</a>
     <a href="#tuneout" class="badge" style="background:#fff;color:#000">+ tune<b style="color:#1cb">out</b></a>
-    <div class="nav"><a href="#birth-time" class="blink" style="color:#e00">--PLAY BIRTH TIME--</a><a href="#dog-garden" style="color:#080">--Dog Garden--</a><a href="#kpop-generator" style="color:#c2007f">--K-Pop Star Generator--</a><a href="#chat">--Chat Room--</a><a href="#spiritual-radio">--Schedule &amp; DJ Info--</a><a href="#daily-schedule">--Daily Schedule--</a><a href="#shop">--Shop--</a></div>
+    <div class="nav"><a href="#birth-time" class="blink" style="color:#e00">--PLAY BIRTH TIME--</a><a href="#flatline" style="color:#0a5fa5">--FLATLINE--</a><a href="#dog-garden" style="color:#080">--Dog Garden--</a><a href="#kpop-generator" style="color:#c2007f">--K-Pop Star Generator--</a><a href="#chat">--Chat Room--</a><a href="#spiritual-radio">--Schedule &amp; DJ Info--</a><a href="#daily-schedule">--Daily Schedule--</a><a href="#shop">--Shop--</a></div>
     <div class="listen blink">LISTEN LIVE</div>
     <div class="player"><button id="play" title="play">&#x25B6;</button><span id="ptime">0:00</span><span class="bar"><i id="pbar"></i></span><button id="mute" title="mute">VOL</button></div>
     <div id="nowp" style="font:italic 11px Arial;color:#555">Now playing: nothing (press play)</div>
@@ -659,7 +686,7 @@ function homeHTML(){
     <div class="scroller"><div class="in">${ql.map(h=>`<a href="#${h[0]}">${h[1]}</a>`).join("")}</div></div>
   </div></div>
   <div class="box a-hosp"><a href="#miracle-hospice" class="sign">${IMG("hospice")}</a>
-    <div class="adslot" data-pool="family,kpop,skull,pyramid,game,hospicetxt,nightmare,coin,crest,tower,radio" data-ms="2300"></div></div>
+    <div class="adslot" data-pool="family,flat,kpop,skull,pyramid,game,hospicetxt,nightmare,coin,crest,tower,radio" data-ms="2300"></div></div>
   <div class="box a-camp"><div class="camp">
     <a href="#campus-experiment" class="cimg">${IMG("tower.jpg")}</a>
     <div class="ctext"><a href="#campus-experiment" class="red">It&rsquo;s a race to the buoy with the best attitude. Make waves with my system for self development!</a><div class="by">- President Lee Pheeter &copy;</div>
@@ -705,7 +732,7 @@ function articleHTML(slug){
     if(p==="%SHOP%")return shopHTML();
     if(p==="%SCAN%")return `<div class="prog"><i id="scanbar"></i></div><div id="scanmsg" style="font:13px 'Courier New'">Initializing soul...</div>`;
     const html=/^</.test(p)?p:`<p>${p}</p>`;
-    return html+(i===1?`<div class="inad"><div class="adslot" data-pool="${pick(['coin,dilly,pyramid,virus,singles','diet,piper,nightmare,casket,check','lawyer,skull,oath,timeshare,tower','easy,nmword,kpop,portrait,doggarden,teeth'])}" data-ms="2200"></div></div>`:"");
+    return html+(i===1?`<div class="inad"><div class="adslot" data-pool="${pick(['coin,dilly,pyramid,virus,singles','diet,piper,nightmare,casket,check','lawyer,skull,oath,timeshare,tower','easy,nmword,kpop,flat,portrait,doggarden,teeth'])}" data-ms="2200"></div></div>`:"");
   }).join("");
   const rel=HEADLINES.filter(h=>h[0]!==s).sort(()=>Math.random()-.5).slice(0,4);
   const TH={"kpop-generator":"kpop_icon.png","birth-time":"birth_womb.jpg","pheeter-family-portrait":"pheeter_family.jpg","dog-garden":"dog_garden.jpg","campus-experiment":"tower.jpg","what-is-a-nightmare":"portrait.jpg","camp-us-experience":"pyramid.jpg","success-through-leadership":"easyheader.jpg","campus-contract":"check.jpg","four-schools":"schools_photo","scientific-quarterly":"brain","miracle-hospice":"hospice","butt-dilly":"buttdilly_hd.jpg","war-movies":"warphoto","the-piper":"piper","lee-pheeter-statement":"crest_hd.jpg","ai-grandma":"skull"};const thumbs=["kpop_icon.png","dog_garden.jpg","pheeter_family.jpg","birth_womb.jpg","schools_photo","brain","hospice","buttdilly_hd.jpg","warphoto","piper","quote","skull","radio","crest_hd.jpg","tower.jpg","portrait.jpg","pyramid.jpg","nightmarebed.jpg"];
@@ -723,7 +750,7 @@ function articleHTML(slug){
       <div id="clist"></div></div>
   </div>
   <div class="aside">
-    <div class="box"><div class="adslot" data-pool="game,kpop,dilly,pyramid,coin,family,skull,portrait,doggarden,singles,piper,check,virus" data-ms="1800"></div></div>
+    <div class="box"><div class="adslot" data-pool="game,flat,kpop,dilly,pyramid,coin,family,skull,portrait,doggarden,singles,piper,check,virus" data-ms="1800"></div></div>
     <div class="box"><h4>MORE GOOD NEWS!</h4><div class="list">${HEADLINES.slice().sort(()=>Math.random()-.5).slice(0,7).map(h=>`<a href="#${h[0]}">${h[1]}</a>`).join("")}</div></div>
     <div class="box"><div class="minihead" style="margin:0"> LIVE CHAT</div><a href="#chat" class="minichat" id="minichat" style="margin:0;height:220px"></a></div>
     <div class="box"><div class="adslot" data-pool="skull,oath,casket,radio,nightmare,lawyer,easy,hospicetxt,crest,tower" data-ms="2700"></div></div>
@@ -755,7 +782,7 @@ const USERS=BASEUSERS.concat(EXTRA);
 const OPS=new Set(["Lee_Pheeter_OFFICIAL","ReverendMoonbeam","Satellite_Dish_Gary","dj_holy_static"]);
 const COINS=["$DEAD","$BIRTH","$PHEET","$BUTT","$HOSPC","$SOUL","$DILLY","$CASKET","$GHOST","$AMEN","$TOMB","$BONE","$RAPTR","$URN"];
 const EM=[":)",":(","xD",":P","&lt;3","^_^","T_T",";)","o_O","(-_-)","\\o/",">:)","lol"];
-const LINES=["just beat BIRTH TIME with 900 $DEAD","what tool do u use on the feet","the jackhammer. it is always the jackhammer","i used the hand and it said no","BIRTH TIME is my favorite game of all time","dog garden is real now","DOG GARDEN PLAY NOW","my dog garden is 100% zen 0% skid","the rake mode is 3 dogs. it is beautiful","who let 8 dogs loose in the garden","just generated a k-pop star named LIL RANCH","my k-pop baby is 100% ugly","debuted my group, charted at #4402","the x on the dog garden ad doesnt work","it worked for me","it opened the ad","GPT said my baby is too american","the pheeter family portrait has a fish in it why","who is the fish","the fish is family","we provide the stairs, but you must do the climbing","its a race to the buoy with the best attitude","make waves with my system for self development!!","just signed the campus contract lol","did anyone else sign all 26 blanks","day 3 of the dismal diet. iceberg lettuce again","crushed tylenol for breakfast {e}","refused the lettuce, got MORE lettuce","powdered tylenol hits different","is my emotionally abandoned chicken ok","the egg quote made me cry","i am a fragile egg in incubation","im the fastly developing fowl","free me from my membrane pheeter","claimed serfdom today {e}","my edge card came in the mail","anyone else nightmaring rn","i think i may might have just nightmared","for every 1 person nightmaring there are millions helplessly awake","the solution to my nightmares is low income housing","the escalator at the pyramid is broken again","we provide the escalator but u must do the standing","does the thin canal count as a pool","my 160HP jetski is in prague","undergoing a ghastly metamorphosis brb","checked all the boxes {e}","tear along the dotted line!!!","pad ur envelope with the remaining pages","i shredded my practice signatures","lol","LOL","lmao","first","FIRST","anyone here?","asl","a/s/l","brb mom needs the phone line","DJ play Free Bird again","thats the 4th time he played free bird","5th","6th actually","hello??","is this the hospice chat","wrong room sorry","no ur in the right room","{u} ur not funny","{u} ur funny","{u} who asked","{u} I asked","{c} TO THE MOON {e}{e}{e}","just put my life savings in {c}","just put my LIFE in {c}","{c} is down {n}% why","{c} is up {n}% WHY","{c} is a rug pull","its not a rug pull its a casket pull","buy {c} before you die","HODL","HODL TILL DEATH","death is just a bear market","amen","AMEN","amen brother","amen sister","amen {u}","the roof is gonna collapse","which roof","ALL roofs","{u} the roof inspector said hm","hm","hm.","HM","does anyone know if butt dilly has a pool","butt dilly pool is closed (someone drowned in it spiritually)","stayed at butt dilly, woke up in 2019","same","same lol","sameeee","checked in, never checked out {e}","my grandma is in this chat","hi grandma","hi grandma!!!","grandma pls get off the computer","{u} is a fed","{u} is a ghost","{u} is a bot","no u","no YOU","im not a bot im a human person with human skin","beep boop i mean hello","lee pheeter is my president","LEE PHEETER 2028","a payment to him is a step out of the darkness","i paid him and my lamp turned on","WHO TOOK MY LAMP","{u} took ur lamp","radio is just static rn","the static is the message","i can hear my dead uncle in the static","which uncle","the one who owed me $40","does anyone have a song request","request: anything but free bird","DJ play the hospice jingle","*sniffs* i smell {c} pumping","the brain can be poked. science.","i poked my brain and now im blue","{u} u ok?","no","yes","maybe","ok","k","kk","...","???","!!!!!!","{e}","{e}{e}","{e}{e}{e}{e}{e}","when is the miracle hospice opening","fall 2020","its fall 2026","exactly. right on time","my cousin works construction there he says its 'mostly roof'","the piper boots took all my rats","and my kids","did u get them back","the rats yes","hot single ghosts are in my area","they're in my WALLS","that's where they live sweetie","i'm the ghost in ur walls lol","{u} get out of my walls","anyone wanna trade {c} for {c}","i will trade my soul for 3 {c}","deal","no deal","DEAL OR NO DEAL","the governor ran past my house","hes on lap {n}","he signed my cast while jogging","is chet brimley ok","nobody is ok","this chat is my only friend","same","{u} ur my friend","ty {u}","np","we are all gonna die (eventually) (bullish)","death is bullish","birth is bearish","just got born, whats going on","welcome to earth","its mostly ads here","CLICK HERE","i clicked here","what happened","nothing","GOOD NEWS!","what's the good news","four schools closed","that's the good news?","its ALL good news on bdnn","mods??","{u} mods are asleep, post caskets","CASKETS CASKETS CASKETS","gary are u there","gary fix the roof","gary is on the roof","gary fell through the roof","gary is fine (statement)","its 3am the witching minute is starting","IT'S HAPPENING","what's happening","the minute","oh","the minute is over","that was a good minute","10/10 minute","my son was born in this chat","congratulations!!","what did u name him","{c}","beautiful name","i just turned 31 and died of old age","rip","f","F","FFFFFF","press f","f to pay respects","$ to pay pheeter","does pheeter take {c}","pheeter takes everything","i'm literally in the hospice rn","which room","the roof","haha","hahahahaha","ahahahahaa","im crying","im dying","literally dying (im at the hospice)","sending prayers {e}","sending {c} {e}","can someone explain {c} to me","{u} explain {c} to them","no","ok fine its money but dead","oh cool","im all in","{u} pls dont","TOO LATE","doctors HATE this one weird chat","barbara is still alive btw","BARBARA LIVES","barbara if ur reading this tell us the trick","the trick is u just dont","wow","whoa","omg","OMG","OMFG","ROFLCOPTER","brb","back","wb","ty","{u} wb","who wants to see my casket collection","not me","me","me!!","show me ur caskets","[casket.jpg]","[img not loading]","dial-up problems","my modem is screaming","thats the radio","is this a cult","its a newsletter","whats the difference","$1 for 3 months","ah"];
+const LINES=["just beat flatline level 4","the defibrillator is so unfair","CLEAR!!!","i mashed so hard my phone ascended","accidentally saved my patient again","the chaplain is goated","DNR FOUND lets gooo","my patient went through the roof (good news)","hospital bill was $412,000 lol","just beat BIRTH TIME with 900 $DEAD","what tool do u use on the feet","the jackhammer. it is always the jackhammer","i used the hand and it said no","BIRTH TIME is my favorite game of all time","dog garden is real now","DOG GARDEN PLAY NOW","my dog garden is 100% zen 0% skid","the rake mode is 3 dogs. it is beautiful","who let 8 dogs loose in the garden","just generated a k-pop star named LIL RANCH","my k-pop baby is 100% ugly","debuted my group, charted at #4402","the x on the dog garden ad doesnt work","it worked for me","it opened the ad","GPT said my baby is too american","the pheeter family portrait has a fish in it why","who is the fish","the fish is family","we provide the stairs, but you must do the climbing","its a race to the buoy with the best attitude","make waves with my system for self development!!","just signed the campus contract lol","did anyone else sign all 26 blanks","day 3 of the dismal diet. iceberg lettuce again","crushed tylenol for breakfast {e}","refused the lettuce, got MORE lettuce","powdered tylenol hits different","is my emotionally abandoned chicken ok","the egg quote made me cry","i am a fragile egg in incubation","im the fastly developing fowl","free me from my membrane pheeter","claimed serfdom today {e}","my edge card came in the mail","anyone else nightmaring rn","i think i may might have just nightmared","for every 1 person nightmaring there are millions helplessly awake","the solution to my nightmares is low income housing","the escalator at the pyramid is broken again","we provide the escalator but u must do the standing","does the thin canal count as a pool","my 160HP jetski is in prague","undergoing a ghastly metamorphosis brb","checked all the boxes {e}","tear along the dotted line!!!","pad ur envelope with the remaining pages","i shredded my practice signatures","lol","LOL","lmao","first","FIRST","anyone here?","asl","a/s/l","brb mom needs the phone line","DJ play Free Bird again","thats the 4th time he played free bird","5th","6th actually","hello??","is this the hospice chat","wrong room sorry","no ur in the right room","{u} ur not funny","{u} ur funny","{u} who asked","{u} I asked","{c} TO THE MOON {e}{e}{e}","just put my life savings in {c}","just put my LIFE in {c}","{c} is down {n}% why","{c} is up {n}% WHY","{c} is a rug pull","its not a rug pull its a casket pull","buy {c} before you die","HODL","HODL TILL DEATH","death is just a bear market","amen","AMEN","amen brother","amen sister","amen {u}","the roof is gonna collapse","which roof","ALL roofs","{u} the roof inspector said hm","hm","hm.","HM","does anyone know if butt dilly has a pool","butt dilly pool is closed (someone drowned in it spiritually)","stayed at butt dilly, woke up in 2019","same","same lol","sameeee","checked in, never checked out {e}","my grandma is in this chat","hi grandma","hi grandma!!!","grandma pls get off the computer","{u} is a fed","{u} is a ghost","{u} is a bot","no u","no YOU","im not a bot im a human person with human skin","beep boop i mean hello","lee pheeter is my president","LEE PHEETER 2028","a payment to him is a step out of the darkness","i paid him and my lamp turned on","WHO TOOK MY LAMP","{u} took ur lamp","radio is just static rn","the static is the message","i can hear my dead uncle in the static","which uncle","the one who owed me $40","does anyone have a song request","request: anything but free bird","DJ play the hospice jingle","*sniffs* i smell {c} pumping","the brain can be poked. science.","i poked my brain and now im blue","{u} u ok?","no","yes","maybe","ok","k","kk","...","???","!!!!!!","{e}","{e}{e}","{e}{e}{e}{e}{e}","when is the miracle hospice opening","fall 2020","its fall 2026","exactly. right on time","my cousin works construction there he says its 'mostly roof'","the piper boots took all my rats","and my kids","did u get them back","the rats yes","hot single ghosts are in my area","they're in my WALLS","that's where they live sweetie","i'm the ghost in ur walls lol","{u} get out of my walls","anyone wanna trade {c} for {c}","i will trade my soul for 3 {c}","deal","no deal","DEAL OR NO DEAL","the governor ran past my house","hes on lap {n}","he signed my cast while jogging","is chet brimley ok","nobody is ok","this chat is my only friend","same","{u} ur my friend","ty {u}","np","we are all gonna die (eventually) (bullish)","death is bullish","birth is bearish","just got born, whats going on","welcome to earth","its mostly ads here","CLICK HERE","i clicked here","what happened","nothing","GOOD NEWS!","what's the good news","four schools closed","that's the good news?","its ALL good news on bdnn","mods??","{u} mods are asleep, post caskets","CASKETS CASKETS CASKETS","gary are u there","gary fix the roof","gary is on the roof","gary fell through the roof","gary is fine (statement)","its 3am the witching minute is starting","IT'S HAPPENING","what's happening","the minute","oh","the minute is over","that was a good minute","10/10 minute","my son was born in this chat","congratulations!!","what did u name him","{c}","beautiful name","i just turned 31 and died of old age","rip","f","F","FFFFFF","press f","f to pay respects","$ to pay pheeter","does pheeter take {c}","pheeter takes everything","i'm literally in the hospice rn","which room","the roof","haha","hahahahaha","ahahahahaa","im crying","im dying","literally dying (im at the hospice)","sending prayers {e}","sending {c} {e}","can someone explain {c} to me","{u} explain {c} to them","no","ok fine its money but dead","oh cool","im all in","{u} pls dont","TOO LATE","doctors HATE this one weird chat","barbara is still alive btw","BARBARA LIVES","barbara if ur reading this tell us the trick","the trick is u just dont","wow","whoa","omg","OMG","OMFG","ROFLCOPTER","brb","back","wb","ty","{u} wb","who wants to see my casket collection","not me","me","me!!","show me ur caskets","[casket.jpg]","[img not loading]","dial-up problems","my modem is screaming","thats the radio","is this a cult","its a newsletter","whats the difference","$1 for 3 months","ah"];
 const ACTIONS=["slaps {u} around a bit with a large trout","pokes {u}'s brain","buys {n} {c}","sells everything","lights a candle","checks into butt dilly","dies","comes back to life","is now known as {u}2","throws a casket at {u}","prays for {c}","hugs {u}","stares at the roof","plays free bird","turns on the lamp","sacrifices a mouse (computer mouse)","eats the mystery box","is crying","dances","laps the governor"];
 const SYS=[()=>`${pick(USERS)} has joined #spiritual-radio`,()=>`${pick(USERS)} has left #spiritual-radio (Quit: ${pick(["Ping timeout","Connection reset by priest","died","went to the light","mom needs phone","Excess Flood","checked into Butt Dilly","Read error: soul not found"])})`,()=>`${pick(USERS)} was kicked by ${pick([...OPS])} (${pick(["spamming","not spamming enough","no reason","too alive","asked for a refund","mentioned the roof"])})`,()=>`${pick([...OPS])} sets mode +o ${pick(USERS)}`,()=>`${pick(USERS)} is now known as ${pick(USERS)}`,()=>`NETSPLIT: ${ri(40,300)} users have gone to the other side`];
 const REPLIES=["@{me} who asked","@{me} welcome to the chat we've been expecting you","@{me} are u a bot","@{me} buy {c}","@{me} lol","@{me} LOL","@{me} wrong chat sweetie","@{me} my grandson says the same thing","@{me} ur so real for that","@{me} ok","@{me} ratio","@{me} first time?","@{me} amen","@{me} that's what the roof inspector said","@{me} hm","@{me} interesting. anyway {c} {e}","@{me} lee pheeter will be informed","@{me} ur in my walls?","@{me} is that a song request","@{me} what does that mean","@{me} ok boomer","@{me} source?","@{me} big if true","@{me} reported","@{me} hi!!!!!! ","@{me} omg same","@{me} WHAT","@{me} ... go on","@{me} hey thats my line"];
@@ -1369,6 +1396,245 @@ function initKpop(){
   window.addEventListener("hashchange",()=>{if(location.hash==="#dog-garden")sb.style.display="none"});
 })();
 
+
+/* ================= FLATLINE (spirit mash game) ================= */
+function flatlineHTML(){
+  return `<div class="apage"><div class="box flbox">
+    <div class="gtitle" style="color:#7ff;text-shadow:3px 3px #036">FLATLINE&trade;</div>
+    <div class="gsub">MASH <b>ASCEND</b> (or spacebar) to keep the spirit rising. If it sinks back into the body, they get resuscitated and you LOSE. Break through the roof to WIN. Sponsored by D&amp;B Miracle Hospice.</div>
+    <div class="flstage" id="flstage">
+      <div id="fl3d"></div>
+      <div class="flav l"><div class="fc2" style="background:#c0392b">MD</div><span>Attending<br>Physician</span></div>
+      <div class="flav r"><div class="fc2" style="background:#2471a3">RN</div><span>Nurse</span></div>
+      <div class="flbub" id="flbub"></div>
+      <div class="fltabs l"><button data-t="patient">Patient</button><button data-t="exam">Exam</button><button data-t="stabilize">Stabilize</button><button data-t="differential">Differential</button></div>
+      <div class="fltabs r"><button data-t="investigate">Investigate</button><button data-t="intervene">Intervene</button><button data-t="communicate">Communicate</button><button data-t="handoff">Hand-off</button></div>
+      <div class="flmeter"><i id="flm"></i><b>ROOF</b></div>
+      <div class="flhud" id="flhud"></div>
+      <div class="flbig" id="flbig"></div>
+      <button class="flbtn" id="flbtn">ASCEND!</button>
+      <div class="ov" id="flov"><h2>FLATLINE&trade;</h2><div>Your patient is trying to leave. Help them.</div><button class="big" id="flstart">START SHIFT</button><small>sound on</small></div>
+    </div>
+    <div class="hiscore" id="flhi" style="margin-top:10px"></div>
+  </div>
+  <div class="aside">
+    <div class="box"><div class="adslot" data-pool="hospicetxt,kpop,game,doggarden,casket" data-ms="2400"></div></div>
+    <div class="box"><div class="minihead" style="margin:0">LIVE CHAT</div><a href="#chat" class="minichat" id="minichat" style="margin:0;height:260px"></a></div>
+    <div class="box"><div class="adslot" data-pool="lawyer,pyramid,family,check,skull" data-ms="2900"></div></div>
+  </div></div>`;
+}
+function initFlatline(){
+  const host=$("#fl3d");
+  const go=()=>{try{buildFlatline()}catch(e){console.error("FLATLINE",e&&e.stack||e);host.innerHTML='<div style="padding:40px;font:bold 16px Arial">3D failed to load. Gary unplugged the graphics card.</div>'}};
+  if(window.THREE)go();
+  else{const sc=document.createElement("script");sc.src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";sc.onload=go;sc.onerror=()=>{host.innerHTML='<div style="padding:40px;font:bold 16px Arial">3D failed to load. Check your connection.</div>'};document.head.appendChild(sc)}
+}
+const FLS={c:null,m:null,flat:null,
+  init(){try{if(navigator.audioSession)navigator.audioSession.type="playback";
+    if(!this.c){const C=window.AudioContext||window.webkitAudioContext;this.c=new C();this.m=this.c.createGain();this.m.gain.value=.8;this.m.connect(this.c.destination);
+      const o=this.c.createOscillator();o.type="sine";o.frequency.value=880;const g=this.c.createGain();g.gain.value=0;o.connect(g);g.connect(this.m);o.start();this.flat=g;
+      try{this.el=new Audio(DGS.silentURL());this.el.loop=true;this.el.play().catch(()=>{})}catch(e){}}
+    if(this.c.state!=="running")this.c.resume();}catch(e){}},
+  tone(f,type,dur,peak,t0,f2){if(!this.c)return;const c=this.c,t=c.currentTime+(t0||0),o=c.createOscillator();o.type=type;o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+dur);const g=c.createGain();g.gain.value=.0001;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(peak,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+dur);o.connect(g);g.connect(this.m);o.start(t);o.stop(t+dur+.05)},
+  beep(){this.tone(1000,"sine",.12,.25)},
+  whoosh(){if(!this.c)return;const c=this.c,t=c.currentTime,b=c.createBuffer(1,c.sampleRate*.25,c.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*(1-i/d.length);const s=c.createBufferSource();s.buffer=b;const f=c.createBiquadFilter();f.type="bandpass";f.frequency.setValueAtTime(600,t);f.frequency.exponentialRampToValueAtTime(2600,t+.2);const g=c.createGain();g.gain.value=.18;s.connect(f);f.connect(g);g.connect(this.m);s.start(t)},
+  charge(){this.tone(300,"sine",1.2,.15,0,2400)},
+  zap(){if(!this.c)return;this.tone(90,"sawtooth",.35,.6,0,40);const c=this.c,t=c.currentTime,b=c.createBuffer(1,c.sampleRate*.3,c.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;const s=c.createBufferSource();s.buffer=b;const g=c.createGain();g.gain.setValueAtTime(.5,t);g.gain.exponentialRampToValueAtTime(.001,t+.3);s.connect(g);g.connect(this.m);s.start(t)},
+  good(){[523,659,784].forEach((f,i)=>this.tone(f,"triangle",.25,.15,i*.06))},
+  bad(){[392,330,262].forEach((f,i)=>this.tone(f,"square",.2,.08,i*.08))},
+  choir(){if(!this.c)return;[261.6,329.6,392,523.3,659.3].forEach((f,i)=>{[0,1].forEach(k=>{const c=this.c,t=c.currentTime+i*.12,o=c.createOscillator();o.type="sawtooth";o.frequency.value=f*(k?1.006:.994);const fl=c.createBiquadFilter();fl.type="lowpass";fl.frequency.value=1400;const g=c.createGain();g.gain.value=.0001;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.05,t+.6);g.gain.exponentialRampToValueAtTime(.0001,t+4);o.connect(fl);fl.connect(g);g.connect(this.m);o.start(t);o.stop(t+4.1)})})},
+  cough(){if(!this.c)return;[0,.28].forEach(d=>{const c=this.c,t=c.currentTime+d,b=c.createBuffer(1,c.sampleRate*.2,c.sampleRate),x=b.getChannelData(0);for(let i=0;i<x.length;i++)x[i]=Math.random()*2-1;const s=c.createBufferSource();s.buffer=b;const f=c.createBiquadFilter();f.type="bandpass";f.frequency.value=500;f.Q.value=1.5;const g=c.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.6,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+.18);s.connect(f);f.connect(g);g.connect(this.m);s.start(t)})},
+  setFlat(on){if(this.flat)this.flat.gain.setTargetAtTime(on?.07:0,this.c.currentTime,.05)}
+};
+function buildFlatline(){
+  const T=THREE,host=$("#fl3d"),stage=$("#flstage");
+  const R=new T.WebGLRenderer({antialias:true});R.setPixelRatio(Math.min(2,window.devicePixelRatio||1));host.appendChild(R.domElement);
+  const scene=new T.Scene();scene.background=new T.Color(0x8fd0ff);
+  const cam=new T.PerspectiveCamera(56,1,.1,100);
+  function fit(){const w=host.clientWidth,h=host.clientHeight;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}fit();
+  scene.add(new T.HemisphereLight(0xffffff,0x8899aa,.8));const dl=new T.DirectionalLight(0xffffff,.5);dl.position.set(2,5,4);scene.add(dl);
+  const L=c=>new T.MeshLambertMaterial({color:c,flatShading:true});
+  const add=(geo,mat,x,y,z,p)=>{const m=new T.Mesh(geo,mat);m.position.set(x,y,z);(p||scene).add(m);return m};
+  const box=(w,h,d,mat,x,y,z,p)=>add(new T.BoxGeometry(w,h,d),mat,x,y,z,p);
+  const cyl=(r1,r2,h,mat,x,y,z,p)=>add(new T.CylinderGeometry(r1,r2,h,10),mat,x,y,z,p);
+  const sph=(r,mat,x,y,z,p)=>add(new T.SphereGeometry(r,12,10),mat,x,y,z,p);
+  function cvTex(w,h,draw){const c=document.createElement("canvas");c.width=w;c.height=h;draw(c.getContext("2d"),w,h);const t=new T.CanvasTexture(c);t.__c=c;return t}
+  // ---- room ----
+  const floorT=cvTex(256,256,(g,w,h)=>{for(let i=0;i<8;i++)for(let j=0;j<8;j++){g.fillStyle=(i+j)%2?"#e9eef0":"#cfd8dc";g.fillRect(i*32,j*32,32,32)}});floorT.wrapS=floorT.wrapT=T.RepeatWrapping;floorT.repeat.set(3,3);
+  box(9,.1,9,new T.MeshLambertMaterial({map:floorT}),0,-.05,0);
+  const white=L(0xf4f4f2),teal=L(0x3d7f8a),grey=L(0x8a9399),dark=L(0x2a2f33),steel=L(0xb8c2c8);
+  box(9,3.3,.1,white,0,1.65,-2.2);box(9,1.05,.14,teal,0,.52,-2.18);
+  [-3.2,3.2].forEach(x=>{box(.1,3.3,9,white,x,1.65,0);box(.14,1.05,9,teal,x*.995,.52,0)});
+  const tiles=[];for(let i=-4;i<=4;i++)for(let j=-4;j<=2;j++){const t=box(.96,.07,.96,L(0xeeeeea),i,3.3,j-.5);t.userData={x:i,z:j-.5,v:null};tiles.push(t)}
+  for(let i=-4;i<=4;i++)box(.04,.08,8,grey,i+.5,3.28,-1);
+  // wall stuff
+  const mon=new T.Group();mon.position.set(.15,2.35,-2.1);scene.add(mon);box(1.3,.85,.12,dark,0,0,0,mon);
+  const monT=cvTex(320,200,()=>{});const monS=new T.Mesh(new T.PlaneGeometry(1.18,.74),new T.MeshBasicMaterial({map:monT}));monS.position.z=.065;mon.add(monS);
+  box(1.6,.12,.12,steel,1.9,1.55,-2.1);[1.35,1.7,2.05,2.4].forEach((x,i)=>cyl(.04,.04,.25,i%2?dark:steel,x,1.38,-2.05));
+  box(.18,.3,.05,L(0xd63031),-1.4,2.35,-2.13);box(.18,.3,.05,L(0xdfe6e9),-1.0,2.35,-2.13);
+  const cab=new T.Group();cab.position.set(-2.3,0,-1.5);scene.add(cab);box(.9,1.15,.7,grey,0,.6,0,cab);[.2,.42,.64,.86,1.04].forEach(y=>box(.78,.16,.04,L(0x5f9e8f),0,y,.36,cab));
+  const iv=new T.Group();iv.position.set(1.25,0,-.6);scene.add(iv);cyl(.025,.025,2.6,steel,0,1.3,0,iv);cyl(.25,.25,.04,dark,0,.05,0,iv);box(.2,.3,.06,new T.MeshLambertMaterial({color:0xeaf6ff,transparent:true,opacity:.75}),0,2.3,0,iv);
+  
+  // ---- bed ----
+  const bed=new T.Group();scene.add(bed);
+  box(1.1,.35,2.4,grey,0,.35,.3,bed);box(1.05,.18,1.7,white,0,.66,.72,bed);
+  const back=new T.Group();back.position.set(0,.7,-.12);back.rotation.x=.9;bed.add(back);box(1.05,.16,1.0,white,0,0,-.5,back);box(.6,.12,.25,white,0,.1,-.85,back);
+  [-.6,.6].forEach(x=>{box(.04,.22,1.3,steel,x,.86,.6,bed);[-1,1].forEach(k=>cyl(.07,.07,.06,dark,x*.8,.07,.3+k*1.05,bed).rotation.z=Math.PI/2)});
+  box(1.1,.3,.06,steel,0,.75,1.53,bed);
+  // ---- people ----
+  const gownT=cvTex(64,64,(g)=>{g.fillStyle="#86bde8";g.fillRect(0,0,64,64);g.fillStyle="#3f78b5";for(let i=0;i<8;i++)for(let j=0;j<8;j++){g.beginPath();g.arc(i*8+4+(j%2)*4,j*8+4,1.3,0,7);g.fill()}});gownT.wrapS=gownT.wrapT=T.RepeatWrapping;gownT.repeat.set(2,2);
+  const SKINS=[0x7a4a2e,0xc68c5a,0xe8c39e,0x5a3420,0xa86b42],HAIRS=[0x22160e,0x3b2a1a,0x9a9a9a,0x111111,0x6b3e1e];
+  function person(ms,mg,mh,ghost){
+    const g=new T.Group(),legs=new T.Group();g.add(legs);
+    [-.13,.13].forEach(x=>{const l=cyl(.085,.075,1.05,ms,x,.06,.78,legs);l.rotation.x=Math.PI/2;box(.1,.17,.08,ms,x,.13,1.32,legs)});
+    box(.52,.2,.72,mg,0,.12,.36,legs);
+    const tor=new T.Group();tor.position.set(0,.1,0);tor.rotation.x=-.67;g.add(tor);
+    box(.56,.72,.3,mg,0,.38,0,tor);
+    const arms=[];[-1,1].forEach(k=>{const a=new T.Group();a.position.set(k*.34,.68,0);tor.add(a);const u=cyl(.065,.06,.55,mg,0,-.26,0,a);const f=cyl(.055,.05,.45,ms,0,-.6,.12,a);f.rotation.x=-.5;if(!ghost)box(.14,.12,.14,L(0x1e3a6b),0,-.16,0,a);a.rotation.z=k*.08;arms.push(a)});
+    cyl(.07,.08,.12,ms,0,.8,0,tor);
+    const head=new T.Group();head.position.set(0,.98,.01);tor.add(head);
+    const hd=sph(.17,ms,0,0,0,head);hd.scale.set(1,1.12,1);
+    const hr=sph(.18,mh,0,.06,-.07,head);hr.scale.set(1.04,.95,.85);sph(.08,mh,0,.1,-.22,head);
+    const eyes=[];[-.06,.06].forEach(x=>{eyes.push(box(.07,.02,.02,L(0x0a0a0a),x,.03,.172,head))});
+    if(!ghost){const mask=sph(.07,new T.MeshLambertMaterial({color:0xffffff,transparent:true,opacity:.7}),0,-.09,.15,head);mask.scale.set(1,.9,.6);box(.37,.03,.33,L(0xffffff),0,.1,-.01,head)}
+    return {g,legs,tor,head,eyes,arms};
+  }
+  const ghostMat=new T.MeshBasicMaterial({color:0x5fd8ff,transparent:true,opacity:.45,depthWrite:false});
+  let pat,spi,lvl=1;
+  function makePeople(){
+    if(pat)bed.remove(pat.g);if(spi)scene.remove(spi.g);
+    const ms=L(SKINS[(lvl-1)%SKINS.length]),mh=L(HAIRS[(lvl-1)%HAIRS.length]),mg=new T.MeshLambertMaterial({map:gownT});
+    pat=person(ms,mg,mh,false);pat.g.position.set(0,.75,.1);bed.add(pat.g);
+    spi=person(ghostMat,ghostMat,ghostMat,true);scene.add(spi.g);
+    const pl=new T.PointLight(0x99ffff,.8,3);pl.position.set(0,.6,0);spi.g.add(pl);
+  }
+  makePeople();
+  const beam=cyl(.7,.7,8,new T.MeshBasicMaterial({color:0xfff6a0,transparent:true,opacity:0,depthWrite:false,blending:T.AdditiveBlending}),0,5,.3);
+  // ---- monitor drawing ----
+  const ecg=[];let ecgPh=0;
+  function drawMon(hr,bp,o2,rr){
+    const c=monT.__c,g=c.getContext("2d"),w=c.width,h=c.height;
+    g.fillStyle="#05080a";g.fillRect(0,0,w,h);
+    ecgPh+=hr>0?hr/60*0.06:0;
+    let y=0;const p=ecgPh%1;if(hr>0){if(p<.04)y=-50;else if(p<.07)y=25;else if(p>.25&&p<.35)y=-8*Math.sin((p-.25)*31)}
+    ecg.push(y+(Math.random()-.5)*2);if(ecg.length>w)ecg.shift();
+    g.strokeStyle=hr>0?"#2ecc71":"#e74c3c";g.lineWidth=3;g.beginPath();ecg.forEach((v,i)=>{const yy=78+v;i?g.lineTo(i,yy):g.moveTo(i,yy)});g.stroke();
+    g.font="bold 26px Arial";g.fillStyle="#fff";g.fillText("HR:",14,160);g.fillStyle=hr>0?"#2ecc71":"#e74c3c";g.font="bold 34px Arial";g.fillText(hr>0?hr:"---",64,162);
+    g.fillStyle="#fff";g.font="bold 20px Arial";g.fillText("T: 37°c",150,160);g.fillText("O₂:",240,160);g.fillStyle="#00d2ff";g.fillText(o2+"%",275,160);
+    g.fillStyle="#fff";g.fillText("BP:",14,192);g.fillStyle="#e74c3c";g.fillText(bp,56,192);g.fillStyle="#fff";g.fillText("RR:",190,192);g.fillStyle="#f1c40f";g.fillText(rr+"/min",228,192);
+    monT.needsUpdate=true;
+  }
+  // ---- game state ----
+  const CEIL=2.45;let S=null;
+  const bub=$("#flbub"),big=$("#flbig"),hud=$("#flhud"),meter=$("#flm"),ov=$("#flov");
+  let bubT;function say(who,txt){bub.className="flbub "+who;bub.innerHTML=(who==="md"?"<b style='color:#c0392b'>MD:</b> ":"<b style='color:#2471a3'>RN:</b> ")+txt;bub.style.display="block";clearTimeout(bubT);bubT=setTimeout(()=>bub.style.display="none",2200)}
+  let bigT;function shout(t,col){big.textContent=t;big.style.color=col||"#fff";big.style.opacity=1;clearTimeout(bigT);bigT=setTimeout(()=>big.style.opacity=0,800)}
+  const EVENTS=[
+    {w:4,f:()=>{say("md","Charging 200 joules...");FLS.charge();S.pending={t:1.3,fn:()=>{say("md","CLEAR!!!");shout("CLEAR!","#ff4d4d");FLS.zap();S.v-=3.4+lvl*.3;S.shake=.5;S.jolt=.35}}}},
+    {w:2,f:()=>{say("rn","Pushing 1mg epinephrine!");S.gm=1.6;S.gmT=3.5;FLS.bad()}},
+    {w:2,f:()=>{say("md","The family says 'don't go!'");S.gm=1.35;S.gmT=4;FLS.bad()}},
+    {w:2,f:()=>{say("rn","The chaplain is here.");S.gm=.55;S.gmT=4;FLS.good()}},
+    {w:1.5,f:()=>{say("md","Wait... there's a DNR in the chart.");S.v+=3;FLS.good();shout("DNR!","#7ff")}},
+    {w:1.5,f:()=>{say("rn","Insurance denied the ventilator.");S.v+=2.4;FLS.good()}},
+    {w:1,f:()=>{say("md","Lee Pheeter has been paid.");S.gm=.7;S.gmT=4;FLS.good()}},
+    {w:1.5,f:()=>{say("rn","Starting chest compressions!");S.gm=1.5;S.gmT=3;S.jolt=.2;FLS.bad()}}
+  ];
+  function pickEvt(){const tot=EVENTS.reduce((a,e)=>a+e.w,0);let r=Math.random()*tot;for(const e of EVENTS){r-=e.w;if(r<=0)return e}return EVENTS[0]}
+  const HI=(()=>{try{return JSON.parse(localStorage.getItem("bdnn_flat")||"{}")}catch(e){return {}}})();
+  function showHi(){$("#flhi").innerHTML=`<b>HOSPICE LEADERBOARD</b><br>Best level: ${HI.lvl||0} &nbsp;|&nbsp; Fastest ascension: ${HI.fast?HI.fast.toFixed(1)+"s":"--"}<br>Souls released (total): ${HI.souls||0} &nbsp;|&nbsp; Accidentally saved: ${HI.saved||0}`}
+  showHi();
+  function saveHi(){try{localStorage.setItem("bdnn_flat",JSON.stringify(HI))}catch(e){}}
+  function resetScene(){
+    tiles.forEach(t=>{t.position.set(t.userData.x,3.3,t.userData.z);t.rotation.set(0,0,0);t.userData.v=null;t.visible=true});
+    beam.material.opacity=0;pat.tor.rotation.x=-.67;pat.eyes.forEach(e=>e.scale.y=1);
+  }
+  function start(){
+    FLS.init();ov.style.display="none";makePeople();resetScene();
+    S={phase:"count",h:.6,v:.6,t:0,gm:1,gmT:0,evt:3.2-Math.min(1.5,lvl*.2),pending:null,shake:0,jolt:0,cd:3,lastBeat:0,taps:0};
+    shout("3");
+  }
+  function lose(){
+    S.phase="lose";FLS.setFlat(false);FLS.cough();say("md","WE GOT 'EM BACK! Great work, team!");
+    HI.saved=(HI.saved||0)+1;saveHi();showHi();
+    setTimeout(()=>{ov.innerHTML=`<h2 style="color:#ff6b6b">RESUSCITATED</h2><div>The patient lived. You lose.</div><div style="background:#fff;color:#000;padding:8px;font:13px 'Courier New';text-align:left">HOSPITAL BILL<br>ICU stay ........ $212,000<br>Defibrillator ... $40,000<br>Being alive ..... $160,000<br><b>TOTAL ........... $412,000</b></div><button class="big" id="flagain">TRY AGAIN</button>`;ov.style.display="flex";$("#flagain").onclick=start},1600);
+    pushMsg({u:pick(USERS),text:`@${esc(myNick)} accidentally saved a patient in FLATLINE lol`});
+  }
+  function win(){
+    S.phase="win";FLS.setFlat(true);FLS.choir();shout("ASCENDED!","#fff6a0");say("rn","Time of death: "+new Date().toTimeString().slice(0,5)+".");
+    tiles.forEach(t=>{const dx=t.userData.x-0,dz=t.userData.z-(.3);if(Math.hypot(dx,dz)<1.6)t.userData.v=new T.Vector3(dx*2+rnd(-1,1),rnd(4,7),dz*2+rnd(-1,1))});
+    HI.souls=(HI.souls||0)+1;HI.lvl=Math.max(HI.lvl||0,lvl);if(!HI.fast||S.t<HI.fast)HI.fast=S.t;saveHi();showHi();
+    pushMsg({u:pick(USERS),text:`RIP to @${esc(myNick)}'s patient (level ${lvl}). they went straight through the roof`});
+    setTimeout(()=>{ov.innerHTML=`<h2>ASCENDED!</h2><div style="font:bold 18px Arial;color:#fff6a0">GOOD NEWS!</div><div>Soul released in ${S.t.toFixed(1)}s. The roof is now a skylight.</div><button class="big" id="flnext">NEXT PATIENT (LEVEL ${lvl+1})</button>`;ov.style.display="flex";$("#flnext").onclick=()=>{lvl++;start()}},2600);
+  }
+  function tap(){
+    FLS.init();
+    if(!S||S.phase!=="play")return;
+    S.v=Math.min(3,S.v+.45);S.taps++;FLS.whoosh();
+    const b=$("#flbtn");b.classList.add("hit");setTimeout(()=>b.classList.remove("hit"),60);
+  }
+  $("#flbtn").addEventListener("pointerdown",e=>{e.preventDefault();tap()});
+  const onKey=e=>{if(e.code==="Space"&&document.body.contains(host)){e.preventDefault();if(!e.repeat)tap()}};
+  document.addEventListener("keydown",onKey);
+  $("#flstart").onclick=start;
+  $$(".fltabs button").forEach(b=>b.onclick=()=>{
+    const t=b.dataset.t,M={patient:"Patient: "+pick(["Barbara (again)","Kyle","Grandma_Online","a man named Gary"])+". Age: yes. Allergies: living.",exam:"Exam: pulse optional. Vibes: departing.",stabilize:"Stabilize? In THIS economy?",differential:"Differential diagnosis: dying vs. not dying.",investigate:"You investigated. It's the roof. It's always the roof.",communicate:"You told the family. They're crying. Gravity +10%.",intervene:"You intervened... in the wrong direction. Spirit boosted!",handoff:"Patient handed off to God. Spirit boosted!"};
+    toast(M[t]);
+    if(S&&S.phase==="play"){if(t==="communicate"){S.gm=1.1;S.gmT=3}if((t==="intervene"||t==="handoff")&&!S["used_"+t]){S["used_"+t]=1;S.v+=2;FLS.good()}}
+  });
+  // ---- loop ----
+  let last=performance.now(),monAcc=0;
+  function frame(now){
+    if(!document.body.contains(host)){document.removeEventListener("keydown",onKey);FLS.setFlat(false);try{R.dispose();R.forceContextLoss()}catch(e){}return}
+    const dt=Math.min(.05,(now-last)/1000);last=now;
+    if(host.clientWidth&&Math.abs(R.domElement.width-host.clientWidth*R.getPixelRatio())>2)fit();
+    let hrate=72,bp="120/80",o2=97,rr=16;
+    if(S){
+      if(S.phase==="count"){S.cd-=dt;const n=Math.ceil(S.cd);if(big.textContent!==String(n)&&n>0)shout(String(n));if(S.cd<=0){S.phase="play";shout("MASH!","#7ff")}}
+      if(S.phase==="play"){
+        S.t+=dt;
+        if(S.gmT>0){S.gmT-=dt;if(S.gmT<=0)S.gm=1}
+        const g=(2.6+lvl*.3+S.t*.03)*Math.min(1,.35+S.t/3);
+        S.v-=(g*S.gm+6*S.v)*dt;S.h+=S.v*dt;
+        if(S.pending){S.pending.t-=dt;if(S.pending.t<=0){const f=S.pending.fn;S.pending=null;f()}}
+        S.evt-=dt;if(S.evt<=0&&!S.pending){S.evt=rnd(3.2,5.8)-Math.min(1.6,lvl*.25);pickEvt().f()}
+        if(S.h<=0){S.h=0;lose()}
+        else if(S.h>=CEIL)win();
+      }
+      if(S.phase==="lose"){S.h=Math.max(0,S.h-dt*3);pat.tor.rotation.x+=(0-pat.tor.rotation.x)*dt*3;pat.eyes.forEach(e=>e.scale.y=4)}
+      if(S.phase==="win"){S.h+=dt*(2.5+S.h);beam.material.opacity=Math.min(.55,beam.material.opacity+dt*.6)}
+      const h=S.h;
+      // vitals from spirit height
+      if(S.phase==="lose"){hrate=88;bp="140/90";o2=99}
+      else if(h>1.2||S.phase==="win"){hrate=0;bp="--/--";o2=Math.max(0,Math.round(60-h*20));rr=0}
+      else{hrate=Math.round(45+Math.max(0,1.2-h)*70);bp=`${Math.round(80+(1.2-h)*60)}/${Math.round(50+(1.2-h)*40)}`;o2=Math.round(70+(1.2-h)*22);rr=Math.round(6+(1.2-h)*10)}
+      FLS.setFlat(hrate===0&&S.phase!=="lose"&&S.phase!=="count");
+      if(hrate>0&&now-S.lastBeat>60000/hrate){S.lastBeat=now;if(S.phase!=="count")FLS.beep()}
+      // spirit pose
+      const k=Math.min(1,h/1.0);
+      spi.g.position.set(0,.85+h+Math.sin(now/300)*.03*k,.1+(S.jolt||0)*0);
+      spi.tor.rotation.x=-.67*(1-k);spi.legs.rotation.x=1.3*k;spi.arms.forEach((a,i)=>a.rotation.z=(i?1:-1)*(.08+2.6*k));
+      spi.g.visible=h>.02||S.phase==="play";
+      ghostMat.opacity=.3+.2*Math.abs(Math.sin(now/400));
+      meter.style.height=Math.min(100,h/CEIL*100)+"%";
+      hud.innerHTML=`LVL ${lvl} | ${S.t.toFixed(1)}s<br>GRAVITY ${S.gm>1?"&#9650;":S.gm<1?"&#9660;":"="}`;
+      // ceiling shake near top
+      tiles.forEach(t=>{if(t.userData.v){t.userData.v.y-=9*dt;t.position.addScaledVector(t.userData.v,dt);t.rotation.x+=dt*3;t.rotation.z+=dt*2;if(t.position.y<-2)t.visible=false}
+        else if(S.phase==="play"&&h>CEIL-.5&&Math.hypot(t.userData.x,t.userData.z-.3)<1.6){t.position.y=3.3+(Math.random()-.5)*.03*(h-(CEIL-.5))*8}});
+      if(S.jolt>0){S.jolt-=dt;pat.g.position.y=.75+Math.max(0,S.jolt)*.4}else pat.g.position.y=.75;
+    } else {spi.g.visible=false;meter.style.height="0%";hud.innerHTML=`LVL ${lvl}`}
+    // camera
+    const sh=S&&S.shake>0?(S.shake-=dt,S.shake):0;
+    const tgtY=S?Math.min(2.5,1.15+Math.max(0,S.h-.8)*.75):1.15;
+    cam.position.set(Math.sin(now/2000)*.08+(Math.random()-.5)*sh*.3,1.85+(tgtY-1.3)*.8+(Math.random()-.5)*sh*.3,3.5);
+    cam.lookAt(0,tgtY,-.2);
+    monAcc+=dt;if(monAcc>1/30){monAcc=0;drawMon(hrate,bp,o2,rr)}
+    R.render(scene,cam);
+    requestAnimationFrame(frame);
+  }
+  drawMon(72,"120/80",97,16);
+  requestAnimationFrame(frame);
+}
+
 /* ================= ROUTER ================= */
 let qTimer, scanTimer, ulTimer;
 const QUOTES=["“A payment to me is a step out of the darkness and into a habitat worth anything at all”","“I have a lamp. When you pay, I turn it on.”","“The roof is fine. The roof has always been fine.”","“Every birth is a subscription. Every death is a cancellation.”","“Do not call 911. That is a different number.”"];
@@ -1382,6 +1648,7 @@ function route(){
     const pb=$("#play");if(organ){pb.innerHTML="&#x275A;&#x275A;";pb.dataset.on=1;$("#nowp").textContent="Now playing: "+pick(SONGS)}
   }
   else if(h==="chat"){v.innerHTML=chatHTML();$("#mynick").textContent=myNick;const log=$("#chatlog");buf.forEach(m=>log.appendChild(msgNode(m)));log.scrollTop=log.scrollHeight;renderUserList();ulTimer=setInterval(renderUserList,7000);setTimeout(()=>pushMsg({sys:1,text:`${myNick} has joined #spiritual-radio`}),200);setTimeout(()=>pushMsg({u:pick(USERS),text:fill(`welcome @{me}!!! {e}`)}),900);$("#cbadge").textContent="0";}
+  else if(h==="flatline"){v.innerHTML=flatlineHTML();initFlatline();}
   else if(h==="dog-garden"){v.innerHTML=dogGardenHTML();initDogGarden();}
   else if(h==="kpop-generator"){v.innerHTML=kpopHTML();initKpop();}
   else if(h==="birth-time"){v.innerHTML=gameHTML();initGame();}
