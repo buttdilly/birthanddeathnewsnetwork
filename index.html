@@ -680,10 +680,10 @@ function homeHTML(){
   return `<div class="grid">
   <div class="box a-top"><a href="#about-bd-llc" class="crest">${IMG("crest_hd.jpg")}</a>
     <a href="#lee-pheeter-statement" class="quote">${IMG("quote")}</a></div>
-  <div class="box a-dilly"><div class="adslot" data-pool="witch,dilly,game,kpop,pyramid,witchmeal,singles,check,family,doggarden,casket,dilly,tower,teeth,hospicetxt" data-ms="2600"></div></div>
+  <div class="box a-dilly"><div class="adslot" data-pool="witch,dilly,game,kpop,pyramid,witchmeal,check,family,doggarden,casket,dilly,tower,teeth,hospicetxt" data-ms="2600"></div></div>
   <div class="box a-radio"><a href="#spiritual-radio" class="radio">${IMG("radio")}</a></div>
   <div class="box a-schools"><a href="#four-schools" class="story"><div class="img">${IMG("schools_photo")}</div><div><h3>Four schools close due to fear of roof collapse</h3><span class="ago">2h</span> &nbsp; ${CH}</div></a></div>
-  <div class="box a-donate"><div class="adslot" data-pool="donate,witchburger,flat,check,kpop,coin,virus,oath,timeshare" data-ms="1900"></div><div class="adslot small" data-pool="piper,witchphoto,doggarden,easy,lawyer,game,diet,piper,nmword,singles" data-ms="3100"></div></div>
+  <div class="box a-donate"><div class="adslot" data-pool="donate,witchburger,flat,check,kpop,coin,oath" data-ms="1900"></div><div class="adslot small" data-pool="piper,witchphoto,doggarden,easy,lawyer,game,diet,piper,nmword" data-ms="3100"></div></div>
   <div class="box a-side"><div class="side">
     <a href="#goggle-pray" class="badge"><small>GET IT ON</small>Goggle Pray</a>
     <a href="#tuneout" class="badge" style="background:#fff;color:#000">+ tune<b style="color:#1cb">out</b></a>
@@ -701,7 +701,7 @@ function homeHTML(){
   <div class="box a-latest"><div class="latest"><a href="#latest-news">${IMG("latestpill","max-width:230px;margin:0 auto")}</a>
     <div class="two"><a href="#victory-lap" class="l">Gov. Brimley takes another victory lap | Randy Schultz<br><span class="ago">2h</span></a>
     <ul class="r"><li><a href="#creep-eats">Are You Getting As Much Out As You’re Putting In? How to avoid ‘Creep Eats’</a></li><li><a href="#congressman-quits">Is the state's most devoted supporter of himself thinking about quitting Congress &mdash; for a gig with Mattress Kingdom?</a></li></ul></div>
-    <div class="adslot" style="min-height:180px" data-pool="witchman,game,kpop,coin,portrait,witchtoilet,family,doggarden,skull,singles,pyramid,radio,nightmare,lawyer" data-ms="2400"></div>
+    <div class="adslot" style="min-height:180px" data-pool="witchman,game,kpop,coin,portrait,witchtoilet,family,doggarden,skull,pyramid,radio,nightmare,lawyer" data-ms="2400"></div>
     <a href="#victory-lap" style="display:block;margin-top:8px">${CH}</a>
     <div class="scroller"><div class="in">${ql.map(h=>`<a href="#${h[0]}">${h[1]}</a>`).join("")}</div></div>
   </div></div>
@@ -752,7 +752,7 @@ function articleHTML(slug){
     if(p==="%SHOP%")return shopHTML();
     if(p==="%SCAN%")return `<div class="prog"><i id="scanbar"></i></div><div id="scanmsg" style="font:13px 'Courier New'">Initializing soul...</div>`;
     const html=/^</.test(p)?p:`<p>${p}</p>`;
-    return html+(i===1?`<div class="inad"><div class="adslot" data-pool="${pick(['coin,dilly,pyramid,virus,singles','diet,piper,nightmare,casket,check','lawyer,skull,oath,timeshare,tower','easy,nmword,witchphoto,kpop,flat,portrait,witchman,doggarden,teeth'])}" data-ms="2200"></div></div>`:"");
+    return html+(i===1?`<div class="inad"><div class="adslot" data-pool="${pick(['coin,dilly,pyramid','diet,piper,nightmare,casket,check','lawyer,skull,oath,tower','easy,nmword,witchphoto,kpop,flat,portrait,witchman,doggarden,teeth'])}" data-ms="2200"></div></div>`:"");
   }).join("");
   const rel=HEADLINES.filter(h=>h[0]!==s).sort(()=>Math.random()-.5).slice(0,4);
   const TH={"the-witch":"w_logo.jpg","eat-on-all-fours":"brain","begging":"pheeter_family.jpg","ego":"portrait.jpg","kpop-generator":"kpop_icon.png","birth-time":"birth_womb.jpg","pheeter-family-portrait":"pheeter_family.jpg","dog-garden":"dog_garden.jpg","campus-experiment":"tower.jpg","what-is-a-nightmare":"portrait.jpg","camp-us-experience":"pyramid.jpg","success-through-leadership":"easyheader.jpg","campus-contract":"check.jpg","four-schools":"schools_photo","scientific-quarterly":"brain","miracle-hospice":"hospice","butt-dilly":"buttdilly_hd.jpg","war-movies":"warphoto","the-piper":"piper","lee-pheeter-statement":"crest_hd.jpg","ai-grandma":"skull"};const thumbs=["w_unhappy.jpg","w_man.jpg","kpop_icon.png","dog_garden.jpg","pheeter_family.jpg","birth_womb.jpg","schools_photo","brain","hospice","buttdilly_hd.jpg","warphoto","piper","quote","skull","radio","crest_hd.jpg","tower.jpg","portrait.jpg","pyramid.jpg","nightmarebed.jpg"];
@@ -770,7 +770,7 @@ function articleHTML(slug){
       <div id="clist"></div></div>
   </div>
   <div class="aside">
-    <div class="box"><div class="adslot" data-pool="witch,game,flat,kpop,dilly,witchmeal,pyramid,coin,family,skull,portrait,doggarden,singles,piper,check,virus" data-ms="1800"></div></div>
+    <div class="box"><div class="adslot" data-pool="witch,game,flat,kpop,dilly,witchmeal,pyramid,coin,family,skull,portrait,doggarden,piper,check" data-ms="1800"></div></div>
     <div class="box"><h4>MORE GOOD NEWS!</h4><div class="list">${HEADLINES.slice().sort(()=>Math.random()-.5).slice(0,7).map(h=>`<a href="#${h[0]}">${h[1]}</a>`).join("")}</div></div>
     <div class="box"><div class="minihead" style="margin:0"> LIVE CHAT</div><a href="#chat" class="minichat" id="minichat" style="margin:0;height:220px"></a></div>
     <div class="box"><div class="adslot" data-pool="skull,oath,casket,radio,nightmare,lawyer,easy,hospicetxt,crest,tower" data-ms="2700"></div></div>
@@ -1020,7 +1020,7 @@ function gameHTML(){
     <div class="hiscore" id="ghi"></div>
   </div>
   <div class="aside">
-    <div class="box"><div class="adslot" data-pool="pyramid,dilly,coin,portrait,singles" data-ms="2200"></div></div>
+    <div class="box"><div class="adslot" data-pool="pyramid,dilly,coin,portrait" data-ms="2200"></div></div>
     <div class="box"><div class="minihead" style="margin:0">LIVE CHAT</div><a href="#chat" class="minichat" id="minichat" style="margin:0;height:260px"></a></div>
     <div class="box"><div class="adslot" data-pool="family,oath,casket,skull,check" data-ms="2800"></div></div>
   </div></div>`;
