@@ -1886,19 +1886,21 @@ function witchHTML(){
   <div class="puzzle"><h3>PRACTICE THE UNLOCKING (SAFELY, AT HOME)</h3><div style="font:13px Arial">Rotate each patty, then reassemble. Get it wrong and she comes for 7 days.</div>
     <div class="pstack">${pats.map((p,i)=>`<div class="prow"><button data-p="${i}" data-d="-10">&#8634; 10&deg;</button><div class="patty" id="pt${i}"></div><button data-p="${i}" data-d="10">10&deg; &#8635;</button><span class="deg" id="pd${i}">0&deg;</span><b style="font:bold 11px Arial;width:80px;text-align:left">${p[0]}</b></div>`).join("")}</div>
     <button class="btn98" id="preass" style="font-size:16px">REASSEMBLE &amp; PRAY FOR RAIN</button> <button class="btn98" id="preset">RESET</button>
-    <div id="pres"></div><img id="pghost" src="img/w_unhappy.jpg" alt=""></div>
+    <div id="pres"></div><audio id="frosty" src="img/frosty.mp3" preload="auto"></audio><img id="pghost" src="img/w_unhappy.jpg" alt=""></div>
   <div class="row"><div class="oval">${IMG("w_unhappy.jpg")}</div><div style="align-self:center"><p><b>Butt Dilly &trade;</b> enterprises inc. would like to thank the publication of this article, that we as an organization have strived to keep secret.</p><p style="font:bold 22px Georgia;letter-spacing:2px">buttdilly.org</p></div></div>
   </div>`;
 }
 function initWitch(){
   const T=[30,-200,40],d=[0,0,0];
+  const song=$("#frosty");const stopSong=()=>{try{song.pause();song.currentTime=0}catch(e){}};
+  window.addEventListener("hashchange",stopSong,{once:true});
   const show=i=>{$("#pt"+i).style.transform=`rotate(${d[i]}deg)`;$("#pd"+i).textContent=(d[i]>0?"+":"")+d[i]+"°"};
   $$(".prow button").forEach(b=>b.onclick=()=>{const i=+b.dataset.p;d[i]+=+b.dataset.d;show(i)});
-  $("#preset").onclick=()=>{d.fill(0);[0,1,2].forEach(show);$("#pres").textContent="";$("#pghost").style.display="none"};
+  $("#preset").onclick=()=>{stopSong();d.fill(0);[0,1,2].forEach(show);$("#pres").textContent="";$("#pghost").style.display="none"};
   $("#preass").onclick=()=>{
     const ok=d.every((v,i)=>Math.abs(v-T[i])<=2);const r=$("#pres"),g=$("#pghost");
-    if(ok){r.innerHTML="&#9730; IT IS RAINING. The puzzle is unlocked. No apparitions detected. (for now)";r.style.color="#06c";g.style.display="none";pushMsg({u:pick(USERS),text:"@"+esc(myNick)+" safely unlocked the hot n juicy. respect"})}
-    else{r.innerHTML="WRONG ROTATION. SHE IS IN YOUR HOME FOR 7 DAYS.";r.style.color="#c00";g.style.display="block";try{DGS.init();DGS.bark(3)}catch(e){}pushMsg({u:pick(USERS),text:"@"+esc(myNick)+" just summoned wendy lmao"})}
+    if(ok){stopSong();song.play().catch(()=>{});r.innerHTML="&#9835; FROSTY, FROSTY, WET AND SWEET... &#9730; IT IS RAINING. The puzzle is unlocked. No apparitions detected. (for now)";r.style.color="#06c";g.style.display="none";pushMsg({u:pick(USERS),text:"@"+esc(myNick)+" safely unlocked the hot n juicy. respect"})}
+    else{stopSong();r.innerHTML="WRONG ROTATION. SHE IS IN YOUR HOME FOR 7 DAYS.";r.style.color="#c00";g.style.display="block";try{DGS.init();DGS.bark(3)}catch(e){}pushMsg({u:pick(USERS),text:"@"+esc(myNick)+" just summoned wendy lmao"})}
   };
 }
 
